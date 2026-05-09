@@ -358,6 +358,13 @@ a { color: inherit; text-decoration: none; }
   font-size: 12px;
   color: var(--text3);
 }
+.footer-link {
+  font-size: 12px;
+  color: var(--text3);
+  text-decoration: none;
+  transition: color var(--dur-base) var(--ease);
+}
+.footer-link:hover { color: var(--teal); }
 
 /* ----- Responsive ----- */
 @media (max-width: 720px) {

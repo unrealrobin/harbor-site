@@ -190,8 +190,11 @@ function Footer() {
         </p>
         <div className="hairline footer-bottom">
           <span className="mono footer-copy">
-            © 2026 Harbor Labs · made for devs who ship
+            © 2026 Paracosm · made for devs who ship
           </span>
+          <a href="mailto:support@paracosm.gg" className="mono footer-link">
+            support@paracosm.gg
+          </a>
         </div>
       </div>
     </footer>
