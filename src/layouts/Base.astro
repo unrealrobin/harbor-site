@@ -13,6 +13,9 @@ const {
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL('/og.png', Astro.site).href;
+
+const fontHref =
+  'https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500;600&display=swap';
 ---
 
 <!doctype html>
@@ -39,13 +42,20 @@ const ogImage = new URL('/og.png', Astro.site).href;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
-    <!-- Fonts -->
+    <!-- Fonts: preconnect + preload, then attach the stylesheet via JS so it
+         doesn't block render. <noscript> fallback applies them without JS. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500;600&display=swap"
-    />
+    <link rel="preload" as="style" href={fontHref} />
+    <script is:inline define:vars={{ fontHref }}>
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = fontHref;
+      document.head.appendChild(link);
+    </script>
+    <noscript>
+      <link rel="stylesheet" href={fontHref} />
+    </noscript>
   </head>
   <body>
     <slot />
