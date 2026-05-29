@@ -1,73 +1,20 @@
-# React + TypeScript + Vite
+# Harbor — Landing Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repo is the public landing page for **Harbor**, served at [harborlauncher.com](https://harborlauncher.com).
 
-Currently, two official plugins are available:
+## What is Harbor?
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Harbor is a white-label launcher surface for indie game studios. It ships as
+`harbor-launcher.exe` alongside your game, sitting between the storefront
+(Steam, Epic, GOG) and your game executable — whatever launched your game
+before now launches Harbor, and Harbor launches your game.
 
-## React Compiler
+That gives studios a moment to reach players right when they hit play: patch
+notes, news, and dev comments delivered at the point of highest attention.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Fully white-label** — your game's name, logo, colors, fonts, and links. No Harbor branding shown to players.
+- **Zero player install** — players just launch the game normally; they never set anything up.
+- **Billed to the studio, not the player** — no ads, no sold telemetry, no upsells to players.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Harbor is targeting a Q3 2026 release. This site captures early interest while
+the launcher is in development.
