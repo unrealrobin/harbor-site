@@ -1,0 +1,42 @@
+:root {
+  /* Surfaces */
+  --bg: #0d0f12;
+  --bg2: #13161b;
+  --bg3: #1a1e25;
+  --bg4: #21262f;
+
+  /* Text */
+  --text: #f0f2f5;
+  --text2: #8b9099;
+  --text3: #555d6b;
+
+  /* Teal (primary) */
+  --teal: #1fcf8e;
+  --teal-bg: rgba(31, 207, 142, 0.08);
+  --teal-border: rgba(31, 207, 142, 0.22);
+
+  /* Harbor */
+  --harbor-deep: #0a0c10;
+  --harbor-ink: #11141a;
+  --harbor-line: rgba(255, 255, 255, 0.06);
+  --harbor-line-strong: rgba(255, 255, 255, 0.12);
+
+  --harbor-halo:
+    radial-gradient(ellipse 70% 50% at 80% 0%, rgba(31, 207, 142, 0.18), transparent 60%),
+    radial-gradient(ellipse 50% 50% at 10% 100%, rgba(94, 200, 255, 0.10), transparent 60%);
+
+  /* Type */
+  --font-display: 'Syne', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Radius */
+  --r-sm: 7px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-pill: 99px;
+
+  /* Motion */
+  --dur-base: 150ms;
+  --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+}
