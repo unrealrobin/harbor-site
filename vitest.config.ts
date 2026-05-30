@@ -7,7 +7,7 @@ export default defineConfig({
     include: ['tests/**/*.test.ts'],
     coverage: {
       provider: 'v8',
-      include: ['netlify/functions/**/*.ts'],
+      include: ['netlify/functions/**/*.ts', 'src/lib/**/*.ts'],
       thresholds: {
         branches: 90,
         functions: 90,
