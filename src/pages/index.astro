@@ -47,17 +47,9 @@ const FAQS: { q: string; a: string }[] = [
         when they hit play.
       </p>
 
-      <form
-        id="waitlist-form"
-        name="waitlist"
-        method="POST"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        class="email-form"
-      >
-        <input type="hidden" name="form-name" value="waitlist" />
-        <p class="honeypot">
-          <label>Don't fill this out: <input name="bot-field" /></label>
+      <form id="waitlist-form" class="email-form">
+        <p class="honeypot" aria-hidden="true">
+          <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
         </p>
         <input
           type="email"
@@ -68,10 +60,10 @@ const FAQS: { q: string; a: string }[] = [
           class="input email-input"
         />
         <button type="submit" class="btn btn-primary btn-lg">Notify me</button>
-        <span class="form-error" id="waitlist-error" hidden></span>
+        <span class="form-error" id="waitlist-error" role="alert" hidden></span>
       </form>
 
-      <div class="form-success" id="waitlist-success" hidden>
+      <div class="form-success" id="waitlist-success" role="status" tabindex="-1" hidden>
         <span class="pill pill-teal">
           <span class="pill-dot"></span>
           You're in.
@@ -136,41 +128,54 @@ const FAQS: { q: string; a: string }[] = [
 </Base>
 
 <script>
-  // Progressive enhancement: the form posts natively without JS (Netlify Forms).
-  // With JS, submit async and swap in the success state in place.
+  // Submit the waitlist email to the /api/subscribe Netlify Function, which
+  // adds it to the Resend Audience. On success, swap the form for the success
+  // state in place; on failure, show a readable error and let the user retry.
   const form = document.getElementById('waitlist-form') as HTMLFormElement | null;
   const success = document.getElementById('waitlist-success');
   const errorEl = document.getElementById('waitlist-error');
 
-  form?.addEventListener('submit', (event) => {
+  function showError(message: string) {
+    if (!errorEl) return;
+    errorEl.textContent = message;
+    errorEl.removeAttribute('hidden');
+  }
+
+  form?.addEventListener('submit', async (event) => {
     event.preventDefault();
     const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-    const params = new URLSearchParams();
-    for (const [key, value] of new FormData(form).entries()) {
-      if (typeof value === 'string') params.append(key, value);
-    }
+    const fields = new FormData(form);
+    const payload = {
+      email: String(fields.get('email') ?? ''),
+      'bot-field': String(fields.get('bot-field') ?? ''),
+    };
 
     button.disabled = true;
     button.textContent = 'Sending…';
     errorEl?.setAttribute('hidden', '');
 
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: params.toString(),
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error('Network error');
-        form.setAttribute('hidden', '');
-        success?.removeAttribute('hidden');
-      })
-      .catch(() => {
-        if (errorEl) {
-          errorEl.textContent = 'Something went wrong. Try again?';
-          errorEl.removeAttribute('hidden');
-        }
-        button.disabled = false;
-        button.textContent = 'Notify me';
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       });
+      const result = (await res.json().catch(() => ({ ok: false, error: '' }))) as {
+        ok?: boolean;
+        error?: string;
+      };
+      if (!res.ok || !result.ok) {
+        throw new Error(result.error || 'Something went wrong. Try again?');
+      }
+      form.setAttribute('hidden', '');
+      success?.removeAttribute('hidden');
+      // Move focus to the success message so screen-reader users hear it
+      // (role="status" also announces it politely).
+      (success as HTMLElement | null)?.focus();
+    } catch (err) {
+      showError(err instanceof Error ? err.message : 'Something went wrong. Try again?');
+      button.disabled = false;
+      button.textContent = 'Notify me';
+    }
   });
 </script>
