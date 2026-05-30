@@ -13,7 +13,7 @@
 export function shouldLoadAnalytics(
   context: string | undefined,
   key: string | undefined,
-): key is string {
+): boolean {
   return context === 'production' && typeof key === 'string' && key.length > 0;
 }
 

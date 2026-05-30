@@ -49,6 +49,11 @@ const loadAnalytics = shouldLoadAnalytics(process.env.CONTEXT, posthogKey);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 
+    {/* PostHog — production deploy only (see src/lib/analytics.ts). Official web
+        snippet (copied 2026-05). It's a tiny synchronous bootstrap that injects
+        the real library (array.js) with async=true, so the third-party network
+        load is non-render-blocking — `defer` is a no-op on inline scripts.
+        Kept in <head> so the initial $pageview is captured reliably. */}
     {
       loadAnalytics && (
         <script is:inline define:vars={{ posthogKey, posthogHost }}>
