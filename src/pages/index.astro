@@ -128,6 +128,9 @@ const FAQS: { q: string; a: string }[] = [
 </Base>
 
 <script>
+  // PostHog (window.posthog) is loaded production-only by Base.astro and typed
+  // in src/env.d.ts; it may be absent in dev/preview, so calls are optional-chained.
+
   // Submit the waitlist email to the /api/subscribe Netlify Function, which
   // adds it to the Resend Audience. On success, swap the form for the success
   // state in place; on failure, show a readable error and let the user retry.
@@ -167,6 +170,7 @@ const FAQS: { q: string; a: string }[] = [
       if (!res.ok || !result.ok) {
         throw new Error(result.error || 'Something went wrong. Try again?');
       }
+      window.posthog?.capture('notify_me_submit');
       form.setAttribute('hidden', '');
       success?.removeAttribute('hidden');
       // Move focus to the success message so screen-reader users hear it
