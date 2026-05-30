@@ -63,7 +63,7 @@ const FAQS: { q: string; a: string }[] = [
         <span class="form-error" id="waitlist-error" role="alert" hidden></span>
       </form>
 
-      <div class="form-success" id="waitlist-success" hidden>
+      <div class="form-success" id="waitlist-success" role="status" tabindex="-1" hidden>
         <span class="pill pill-teal">
           <span class="pill-dot"></span>
           You're in.
@@ -169,6 +169,9 @@ const FAQS: { q: string; a: string }[] = [
       }
       form.setAttribute('hidden', '');
       success?.removeAttribute('hidden');
+      // Move focus to the success message so screen-reader users hear it
+      // (role="status" also announces it politely).
+      (success as HTMLElement | null)?.focus();
     } catch (err) {
       showError(err instanceof Error ? err.message : 'Something went wrong. Try again?');
       button.disabled = false;
