@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import PostHog from '../components/posthog.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import { shouldLoadAnalytics } from '../lib/analytics';
 
 interface Props {
@@ -17,7 +19,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL('/og.png', Astro.site).href;
 
 const fontHref =
-  'https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500;600&display=swap';
+  'https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500;600&display=swap';
 
 // Analytics: resolved at build time. Render PostHog only on the Netlify
 // production deploy (see src/lib/analytics.ts). The snippet itself lives in
@@ -69,6 +71,8 @@ const loadAnalytics = shouldLoadAnalytics(process.env.CONTEXT);
     </noscript>
   </head>
   <body>
+    <Header />
     <slot />
+    <Footer />
   </body>
 </html>
