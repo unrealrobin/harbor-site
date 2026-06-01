@@ -31,7 +31,7 @@
     radial-gradient(ellipse 50% 50% at 10% 100%, rgba(94, 200, 255, 0.10), transparent 60%);
 
   /* Type */
-  --font-display: 'Syne', system-ui, sans-serif;
+  --font-display: 'Sora', system-ui, sans-serif;
   --font-body: 'DM Sans', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
