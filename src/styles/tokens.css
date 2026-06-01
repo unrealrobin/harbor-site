@@ -15,6 +15,11 @@
   --teal-bg: rgba(31, 207, 142, 0.08);
   --teal-border: rgba(31, 207, 142, 0.22);
 
+  /* Blue (secondary accent) */
+  --blue: #5ec8ff;
+  --blue-bg: rgba(94, 200, 255, 0.08);
+  --blue-border: rgba(94, 200, 255, 0.22);
+
   /* Harbor */
   --harbor-deep: #0a0c10;
   --harbor-ink: #11141a;

@@ -1,0 +1,168 @@
+---
+import Base from '../layouts/Base.astro';
+
+const APPLY_MAILTO =
+  "mailto:earlyaccess@paracosm.gg?subject=Harbor%20early%20access&body=Hi%2C%0A%0AOur%20studio%3A%20%0AOur%20game%20(Steam%20link)%3A%20%0AWhy%20we're%20interested%3A%20%0A";
+---
+
+<Base
+  title="Early access — Harbor"
+  description="Be one of the first developers shipping Harbor. Full launcher, six months free for accepted partners, and a direct line to the founder."
+>
+  <!-- ===== Hero ===== -->
+  <section class="hero hero-page">
+    <div class="dotgrid hero-grid"></div>
+    <div class="container hero-inner">
+      <span class="pill pill-teal" style="margin-bottom:24px;">
+        <span class="pill-dot"></span>
+        Design-partner program · limited spots
+      </span>
+      <h1 class="hero-headline" style="font-size:42px;line-height:1.08;">
+        Be one of the first<br />
+        developers shipping<br />
+        <span class="text-teal">Harbor.</span>
+      </h1>
+      <p class="hero-paragraph">
+        We're onboarding a small group of studios to ship Harbor before launch. You get the full
+        product and help shape it; we get honest feedback from people who actually run a live game.
+        Accepted partners ship free for six months — and it's a real working relationship, not a beta list.
+      </p>
+      <div class="hero-cta-row">
+        <a href="#apply" class="btn btn-primary btn-lg">Apply to be a partner</a>
+        <a href={APPLY_MAILTO} class="btn btn-ghost btn-lg">Email us directly</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== What you get ===== -->
+  <section class="section section-ink">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">What you get</span>
+        <h2 class="display-lg">The whole thing — not a trimmed-down trial.</h2>
+        <p class="lede">Every partner ships the full launcher with all current modules. No feature gating during the program.</p>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 14h5"/></svg>
+          </div>
+          <h3 class="card-title">The full launcher + every module</h3>
+          <p class="card-body">White-label launcher with patch notes, news, beta signups, and surveys — all of it, branded to your game. New modules land in your build as we ship them.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </div>
+          <h3 class="card-title">Six months free</h3>
+          <p class="card-body">Accepted partners pay nothing for the first six months — no card, no invoice. You're helping us get it right; that's the deal. After that, partners move to a subscription at a rate we set together.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon blue">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 16 0"/><path d="M2 12h2M20 12h2M12 2v2"/><circle cx="12" cy="13" r="3"/></svg>
+          </div>
+          <h3 class="card-title">CDN delivery, handled</h3>
+          <p class="card-body">Your launcher and its content are served from a global CDN, so patch notes and news land fast wherever your players are. We run the infrastructure; you don't think about it.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon blue">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3 class="card-title">A direct line to the founder</h3>
+          <p class="card-body">You're not filing tickets into a void. The founder building Harbor is on the other end for setup, requests, and the occasional 11pm "can it do this?"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== What we ask ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="grid" style="grid-template-columns:0.85fr 1.15fr;gap:56px;align-items:start;" data-stack>
+        <div class="section-head" style="margin-bottom:0;">
+          <span class="eyebrow eyebrow-blue">What we ask</span>
+          <h2 class="display-lg">Two things, both reasonable.</h2>
+          <p class="lede">A design partnership runs both ways. Here's the part that's on you.</p>
+        </div>
+        <ul class="feature-list" style="gap:14px;">
+          <li class="card" style="display:flex;gap:18px;align-items:flex-start;">
+            <span class="card-num" style="margin:0;font-size:22px;min-width:34px;">01</span>
+            <div>
+              <p class="feature-title" style="font-size:17px;margin-bottom:6px;">A biweekly feedback call</p>
+              <p class="feature-desc">Thirty minutes, every other week. What's working, what's in the way, what you'd ship next. This is the whole reason the program exists — your real usage steers the roadmap.</p>
+            </div>
+          </li>
+          <li class="card" style="display:flex;gap:18px;align-items:flex-start;">
+            <span class="card-num" style="margin:0;font-size:22px;min-width:34px;">02</span>
+            <div>
+              <p class="feature-title" style="font-size:17px;margin-bottom:6px;">Move to a subscription at month six</p>
+              <p class="feature-desc">When the free window ends, partners transition to a paid plan. Pricing starts at $20/mo, with a $40/mo tier for advanced modules — and partners help set where those lines land. No surprise bill; we'll talk well before month six.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="callout blue" style="margin-top:44px;">
+        <span class="callout-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
+        </span>
+        <p class="callout-body"><strong>Worried it might break a storefront rule?</strong> It doesn't — Harbor is pre-launch-only, shows no player-facing branding, and takes no payments. A full Steam/Epic compliance write-up is on the way.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Pricing framing ===== -->
+  <section class="section section-ink">
+    <div class="container">
+      <div class="section-head center">
+        <span class="eyebrow">After the free window</span>
+        <h2 class="display-lg">Honest pricing, set with partners.</h2>
+        <p class="lede">Free for accepted partners while we build together. When you transition, here's the shape of it — and partners help set the lines.</p>
+      </div>
+      <div class="price-grid" style="max-width:760px;margin:0 auto;">
+        <div class="price-card">
+          <p class="price-name">Base</p>
+          <div class="price-amount">$20<span> / mo</span></div>
+          <ul class="price-list">
+            <li><span class="price-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> The white-label launcher</li>
+            <li><span class="price-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Patch notes &amp; news</li>
+            <li><span class="price-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> CDN delivery</li>
+          </ul>
+        </div>
+        <div class="price-card is-feature">
+          <p class="price-name" style="color:var(--teal);">Pro</p>
+          <div class="price-amount">$40<span> / mo</span></div>
+          <ul class="price-list">
+            <li><span class="price-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Everything in Base</li>
+            <li><span class="price-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Beta signups &amp; surveys</li>
+            <li><span class="price-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Advanced modules as they ship</li>
+          </ul>
+        </div>
+      </div>
+      <p class="form-note" style="text-align:center;max-width:760px;margin-left:auto;margin-right:auto;">Accepted partners pay nothing for the first six months. Players never pay anything, ever.</p>
+    </div>
+  </section>
+
+  <!-- ===== Apply / email CTA ===== -->
+  <section class="cta-band" id="apply">
+    <div class="dotgrid cta-band-grid"></div>
+    <div class="container cta-band-inner" style="max-width:680px;">
+      <span class="eyebrow">Come on as a partner</span>
+      <h2 class="display-lg" style="margin-bottom:16px;">Email us. Tell us about your game.</h2>
+      <p class="lede" style="margin-bottom:30px;">One line about your studio and your Steam page is plenty. If it's a fit, we'll set up a short call and get you shipping. No forms, no funnel.</p>
+      <div class="hero-cta-row">
+        <a href={APPLY_MAILTO} class="btn btn-primary btn-lg">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          earlyaccess@paracosm.gg
+        </a>
+      </div>
+      <p class="form-note">We read every email and reply within a couple of days.</p>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Fire a PostHog conversion event for the early-access view (production only;
+  // window.posthog is absent in dev/preview, so it's optional-chained).
+  window.posthog?.capture('early_access_view');
+</script>

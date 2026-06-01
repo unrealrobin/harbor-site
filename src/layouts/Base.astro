@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import PostHog from '../components/posthog.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import { shouldLoadAnalytics } from '../lib/analytics';
 
 interface Props {
@@ -69,6 +71,8 @@ const loadAnalytics = shouldLoadAnalytics(process.env.CONTEXT);
     </noscript>
   </head>
   <body>
+    <Header />
     <slot />
+    <Footer />
   </body>
 </html>
