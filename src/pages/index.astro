@@ -1,43 +1,68 @@
 ---
 import Base from '../layouts/Base.astro';
+import WhyHarbor from '../components/WhyHarbor.astro';
+
+const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
+  {
+    title: 'It sits between the storefront and your game',
+    desc: 'Steam, Epic, or GOG launches Harbor; Harbor launches your game. Nothing about how players start your game changes.',
+    icon: 'M5 12h14M13 6l6 6-6 6',
+  },
+  {
+    title: 'Fully white-label',
+    desc: 'Your name, logo, colors, fonts, and play button. There is no Harbor branding shown to your players — ever.',
+    icon: 'M8 12l2.5 2.5L16 9',
+  },
+  {
+    title: 'Zero player install',
+    desc: "Harbor ships as a file alongside your build. Players don't download anything, sign in to anything, or know it's there.",
+    icon: 'M12 3v12M7 10l5 5 5-5M5 21h14',
+  },
+];
 
 const FAQS: { q: string; a: string }[] = [
   {
     q: 'Do players install Harbor, or do I?',
-    a: "You do. Harbor ships as harbor-launcher.exe alongside your game. Players never install anything separately — they just launch your game normally, and see the Harbor launcher instead of whatever you had before (or nothing).",
+    a: 'You do. Harbor ships as harbor-launcher.exe alongside your build. Players never install anything separately — they launch your game the way they always have, and see your Harbor launcher instead of whatever was there before (or nothing).',
   },
   {
-    q: 'Does it work with Steam / Epic / GOG?',
-    a: 'Yes. Harbor sits between the storefront and your game executable. Whatever launched your game before still launches Harbor, and Harbor then launches your game.',
+    q: 'Does it work with Steam, Epic, and GOG?',
+    a: 'Yes. Harbor sits between the storefront and your game executable. Whatever launched your game before now launches Harbor, and Harbor launches your game. No storefront integration or approval is required to ship it.',
   },
   {
-    q: 'Can I white-label it?',
-    a: 'Completely. Your game name, logo, colors, fonts, play button text, social links. There is no Harbor branding visible to your players. A small "powered by harbor" footer is optional and off by default on Pro.',
+    q: 'How much does it change for my players?',
+    a: "One screen they can move past in a single click — your patch notes, news, and dev comments, then Play. They don't download anything, don't sign in, and there's no Harbor branding anywhere. You can set it to skip straight to the game for returning players.",
   },
   {
-    q: 'What does it cost my players?',
-    a: 'Nothing. Harbor is billed to the studio, not the player. No ads, no telemetry we sell, no upsells to your players.',
+    q: 'What does it cost — and what about my players?',
+    a: 'Harbor is billed to the studio, not the player. Pricing starts at $20/mo, with a $40/mo tier for advanced modules. The first design partners get six months free. Players pay nothing, see no ads, and we never sell their data.',
   },
   {
     q: 'When is Harbor shipping?',
-    a: "Q3 2026, give or take. Get on the list and you'll know first.",
+    a: "Targeting Q3 2026. We're onboarding a small group of design partners before then. Get on the list and you'll hear first — or read the early-access offer to come on as a partner now.",
   },
 ];
 ---
 
 <Base>
+  <!-- ===== Hero ===== -->
   <section class="hero">
     <div class="dotgrid hero-grid"></div>
     <div class="container hero-inner">
+      <span class="pill pill-teal" style="margin-bottom:28px;">
+        <span class="pill-dot"></span>
+        Pre-launch · partner program open
+      </span>
+
       <h1 class="hero-headline">
         The launcher<br />
         between <span class="text-teal">Steam<br />and your game.</span>
       </h1>
 
       <p class="hero-paragraph">
-        Harbor is a white-label launcher surface for indie studios. Ship patch notes,
-        news, and dev comments to your players at the moment they care most; right
-        when they hit play.
+        Harbor is a white-label launcher that drops in next to your game on Steam, Epic, or GOG.
+        When a player hits Play, they see <em>your</em> patch notes, news, and dev comments — then
+        the game launches normally. No player install. Billed to you, not them.
       </p>
 
       <form id="waitlist-form" class="email-form">
@@ -66,31 +91,83 @@ const FAQS: { q: string; a: string }[] = [
     </div>
   </section>
 
-  <section class="faq-section">
-    <div class="container faq-container">
-      <div class="faq-header">
-        <div class="eyebrow">FAQ</div>
+  <!-- ===== Why Harbor ===== -->
+  <WhyHarbor />
+
+  <!-- ===== What is Harbor ===== -->
+  <section class="section section-ink" id="what">
+    <div class="container">
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:56px;align-items:center;" data-stack>
+        <div>
+          <span class="eyebrow">What is Harbor</span>
+          <h2 class="display-lg" style="margin-bottom:18px;">A surface you own, at the moment that matters.</h2>
+          <p class="lede" style="margin-bottom:28px;">
+            Your players already open your game several times a week. Harbor turns that launch moment
+            into a channel you control — to show a patch note, drop a beta invite, or just say something
+            in your own voice. It's the part of the player relationship the storefront keeps for itself.
+          </p>
+          <ul class="feature-list">
+            {
+              WHAT_BULLETS.map((b) => (
+                <li class="feature-item">
+                  <span class="feature-bullet" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d={b.icon} /></svg>
+                  </span>
+                  <div>
+                    <p class="feature-title">{b.title}</p>
+                    <p class="feature-desc">{b.desc}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div>
+          <div class="flow" aria-label="Storefront launches Harbor, Harbor launches your game">
+            <div class="flow-node">
+              <div class="flow-node-label">Storefront</div>
+              <div class="flow-node-sub">Steam · Epic · GOG</div>
+            </div>
+            <div class="flow-arrow" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </div>
+            <div class="flow-node is-harbor">
+              <div class="flow-node-label text-teal">Harbor</div>
+              <div class="flow-node-sub">your branded launcher</div>
+            </div>
+            <div class="flow-arrow" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </div>
+            <div class="flow-node">
+              <div class="flow-node-label">Your game</div>
+              <div class="flow-node-sub">launches as normal</div>
+            </div>
+          </div>
+          <div class="callout plain" style="margin-top:20px;">
+            <span class="callout-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 8h.01M11 12h1v4h1" /></svg>
+            </span>
+            <p class="callout-body">The player's experience is one extra screen they can skip in a click. The studio gets a channel it never had.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section">
+    <div class="container container-narrow">
+      <div class="section-head center">
+        <span class="eyebrow">FAQ</span>
         <h2 class="display-lg">Things devs ask us.</h2>
       </div>
-
       <div class="faq-list">
         {
           FAQS.map((faq) => (
             <details class="faq-item">
               <summary class="faq-question">
                 <span>{faq.q}</span>
-                <svg
-                  class="faq-chevron"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
+                <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="m9 18 6-6-6-6" />
                 </svg>
               </summary>
@@ -101,61 +178,95 @@ const FAQS: { q: string; a: string }[] = [
       </div>
     </div>
   </section>
+
+  <!-- ===== CTA band ===== -->
+  <section class="cta-band">
+    <div class="dotgrid cta-band-grid"></div>
+    <div class="container cta-band-inner">
+      <span class="eyebrow">Get on the list</span>
+      <h2 class="display-lg" style="margin-bottom:16px;">Be early. It's free for the first partners.</h2>
+      <p class="lede" style="margin-bottom:28px;">
+        We're bringing on a small group of studios to ship Harbor first — six months free, a direct
+        line to the founder. Leave your email, or read the offer.
+      </p>
+      <form id="waitlist-form-2" class="email-form">
+        <p class="honeypot" aria-hidden="true">
+          <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
+        <input
+          type="email"
+          name="email"
+          placeholder="you@studio.com"
+          required
+          aria-label="Email address"
+          class="input email-input"
+        />
+        <button type="submit" class="btn btn-primary btn-lg">Notify me</button>
+        <span class="form-error" id="waitlist-error-2" role="alert" hidden></span>
+      </form>
+      <div class="form-success" id="waitlist-success-2" role="status" tabindex="-1" hidden>
+        <span class="pill pill-teal"><span class="pill-dot"></span> You're in.</span>
+        <p class="form-success-msg">We'll let you know when Harbor ships.</p>
+      </div>
+      <p class="form-note">
+        Or — <a href="/early-access" class="text-teal" style="text-decoration:underline;text-underline-offset:2px;">read the early-access offer</a>.
+      </p>
+    </div>
+  </section>
 </Base>
 
 <script>
-  // PostHog (window.posthog) is loaded production-only by Base.astro and typed
-  // in src/env.d.ts; it may be absent in dev/preview, so calls are optional-chained.
+  // Wire each waitlist form to the /api/subscribe Netlify Function (adds the
+  // email to the Resend Audience). On success, swap the form for the success
+  // state; on failure, show a readable error. PostHog (production-only) is
+  // optional-chained. There are two forms on the page (hero + CTA band).
+  function wireForm(formId: string, successId: string, errorId: string) {
+    const form = document.getElementById(formId) as HTMLFormElement | null;
+    const success = document.getElementById(successId);
+    const errorEl = document.getElementById(errorId);
+    if (!form) return;
 
-  // Submit the waitlist email to the /api/subscribe Netlify Function, which
-  // adds it to the Resend Audience. On success, swap the form for the success
-  // state in place; on failure, show a readable error and let the user retry.
-  const form = document.getElementById('waitlist-form') as HTMLFormElement | null;
-  const success = document.getElementById('waitlist-success');
-  const errorEl = document.getElementById('waitlist-error');
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const fields = new FormData(form);
+      const payload = {
+        email: String(fields.get('email') ?? ''),
+        'bot-field': String(fields.get('bot-field') ?? ''),
+      };
 
-  function showError(message: string) {
-    if (!errorEl) return;
-    errorEl.textContent = message;
-    errorEl.removeAttribute('hidden');
+      button.disabled = true;
+      button.textContent = 'Sending…';
+      errorEl?.setAttribute('hidden', '');
+
+      try {
+        const res = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        const result = (await res.json().catch(() => ({ ok: false, error: '' }))) as {
+          ok?: boolean;
+          error?: string;
+        };
+        if (!res.ok || !result.ok) {
+          throw new Error(result.error || 'Something went wrong. Try again?');
+        }
+        window.posthog?.capture('notify_me_submit');
+        form.setAttribute('hidden', '');
+        success?.removeAttribute('hidden');
+        (success as HTMLElement | null)?.focus();
+      } catch (err) {
+        if (errorEl) {
+          errorEl.textContent = err instanceof Error ? err.message : 'Something went wrong. Try again?';
+          errorEl.removeAttribute('hidden');
+        }
+        button.disabled = false;
+        button.textContent = 'Notify me';
+      }
+    });
   }
 
-  form?.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-    const fields = new FormData(form);
-    const payload = {
-      email: String(fields.get('email') ?? ''),
-      'bot-field': String(fields.get('bot-field') ?? ''),
-    };
-
-    button.disabled = true;
-    button.textContent = 'Sending…';
-    errorEl?.setAttribute('hidden', '');
-
-    try {
-      const res = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      const result = (await res.json().catch(() => ({ ok: false, error: '' }))) as {
-        ok?: boolean;
-        error?: string;
-      };
-      if (!res.ok || !result.ok) {
-        throw new Error(result.error || 'Something went wrong. Try again?');
-      }
-      window.posthog?.capture('notify_me_submit');
-      form.setAttribute('hidden', '');
-      success?.removeAttribute('hidden');
-      // Move focus to the success message so screen-reader users hear it
-      // (role="status" also announces it politely).
-      (success as HTMLElement | null)?.focus();
-    } catch (err) {
-      showError(err instanceof Error ? err.message : 'Something went wrong. Try again?');
-      button.disabled = false;
-      button.textContent = 'Notify me';
-    }
-  });
+  wireForm('waitlist-form', 'waitlist-success', 'waitlist-error');
+  wireForm('waitlist-form-2', 'waitlist-success-2', 'waitlist-error-2');
 </script>
