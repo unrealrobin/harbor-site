@@ -61,9 +61,9 @@ const PROBLEMS = [
           </div>
         </div>
         <div class="field" id="main-field" data-total="160" style="--cols:16;" aria-hidden="true"></div>
-        <div class="pf-toggle" role="tablist" aria-label="Reach with and without Harbor">
-          <button class="active" id="btn-today" type="button" role="tab" aria-selected="true">Without Harbor</button>
-          <button id="btn-launch" type="button" role="tab" aria-selected="false">With Harbor</button>
+        <div class="pf-toggle" role="group" aria-label="Reach with and without Harbor">
+          <button class="active" id="btn-today" type="button" aria-pressed="true">Without Harbor</button>
+          <button id="btn-launch" type="button" aria-pressed="false">With Harbor</button>
         </div>
         <p class="pf-caption" id="pf-caption">
           Scattered across Steam, Discord, and your socials — you reach only a fraction.
@@ -255,8 +255,8 @@ const PROBLEMS = [
       lightField(on);
       btnLaunch!.classList.toggle('active', on);
       btnToday!.classList.toggle('active', !on);
-      btnLaunch!.setAttribute('aria-selected', String(on));
-      btnToday!.setAttribute('aria-selected', String(!on));
+      btnLaunch!.setAttribute('aria-pressed', String(on));
+      btnToday!.setAttribute('aria-pressed', String(!on));
       pfCaption!.textContent = on ? CAPTION_ON : CAPTION_OFF;
     }
 
