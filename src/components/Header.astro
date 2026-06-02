@@ -11,6 +11,7 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
   <div class="container site-header-inner">
     <a href="/" class="logo"><span class="logo-mark"></span> Harbor</a>
     <nav class="nav-links" aria-label="Primary">
+      <a href="/#what" class="nav-link">What it is</a>
       <a
         href="/early-access"
         class:list={["nav-link", { "is-active": path === "/early-access" }]}
