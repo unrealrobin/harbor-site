@@ -20,6 +20,9 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
   },
 ];
 
+// Authored, trusted content — rendered with set:html in the FAQ so the Steam/Epic
+// answer can carry an inline link. Do NOT source this from untrusted input
+// (CMS/API/build data) without escaping first.
 const FAQS: { q: string; a: string }[] = [
   {
     q: 'Do players install Harbor, or do I?',

@@ -127,10 +127,22 @@ const NEVER: { claim: string; detail: string }[] = [
   .print-only { display: none; }
   .doc-print-foot { margin-top: 48px; font-family: var(--font-mono); font-size: 11px; }
 
-  /* ----- Print: render as a clean black-on-white PDF ----- */
+  @media (max-width: 760px) {
+    .doc-sheet { padding: 40px 0 72px; }
+    .doc h1 { font-size: 31px; }
+    .doc-lede { font-size: 17px; }
+  }
+
+  /* ----- Print: render as a clean black-on-white PDF. This palette is
+     deliberately separate from the dark-theme screen tokens. ----- */
   @media print {
     @page { margin: 18mm 16mm; }
-    html, body { background: #ffffff !important; color: #14171c !important; }
+    html, body {
+      background: #ffffff !important;
+      color: #14171c !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
     .site-header, .footer, .no-print { display: none !important; }
     .doc, .doc-sheet { background: #fff !important; max-width: none; padding: 0; }
     .doc h1 { color: #0a0c10 !important; }
