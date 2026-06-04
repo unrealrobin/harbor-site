@@ -1,0 +1,153 @@
+---
+import Base from '../layouts/Base.astro';
+
+const NEVER: { claim: string; detail: string }[] = [
+  { claim: 'No payments or commerce.', detail: 'No store, no transactions — Harbor never sells anything.' },
+  { claim: 'No ads.', detail: 'Players never see advertising in Harbor.' },
+  {
+    claim: 'No changes to your game.',
+    detail: "Harbor doesn't modify, patch, or inject anything into your game or its files.",
+  },
+  {
+    claim: 'No player installs or accounts.',
+    detail: "Players don't download or sign in to anything, and there's no Harbor account.",
+  },
+  {
+    claim: 'No interference with the storefront.',
+    detail: "Harbor never touches or overlays the storefront's pages, client, or checkout.",
+  },
+  {
+    claim: 'No data sold or shared.',
+    detail: 'The analytics Harbor collects go only to you, the developer — never sold, never handed to a third party.',
+  },
+];
+---
+
+<Base
+  title="What Harbor does — and never does · Harbor"
+  description="Exactly what Harbor does and doesn't do on Steam, Epic, and GOG — so you can check it against your own storefront agreement."
+>
+  <section class="doc">
+    <div class="container doc-sheet">
+      <div class="doc-toolbar">
+        <span class="doc-kicker">Harbor · Storefront transparency · 2026</span>
+        <button id="print-btn" type="button" class="btn btn-ghost btn-sm no-print">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v8H6z" /></svg>
+          Download PDF
+        </button>
+      </div>
+
+      <h1>What Harbor does — and what it never does</h1>
+      <p class="doc-lede">
+        Developers ask whether Harbor is okay to ship on Steam, Epic, and GOG. Rather than make legal
+        claims, this page describes exactly what Harbor does and doesn't do, so you can check it against
+        your own storefront agreement.
+      </p>
+
+      <div class="doc-section">
+        <h2>What Harbor is</h2>
+        <p>
+          A launcher that runs in front of your game. The storefront launches Harbor; Harbor shows your
+          patch notes, news, and links; then your game starts. Harbor keeps a light footprint while the
+          game runs, only to record basic analytics for you.
+        </p>
+      </div>
+
+      <div class="doc-section">
+        <h2>What Harbor collects</h2>
+        <p>
+          A small amount of analytics — launcher engagement and gameplay session length — so you can
+          understand your players better. That data belongs to you, the developer. It is shared only with
+          you, and is never sold or handed to anyone else.
+        </p>
+      </div>
+
+      <div class="doc-section">
+        <h2>What Harbor never does</h2>
+        <ul class="doc-points">
+          {
+            NEVER.map((item) => (
+              <li class="doc-point">
+                <span class="doc-point-check" aria-hidden="true">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                </span>
+                <span class="doc-point-text">
+                  <strong>{item.claim}</strong> <span>{item.detail}</span>
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="doc-section">
+        <h2>On branding</h2>
+        <p>
+          Harbor is white-label: players see your studio throughout. A small link back to Harbor may
+          appear among your social links; the $40 Pro tier removes it.
+        </p>
+      </div>
+
+      <div class="doc-section">
+        <h2>Note</h2>
+        <p class="muted">
+          This page describes how Harbor behaves, for transparency. It is not legal advice or a guarantee
+          of compliance with any storefront's terms — review it against your own agreement.
+        </p>
+      </div>
+
+      <p class="print-only doc-print-foot">harborlauncher.com/tos-compliance · a product of Paracosm</p>
+    </div>
+  </section>
+</Base>
+
+<style is:global>
+  /* ----- Document layout (the /tos-compliance one-pager) ----- */
+  .doc { background: var(--harbor-deep); }
+  .doc-sheet { max-width: 880px; margin: 0 auto; padding: 56px 0 96px; }
+  .doc-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 40px; flex-wrap: wrap; }
+  .doc-kicker { font-family: var(--font-mono); font-size: 12px; color: var(--text3); letter-spacing: 0.02em; }
+  .doc h1 { font-family: var(--font-display); font-weight: 800; font-size: 40px; letter-spacing: -0.02em; line-height: 1.08; margin: 0 0 18px; color: var(--text); }
+  .doc-lede { font-family: var(--font-body); font-size: 19px; line-height: 1.55; color: var(--text2); margin: 0 0 8px; max-width: 680px; }
+  .doc-section { margin-top: 44px; }
+  .doc-section > h2 {
+    font-family: var(--font-display); font-weight: 700; font-size: 13px;
+    text-transform: uppercase; letter-spacing: 0.1em; color: var(--teal);
+    margin: 0 0 18px; padding-bottom: 12px; border-bottom: 1px solid var(--harbor-line);
+  }
+  .doc-section p { font-family: var(--font-body); font-size: 15.5px; line-height: 1.7; color: var(--text); margin: 0 0 14px; max-width: 720px; }
+  .doc-section p.muted { color: var(--text2); }
+  .doc-points { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+  .doc-point { display: flex; gap: 14px; align-items: flex-start; }
+  .doc-point-check { color: var(--teal); flex-shrink: 0; margin-top: 3px; }
+  .doc-point-text { font-family: var(--font-body); font-size: 15px; line-height: 1.6; color: var(--text); }
+  .doc-point-text strong { font-weight: 600; }
+  .doc-point-text span { color: var(--text2); }
+
+  .print-only { display: none; }
+  .doc-print-foot { margin-top: 48px; font-family: var(--font-mono); font-size: 11px; }
+
+  /* ----- Print: render as a clean black-on-white PDF ----- */
+  @media print {
+    @page { margin: 18mm 16mm; }
+    html, body { background: #ffffff !important; color: #14171c !important; }
+    .site-header, .footer, .no-print { display: none !important; }
+    .doc, .doc-sheet { background: #fff !important; max-width: none; padding: 0; }
+    .doc h1 { color: #0a0c10 !important; }
+    .doc-lede { color: #3a4049 !important; }
+    .doc-section > h2 { color: #0a8f60 !important; border-color: #d8dde3 !important; }
+    .doc-section p { color: #14171c !important; }
+    .doc-section p.muted { color: #3a4049 !important; }
+    .doc-point-text { color: #14171c !important; }
+    .doc-point-text span { color: #3a4049 !important; }
+    .doc-point-check { color: #0a8f60 !important; }
+    .doc-kicker, .doc-print-foot { color: #6b7280 !important; }
+    .doc-section, .doc-point { break-inside: avoid; }
+    a { color: inherit !important; }
+    .print-only { display: block !important; }
+  }
+</style>
+
+<script>
+  document.getElementById('print-btn')?.addEventListener('click', () => window.print());
+</script>

@@ -27,7 +27,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: 'Does it work with Steam, Epic, and GOG?',
-    a: 'Yes. Harbor sits between the storefront and your game executable. Whatever launched your game before now launches Harbor, and Harbor launches your game. No storefront integration or approval is required to ship it.',
+    a: 'Yes. Harbor sits between the storefront and your game executable. Whatever launched your game before now launches Harbor, and Harbor launches your game. No storefront integration or approval is required to ship it. <a href="/tos-compliance" class="text-teal" style="text-decoration:underline;text-underline-offset:2px;">See exactly what Harbor does and doesn’t do →</a>',
   },
   {
     q: 'How much does it change for my players?',
@@ -171,7 +171,7 @@ const FAQS: { q: string; a: string }[] = [
                   <path d="m9 18 6-6-6-6" />
                 </svg>
               </summary>
-              <div class="faq-answer">{faq.a}</div>
+              <div class="faq-answer" set:html={faq.a} />
             </details>
           ))
         }
