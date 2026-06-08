@@ -43,6 +43,7 @@ input:focus-visible {
 .hairline { border-top: 1px solid var(--harbor-line); }
 .mono { font-family: var(--font-mono); }
 .text-teal { color: var(--teal); }
+.text-blue { color: var(--blue); }
 
 /* ----- Logo ----- */
 .logo {
