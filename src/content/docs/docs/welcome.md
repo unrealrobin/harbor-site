@@ -10,13 +10,17 @@ You're one of the first developers shipping Harbor inside a real game on Steam, 
 - **Audience:** the first few developers shipping Harbor inside a real Steam game.
 - **Offer:** six months free, full access to the current modules.
 - **What we ask:** biweekly feedback calls (about 20–30 minutes), and a heads-up that month six transitions to a paid subscription.
-- **Contact:** robin@paracosm.gg. Put `blocker` in the subject line for anything stopping your integration.
+- **Contact:** earlyaccess@paracosm.gg. Put `blocker` in the subject line for anything stopping your integration.
 
-## The short version
+## Why I built this
 
-I built Harbor because I kept watching indie devs ship updates into a void. You spend a week on a patch, hit publish on a Steam post most of your players will never see, then wait for the few who happen to scroll through their library that week to notice. The communication tools Steam and Epic give us are genuinely bad, and nothing fills that gap at the moment that matters: the moment a player has decided to actually play your game tonight.
+I'm a developer too, and Harbor comes out of a problem I couldn't shake: we pour years into these games, and then we have almost no real way to talk to the people playing them. You ship a patch and hope someone notices. You post in Discord and reach the slice who already joined. The players quietly drifting away — the ones you'd most want back — never hear from you at all.
 
-Harbor is my attempt at that. A small launcher that opens before your game, shows whatever you want to say, then gets out of the way. No store, no accounts, no fingerprint of mine on what your players see. It's your launcher.
+The one place you're *guaranteed* a player's attention is the moment they press Play. Every session, before your game opens. Harbor lives in that moment. It's a small launcher that opens first, shows whatever you want to say, then gets out of the way: what you just shipped, what's coming next, a way into your Discord, a nudge toward your next game.
+
+That's the whole idea. **The launcher is the top of the funnel** — the one surface every single player passes through, every time they play. **The modules are everything you build on top of it:** the creative ways to turn that attention into engagement, feedback, trust, and a genuine line of communication with your players. A one-time buyer becomes a regular. A regular becomes someone who follows you to whatever you make next.
+
+And it's *yours*. No store, no accounts, no fingerprint of mine on what your players see. Just you, talking to your players, at the one moment they're all listening.
 
 ## What you get
 
@@ -42,7 +46,7 @@ That's it. No NDAs, no exclusivity, no "you have to keep it running for X months
 
 ## How to reach me
 
-The fastest way is email: **robin@paracosm.gg**. I read everything, usually within a day. For bugs, paste what you're seeing. If something is fully broken and blocking you, put `blocker` in the subject and I'll prioritize it.
+The fastest way is email: **earlyaccess@paracosm.gg**. I read everything, usually within a day. For bugs, paste what you're seeing. If something is fully broken and blocking you, put `blocker` in the subject and I'll prioritize it.
 
 ## What to do next
 

@@ -15,4 +15,4 @@ Harbor is a white-label launcher that opens before your game, shows whatever you
 
 The [Reference](/docs/reference/cli-menu) section covers the CLI menu, the `harbor.config.json` schema, and the module system in detail.
 
-Stuck on something? Email **robin@paracosm.gg** and put `blocker` in the subject if it's stopping your integration.
+Stuck on something? Email **earlyaccess@paracosm.gg** and put `blocker` in the subject if it's stopping your integration.
