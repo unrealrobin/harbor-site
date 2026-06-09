@@ -1,0 +1,49 @@
+/* Harbor theme for Starlight docs — maps Starlight's tokens onto the Harbor
+   brand (teal accent, near-black surfaces, Sora display + DM Sans body). */
+
+:root {
+  --sl-font: 'DM Sans', system-ui, sans-serif;
+  --sl-font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+/* Dark is the default and only theme we ship, to match the marketing site. */
+:root[data-theme='dark'] {
+  /* Teal accent */
+  --sl-color-accent-low: #123a2a;
+  --sl-color-accent: #1fcf8e;
+  --sl-color-accent-high: #b3f0d6;
+
+  /* Harbor surfaces */
+  --sl-color-bg: #0a0c10;
+  --sl-color-bg-nav: rgba(10, 12, 16, 0.85);
+  --sl-color-bg-sidebar: #0d0f12;
+  --sl-color-bg-inline-code: #1a1e25;
+  --sl-color-bg-accent: #1fcf8e;
+
+  /* Text */
+  --sl-color-white: #f0f2f5;
+  --sl-color-text: #c2c7cf;
+  --sl-color-text-accent: #1fcf8e;
+
+  /* Hairline borders to match the marketing site */
+  --sl-color-hairline: rgba(255, 255, 255, 0.06);
+  --sl-color-hairline-light: rgba(255, 255, 255, 0.1);
+  --sl-color-hairline-shade: rgba(255, 255, 255, 0.04);
+}
+
+/* Display font on headings; body/nav stay DM Sans via --sl-font. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.site-title {
+  font-family: 'Sora', system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* The Harbor mark next to the docs title in the top bar. */
+.site-title {
+  font-weight: 800;
+}
