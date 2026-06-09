@@ -17,6 +17,7 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
         class:list={["nav-link", { "is-active": path === "/early-access" }]}
         >Early access</a
       >
+      <a href="/docs" class="nav-link">Docs</a>
     </nav>
     <div class="nav-right">
       <a href={EARLY_ACCESS_MAILTO} class="btn btn-primary btn-sm">Get early access</a>
