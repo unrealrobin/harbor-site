@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import WhyHarbor from '../components/WhyHarbor.astro';
+import DemoVideo from '../components/DemoVideo.astro';
 
 const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
   {
@@ -94,6 +95,9 @@ const FAQS: { q: string; a: string }[] = [
       </div>
     </div>
   </section>
+
+  <!-- ===== 60-second demo ===== -->
+  <DemoVideo />
 
   <!-- ===== Why Harbor ===== -->
   <WhyHarbor />
