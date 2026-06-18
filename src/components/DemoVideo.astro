@@ -1,0 +1,202 @@
+---
+// 60-second demo section (HAR-145). Click-to-load facade: renders a branded
+// poster-state frame and only swaps in the YouTube embed on activation, so no
+// third-party iframe / script / cookie loads until the player chooses to play —
+// same privacy posture as the deferred, production-gated PostHog. A native
+// <button> gives keyboard activation (Enter/Space) and focus handling for free.
+const VIDEO_ID = '7SXS6Xpi17U';
+const DURATION = '1:18';
+// Poster is a real launcher frame at /public/demo-poster.webp. The CSS dotgrid +
+// halo sit behind it as a fallback; the facade swaps the whole frame for the
+// embed on activation.
+---
+
+<section class="section demo" id="demo" aria-labelledby="demo-title">
+  <div class="container">
+    <div class="section-head center">
+      <span class="eyebrow">See it in action</span>
+      <h2 class="display-lg" id="demo-title">Harbor, in a real game.</h2>
+      <p class="lede">
+        A player presses Play, sees your patch notes, news, and a note from you, then the game
+        launches. The whole flow, start to finish.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="demo-frame"
+      id="demo-frame"
+      data-video={VIDEO_ID}
+      aria-label={`Play the Harbor demo video, ${DURATION} long`}
+    >
+      <span class="dotgrid demo-grid" aria-hidden="true"></span>
+      <img class="demo-poster" src="/demo-poster.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+      <span class="demo-scrim" aria-hidden="true"></span>
+      <span class="demo-play" aria-hidden="true">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+      </span>
+      <span class="demo-meta" aria-hidden="true">
+        <span class="demo-meta-dot"></span> Watch the demo · {DURATION}
+      </span>
+    </button>
+  </div>
+</section>
+
+<style>
+  .demo-frame {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;
+    padding: 0;
+    border: 1px solid var(--harbor-line-strong);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    cursor: pointer;
+    background:
+      radial-gradient(ellipse 60% 55% at 50% 0%, rgba(31, 207, 142, 0.16), transparent 60%),
+      var(--harbor-ink);
+    transition:
+      border-color var(--dur-base) var(--ease),
+      transform var(--dur-base) var(--ease);
+  }
+  .demo-frame:hover {
+    border-color: var(--teal-border);
+    transform: translateY(-2px);
+  }
+  .demo-frame:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
+  }
+
+  .demo-grid {
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .demo-poster {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+  /* Gentle centre vignette so the teal play button seats over the artwork
+     without hiding the launcher behind it. */
+  .demo-scrim {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse 55% 55% at 50% 50%, rgba(6, 10, 14, 0.4), transparent 68%);
+  }
+
+  .demo-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 4px; /* optically centre the triangle */
+    color: #062014;
+    background: var(--teal);
+    box-shadow:
+      0 0 0 8px rgba(31, 207, 142, 0.14),
+      0 12px 40px rgba(31, 207, 142, 0.3);
+    transition: transform var(--dur-base) var(--ease);
+  }
+  .demo-frame:hover .demo-play {
+    transform: translate(-50%, -50%) scale(1.06);
+  }
+
+  .demo-meta {
+    position: absolute;
+    left: 16px;
+    bottom: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    background: rgba(10, 12, 16, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid var(--harbor-line);
+    border-radius: var(--r-pill);
+    padding: 7px 13px;
+  }
+  .demo-meta-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--teal);
+    box-shadow: 0 0 8px var(--teal);
+  }
+
+  @media (max-width: 760px) {
+    .demo-play {
+      width: 60px;
+      height: 60px;
+    }
+    .demo-frame:hover {
+      transform: none;
+    }
+  }
+</style>
+
+<!-- The player is injected by the facade script below, so it lacks the scoped
+     component attribute — these rules are global, namespaced under #demo. -->
+<style is:global>
+  #demo .demo-embed {
+    width: 100%;
+    max-width: 920px;
+    margin: 0 auto;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--harbor-line-strong);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    display: block;
+  }
+  #demo .demo-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+</style>
+
+<script>
+  // Click-to-load facade. On activation, replace the poster button with the
+  // privacy-friendly youtube-nocookie embed. No YouTube request, script, or
+  // cookie until the user clicks. The native <button> handles Enter/Space.
+  const frame = document.getElementById('demo-frame');
+  if (frame) {
+    frame.addEventListener('click', () => {
+      const id = frame.getAttribute('data-video');
+      if (!id) return;
+
+      const wrap = document.createElement('div');
+      wrap.className = 'demo-embed';
+
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+      iframe.title = 'Harbor demo video';
+      iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      iframe.setAttribute('allowfullscreen', '');
+
+      wrap.appendChild(iframe);
+      frame.replaceWith(wrap);
+      iframe.focus();
+    });
+  }
+</script>

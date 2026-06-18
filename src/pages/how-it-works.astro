@@ -1,0 +1,452 @@
+---
+import Base from '../layouts/Base.astro';
+
+const STEPS = [
+  {
+    n: '01',
+    title: 'Drop in the binary',
+    desc: 'Ship harbor-launcher.exe next to your game. It replaces your current launcher, or sits in front of a bare exe.',
+  },
+  {
+    n: '02',
+    title: 'Write harbor.config.json',
+    desc: 'Point it at your game executable, name it, theme it, turn modules on. One file, checked into your repo.',
+  },
+  {
+    n: '03',
+    title: 'Publish from the CLI',
+    desc: "Write a patch note in markdown and run harbor push. It lands in every player's launcher before their next session.",
+    note: 'Web app coming soon',
+  },
+];
+
+const CONFIG_JSON = `{
+  "app_id": "paracosm/dierobot",
+  "game_exe": "./Windows/DieRobot.exe",
+  "branding": {
+    "game_name": "Die Robot",
+    "studio_name": "Paracosm",
+    "play_button_text": "Play"
+  },
+  "modules": [
+    { "type": "patch_notes",  "enabled": true },
+    { "type": "news",         "enabled": true },
+    { "type": "dev_comments", "enabled": true }
+  ],
+  "theme": {
+    "accent_color": "#FF6B00"
+  }
+}`;
+
+// status: 'included' (base tier, live) | 'pro' (live, Pro tier) | 'soon' (in development)
+const MODULES = [
+  {
+    name: 'Patch Notes',
+    status: 'included',
+    icon: 'M4 7h16M4 12h16M4 17h10',
+    desc: 'Ship notes in markdown. Players see what changed before they hit Play.',
+  },
+  {
+    name: 'News',
+    status: 'included',
+    icon: 'M4 5h13v14H4zM17 8h3v9a2 2 0 0 1-2 2M7 9h7M7 13h7M7 16h4',
+    desc: 'Announcements, blog posts, and livestream reminders. Your studio channel.',
+  },
+  {
+    name: 'Dev Comments',
+    status: 'included',
+    icon: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2z',
+    desc: 'Short, signed notes from the team. The changelog, in human terms.',
+  },
+  {
+    name: 'Surveys',
+    status: 'pro',
+    icon: 'M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 1 4 0v1H9zM8 13l2 2 4-4',
+    desc: 'In-launcher questions with open, multiple-choice, and NPS formats.',
+  },
+  {
+    name: 'Email Capture',
+    status: 'soon',
+    icon: 'M3 7l9 6 9-6M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z',
+    desc: 'Collect player emails and tester interest with one click, gated by branch or key.',
+  },
+  {
+    name: 'Discord Integration',
+    status: 'soon',
+    icon: 'M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-6l-4 3v-3H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM8.5 10h.01M15.5 10h.01',
+    desc: 'Invite, OAuth link, and live server stats, right in the launcher.',
+  },
+  {
+    name: 'Voting System',
+    status: 'soon',
+    icon: 'M7 11v8H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1zM7 11l3.5-7a2 2 0 0 1 2 2v3h5a2 2 0 0 1 2 2.3l-1.2 6A2 2 0 0 1 16.3 19H7',
+    desc: 'Let players pick the next feature, boss, or cosmetic.',
+  },
+];
+
+const STATUS_LABEL: Record<string, string> = {
+  included: 'Included',
+  pro: 'Pro',
+  soon: 'In development',
+};
+---
+
+<Base
+  title="How it works — Harbor"
+  description="How Harbor works: a launcher binary, a JSON config, and a one-line CLI push. Plus every module you can turn on — patch notes, news, dev comments, surveys, and more."
+>
+  <!-- ===== Hero ===== -->
+  <section class="hero hero-page">
+    <div class="dotgrid hero-grid"></div>
+    <div class="container hero-inner">
+      <span class="pill pill-teal" style="margin-bottom:24px;">
+        <span class="pill-dot"></span>
+        How it works
+      </span>
+      <h1 class="hero-headline" style="font-size:44px;line-height:1.08;">
+        Three files. No backend.<br />
+        <span class="text-teal">Ships in an afternoon.</span>
+      </h1>
+      <p class="hero-paragraph">
+        Harbor is a launcher binary, a JSON config, and a one-line CLI push. No SDK, no build step,
+        nothing to host. Here's the whole thing, end to end.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== Steps + config ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="steps">
+        {
+          STEPS.map((s) => (
+            <div class="step">
+              <span class="step-num mono">
+                {s.n} <span class="step-num-total">/ 03</span>
+              </span>
+              <h2 class="step-title">{s.title}</h2>
+              <p class="step-desc">{s.desc}</p>
+              {s.note && <span class="step-note">{s.note}</span>}
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="json-block">
+        <div class="code-panel">
+          <div class="code-head">
+            <span class="code-dot"></span>
+            <span class="code-dot"></span>
+            <span class="code-dot"></span>
+            <span class="code-file mono">harbor.config.json</span>
+          </div>
+          <pre class="code-body mono"><code>{CONFIG_JSON}</code></pre>
+        </div>
+        <div class="json-copy">
+          <span class="eyebrow">It's just JSON</span>
+          <h2 class="display-lg" style="font-size:28px;margin-bottom:16px;">Configured like code.</h2>
+          <p class="json-p">
+            Harbor is configured by a single file in your repo. You version it like code, review it
+            like code, and ship it like code. No SDK. No build step.
+          </p>
+          <p class="json-p">
+            Modules, theme, play button, and social links are all declared in
+            <span class="mono text-teal">harbor.config.json</span>. Push it with the Harbor CLI today.
+            A web app for non-engineers is coming soon.
+          </p>
+          <a href="/docs/quickstart" class="btn btn-ghost">Read the docs →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Modules ===== -->
+  <section class="section section-ink">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Modules</span>
+        <h2 class="display-lg">Turn features on like a light switch.</h2>
+        <p class="lede">
+          Every module is a self-contained tab in the launcher. Turn on what you need. Anything you
+          don't enable never ships in the binary.
+        </p>
+      </div>
+
+      <div class="module-grid">
+        {
+          MODULES.map((m) => (
+            <div class:list={['module-card', { 'is-soon': m.status === 'soon' }]}>
+              <div class="module-top">
+                <span class="module-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                    <path d={m.icon} />
+                  </svg>
+                </span>
+                <span class:list={['module-badge', `is-${m.status}`]}>{STATUS_LABEL[m.status]}</span>
+              </div>
+              <h3 class="module-name">{m.name}</h3>
+              <p class="module-desc">{m.desc}</p>
+            </div>
+          ))
+        }
+        <div class="module-card module-more">
+          <span class="module-more-plus" aria-hidden="true">+</span>
+          <h3 class="module-name">Many more to come</h3>
+          <p class="module-desc">
+            New modules land every few patches. Tell us what you'd put in front of your players.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta-band">
+    <div class="dotgrid cta-band-grid"></div>
+    <div class="container cta-band-inner" style="max-width:680px;">
+      <span class="eyebrow">Ready in an afternoon</span>
+      <h2 class="display-lg" style="margin-bottom:16px;">Read the docs, or come on as a partner.</h2>
+      <p class="lede" style="margin-bottom:28px;">
+        The full integration is in the Quickstart. Or skip ahead and email us about your game.
+      </p>
+      <div class="hero-cta-row">
+        <a href="/docs/quickstart" class="btn btn-primary btn-lg">Read the docs</a>
+        <a href="/early-access" class="btn btn-ghost btn-lg">Get early access</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ----- Steps ----- */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-bottom: 56px;
+  }
+  .step-num {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--teal);
+    letter-spacing: 0.04em;
+    margin-bottom: 14px;
+  }
+  .step-num-total {
+    color: var(--text3);
+  }
+  .step-title {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin: 0 0 8px;
+  }
+  .step-desc {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text2);
+    margin: 0;
+  }
+  .step-note {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: var(--font-display);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: var(--blue-bg);
+    border: 1px solid var(--blue-border);
+    border-radius: var(--r-pill);
+    padding: 4px 10px;
+  }
+
+  /* ----- JSON block ----- */
+  .json-block {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+    padding-top: 56px;
+    border-top: 1px solid var(--harbor-line);
+  }
+  .code-panel {
+    background: var(--harbor-deep);
+    border: 1px solid var(--harbor-line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .code-head {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--harbor-line);
+  }
+  .code-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--bg4);
+  }
+  .code-file {
+    margin-left: 10px;
+    font-size: 12px;
+    color: var(--text2);
+  }
+  .code-body {
+    margin: 0;
+    padding: 18px 20px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text2);
+    overflow-x: auto;
+  }
+  .json-copy .eyebrow {
+    margin-bottom: 12px;
+  }
+  .json-p {
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text2);
+    margin: 0 0 16px;
+  }
+  .json-copy .btn {
+    margin-top: 10px;
+  }
+
+  /* ----- Modules ----- */
+  .module-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .module-card {
+    background: var(--harbor-ink);
+    border: 1px solid var(--harbor-line);
+    border-radius: var(--r-lg);
+    padding: 22px;
+    transition:
+      border-color var(--dur-base) var(--ease),
+      transform var(--dur-base) var(--ease);
+  }
+  .module-card:hover {
+    border-color: var(--harbor-line-strong);
+    transform: translateY(-2px);
+  }
+  .module-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .module-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--r-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--teal-bg);
+    color: var(--teal);
+    border: 1px solid var(--teal-border);
+  }
+  .module-name {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 6px;
+  }
+  .module-desc {
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--text2);
+    margin: 0;
+  }
+
+  .module-badge {
+    font-family: var(--font-display);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: var(--r-pill);
+    padding: 4px 9px;
+    white-space: nowrap;
+  }
+  .module-badge.is-included {
+    color: var(--teal);
+    background: var(--teal-bg);
+    border: 1px solid var(--teal-border);
+  }
+  .module-badge.is-pro {
+    color: var(--blue);
+    background: var(--blue-bg);
+    border: 1px solid var(--blue-border);
+  }
+  .module-badge.is-soon {
+    color: var(--text3);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--harbor-line);
+  }
+
+  /* "In development" cards are de-emphasised via a recessed background plus a
+     muted icon, badge, and title — NOT a blanket opacity, so the description
+     copy stays at full AA contrast. */
+  .module-card.is-soon {
+    background: var(--harbor-deep);
+  }
+  .module-card.is-soon .module-icon {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text3);
+    border-color: var(--harbor-line);
+  }
+  .module-card.is-soon .module-name {
+    color: var(--text2);
+  }
+
+  .module-more {
+    border-style: dashed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .module-more:hover {
+    transform: none;
+  }
+  .module-more-plus {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text3);
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  @media (max-width: 980px) {
+    .steps {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .json-block {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .module-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .module-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

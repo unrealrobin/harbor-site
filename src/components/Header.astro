@@ -1,6 +1,5 @@
 ---
-// Sticky site header. Nav links only point at routes that exist today;
-// /overview and /tos-compliance get added here when those pages ship.
+// Sticky site header. Nav links only point at routes that exist today.
 const EARLY_ACCESS_MAILTO =
   "mailto:earlyaccess@paracosm.gg?subject=Harbor%20early%20access";
 
@@ -12,6 +11,11 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
     <a href="/" class="logo"><span class="logo-mark"></span> Harbor</a>
     <nav class="nav-links" aria-label="Primary">
       <a href="/#what" class="nav-link">What it is</a>
+      <a
+        href="/how-it-works"
+        class:list={["nav-link", { "is-active": path === "/how-it-works" }]}
+        >How it works</a
+      >
       <a
         href="/early-access"
         class:list={["nav-link", { "is-active": path === "/early-access" }]}
