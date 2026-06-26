@@ -100,6 +100,30 @@ input:focus-visible {
 .nav-link.is-active { color: var(--text); }
 .nav-right { display: flex; align-items: center; gap: 18px; }
 
+/* Mobile menu: on desktop the collapse is transparent (display:contents) so the
+   nav + CTA lay out exactly as before, and the toggle is hidden. Both flip on
+   at <=760px (see the responsive block below). */
+.nav-collapse { display: contents; }
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: -8px;
+  padding: 0;
+  color: var(--text);
+  background: transparent;
+  border: none;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+}
+.nav-toggle:hover { background: var(--harbor-line-strong); }
+.nav-toggle:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.nav-toggle-x { display: none; }
+.site-header[data-open] .nav-toggle-bars { display: none; }
+.site-header[data-open] .nav-toggle-x { display: block; }
+
 /* ----- Pill ----- */
 .pill {
   display: inline-flex;
@@ -588,7 +612,37 @@ input:focus-visible {
   .display-md { font-size: 21px; }
   .grid-2, .price-grid { grid-template-columns: 1fr; }
   [data-stack] { grid-template-columns: 1fr !important; gap: 40px !important; }
-  .nav-links { display: none; }
+  .nav-toggle { display: inline-flex; }
+  /* Full-bleed dropdown below the sticky bar. Positioned against .site-header
+     (sticky = its containing block); the horizontal padding intentionally
+     mirrors .container's 22px gutter at this breakpoint so link text lines up
+     with the logo. Keep the two values in sync if either changes. */
+  .nav-collapse {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    padding: 10px 22px 18px;
+    background: var(--harbor-deep);
+    border-bottom: 1px solid var(--harbor-line);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  }
+  .site-header[data-open] .nav-collapse { display: flex; }
+  .nav-collapse .nav-links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  .nav-collapse .nav-link {
+    padding: 13px 2px;
+    font-size: 15px;
+    border-bottom: 1px solid var(--harbor-line);
+  }
+  .nav-collapse .nav-link:last-child { border-bottom: none; }
+  .nav-collapse .nav-right { margin-top: 14px; }
+  .nav-collapse .nav-right .btn { width: 100%; justify-content: center; }
   .hero-cta-row { width: 100%; }
   .flow { flex-direction: column; }
   .flow-arrow { transform: rotate(90deg); padding: 6px 0; }
