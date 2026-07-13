@@ -4,19 +4,19 @@ import Base from '../layouts/Base.astro';
 const STEPS = [
   {
     n: '01',
-    title: 'Drop in the binary',
-    desc: 'Ship harbor-launcher.exe next to your game. It replaces your current launcher, or sits in front of a bare exe.',
+    title: 'Set it up in the web app',
+    desc: 'Point it at your game, name it, theme it, and turn modules on. The Harbor web app handles the whole config — no files to hand-edit.',
+    note: 'Invite-only for now',
   },
   {
     n: '02',
-    title: 'Write harbor.config.json',
-    desc: 'Point it at your game executable, name it, theme it, turn modules on. One file, checked into your repo.',
+    title: 'Download your launcher',
+    desc: 'The web app builds a ready-to-ship harbor-launcher.exe. Download it and drop it next to your game — it replaces your current launcher, or sits in front of a bare exe.',
   },
   {
     n: '03',
-    title: 'Publish from the CLI',
-    desc: "Write a patch note in markdown and run harbor push. It lands in every player's launcher before their next session.",
-    note: 'Web app coming soon',
+    title: 'Publish from the web app',
+    desc: "Write a patch note and hit publish. It lands in every player's launcher before their next session.",
   },
 ];
 
@@ -93,7 +93,7 @@ const STATUS_LABEL: Record<string, string> = {
 
 <Base
   title="How it works — Harbor"
-  description="How Harbor works: a launcher binary, a JSON config, and a one-line CLI push. Plus every module you can turn on — patch notes, news, dev comments, surveys, and more."
+  description="How Harbor works: a launcher binary, a JSON config, and the Harbor web app. Plus every module you can turn on — patch notes, news, dev comments, surveys, and more."
 >
   <!-- ===== Hero ===== -->
   <section class="hero hero-page">
@@ -104,11 +104,11 @@ const STATUS_LABEL: Record<string, string> = {
         How it works
       </span>
       <h1 class="hero-headline" style="font-size:44px;line-height:1.08;">
-        Three files. No backend.<br />
+        One download. No backend.<br />
         <span class="text-teal">Ships in an afternoon.</span>
       </h1>
       <p class="hero-paragraph">
-        Harbor is a launcher binary, a JSON config, and a one-line CLI push. No SDK, no build step,
+        Harbor is a launcher binary, a JSON config, and the Harbor web app. No SDK, no build step,
         nothing to host. Here's the whole thing, end to end.
       </p>
     </div>
@@ -144,17 +144,18 @@ const STATUS_LABEL: Record<string, string> = {
         </div>
         <div class="json-copy">
           <span class="eyebrow">It's just JSON</span>
-          <h2 class="display-lg" style="font-size:28px;margin-bottom:16px;">Configured like code.</h2>
+          <h2 class="display-lg" style="font-size:28px;margin-bottom:16px;">Configured in the web app.</h2>
           <p class="json-p">
-            Harbor is configured by a single file in your repo. You version it like code, review it
-            like code, and ship it like code. No SDK. No build step.
+            Modules, theme, play button, and social links are all set from the Harbor web app — no
+            SDK, no build step, nothing to host. Under the hood it's one clean JSON config, so your
+            setup is never a black box.
           </p>
           <p class="json-p">
-            Modules, theme, play button, and social links are all declared in
-            <span class="mono text-teal">harbor.config.json</span>. Push it with the Harbor CLI today.
-            A web app for non-engineers is coming soon.
+            Set it up, download your launcher, and publish updates — all from the web app. It's
+            invite-only right now — email
+            <a href="mailto:earlyaccess@paracosm.gg" class="text-teal" style="text-decoration:underline;text-underline-offset:2px;">earlyaccess@paracosm.gg</a>
+            to request access for your studio.
           </p>
-          <a href="/docs/quickstart" class="btn btn-ghost">Read the docs →</a>
         </div>
       </div>
     </div>
@@ -205,13 +206,12 @@ const STATUS_LABEL: Record<string, string> = {
     <div class="dotgrid cta-band-grid"></div>
     <div class="container cta-band-inner" style="max-width:680px;">
       <span class="eyebrow">Ready in an afternoon</span>
-      <h2 class="display-lg" style="margin-bottom:16px;">Read the docs, or come on as a partner.</h2>
+      <h2 class="display-lg" style="margin-bottom:16px;">Come on as a partner.</h2>
       <p class="lede" style="margin-bottom:28px;">
-        The full integration is in the Quickstart. Or skip ahead and email us about your game.
+        The full integration takes an afternoon. Tell us about your game and we'll get you set up.
       </p>
       <div class="hero-cta-row">
-        <a href="/docs/quickstart" class="btn btn-primary btn-lg">Read the docs</a>
-        <a href="/early-access" class="btn btn-ghost btn-lg">Get early access</a>
+        <a href="/early-access" class="btn btn-primary btn-lg">Get early access</a>
       </div>
     </div>
   </section>

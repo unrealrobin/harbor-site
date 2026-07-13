@@ -5,3 +5,16 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
+
+# Docs (CLI-oriented) were removed in HAR-180. 301 old doc URLs to the homepage
+# so inbound links and search results don't dead-end. Reintroduce when the
+# web-configurator docs land.
+[[redirects]]
+  from = "/docs/*"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/docs"
+  to = "/"
+  status = 301
