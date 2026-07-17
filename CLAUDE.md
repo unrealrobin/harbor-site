@@ -139,7 +139,3 @@ Defined in `.claude/commands/`. Invoke as `/start-task`, `/finish-task`, `/check
 - **`/start-task HAR-XXX`** — Branch from `main`, set Linear status to In Progress, fetch issue context.
 - **`/finish-task`** — Run tests + build + reviewers, push branch, ask user to confirm PR, open PR + set Linear to In Review on yes.
 - **`/check-pkg <name>`** — Look up the latest stable version on the npm registry. Always run before `npm install <name>`.
-
-## Heads-up — wrong directory
-
-The current Claude session was started in `Desktop/harbor site/` (the React+Babel-standalone prototype, not the deployed site). The deployed site lives at `Desktop/harbor-site/` where these instructions are saved. **Next session, launch Claude from `Desktop/harbor-site/` so this `CLAUDE.md` and the `.claude/` config activate.**
