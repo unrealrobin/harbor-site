@@ -1,22 +1,25 @@
 ---
-// "Why Harbor" — the problem section. Graphic A: a field of player dots, only a
-// small fraction lit today; toggling to "every launch" lights the whole field.
-const PROBLEMS = [
+// "Why Harbor" — the ownership section. Concedes Steam's toolkit, then leads
+// each item with what Harbor gives back (value-add headlines, never
+// problem-anchored, so none of it reads as a Harbor shortcoming). Graphic A: a
+// field of player dots, only a small fraction lit today; toggling to "every
+// launch" lights the whole field.
+const VALUE_ITEMS = [
   {
-    claim: "Not everyone's in your Discord.",
-    line: 'Your server reaches the fans you already have, not the ones quietly drifting away.',
+    claim: 'A relationship you own.',
+    line: "On Steam, your audience lives on Valve's servers, under Valve's rules. Harbor moves it onto a surface that belongs to you.",
   },
   {
-    claim: "Steam's news feed goes unread.",
-    line: 'Most players never open the news tab. Your patch notes are live, and almost nobody sees them.',
+    claim: 'Players, not counts.',
+    line: 'Steam shows you totals and regions, never a player you can actually reach. Harbor gives you player-level contact: a list you can export.',
   },
   {
-    claim: 'Epic and GOG give you nothing.',
-    line: 'No patch notes, no news feed, no announcements. There is no built-in way to reach your players or keep up any communication on those stores. None at all.',
+    claim: 'Guaranteed to be seen.',
+    line: 'Even Valve says it: “Not all of your customers will see your event…” Harbor sits on the one screen every player passes through, every session.',
   },
   {
-    claim: 'Some players just launch from the shortcut.',
-    line: 'They skip the storefront entirely. There’s no page left to reach them on.',
+    claim: 'Yours to take anywhere.',
+    line: 'Nothing Steam gives you follows you off Steam. With Harbor, your list and your data leave with you: to your next game, your next platform.',
   },
 ];
 ---
@@ -27,21 +30,21 @@ const PROBLEMS = [
     <div class="why-head">
       <span class="eyebrow">Why Harbor</span>
       <h2 class="display-lg" id="why-title">
-        You’re shipping updates <span class="leak">your players never see.</span>
+        You sold the game. <span class="leak">You never got the player.</span>
       </h2>
       <p class="lede">
-        You post a patch note on Steam. You announce a beta in Discord. You celebrate a launch on X or Bluesky,
-        and no single player sees all of it. Here’s where your reach leaks out:
+        Steam's tools are real: announcements, wishlist emails, a community hub. But the
+        relationship they carry isn't yours. Harbor hands it back, four ways:
       </p>
     </div>
 
     <div class="why-body">
       <div class="problems">
         {
-          PROBLEMS.map((p) => (
+          VALUE_ITEMS.map((p) => (
             <div class="problem">
               <span class="problem-mark" aria-hidden="true">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14" /></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
               </span>
               <div>
                 <p class="problem-claim">{p.claim}</p>
@@ -76,17 +79,16 @@ const PROBLEMS = [
       <div class="turn-inner">
         <h3 class="turn-statement">But every one of them <span class="hl">presses Play.</span></h3>
         <p class="turn-body">
-          That launch is the one moment you’re <strong>guaranteed their attention</strong>, every session.
-          Harbor puts your patch notes, news, dev comments, and every social link right there, every time they play.
-          It’s how a one-time buyer becomes a regular, and a regular becomes a <strong>lifelong fan</strong> who
-          follows you to your next game.
+          That launch is the one moment you're <strong>guaranteed their attention</strong>, every session,
+          and it's the moment Harbor hands back to you. It's how a one-time buyer becomes a regular,
+          and a regular becomes a <strong>lifelong fan</strong> who follows you to your next game.
         </p>
         <a
-          href="mailto:earlyaccess@paracosm.gg?subject=Harbor%20early%20access"
+          href="mailto:earlyaccess@harborlauncher.com?subject=Harbor%20early%20access"
           class="btn btn-primary btn-lg turn-cta"
         >
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
-          Email earlyaccess@paracosm.gg to get started
+          Email earlyaccess@harborlauncher.com to get started
         </a>
       </div>
     </div>
@@ -102,7 +104,7 @@ const PROBLEMS = [
   }
   .why-grid-bg { position: absolute; inset: 0; opacity: 0.5; pointer-events: none; }
   .why-inner { position: relative; z-index: 2; }
-  .why-head { max-width: 760px; margin-bottom: 56px; }
+  .why-head { max-width: 780px; margin-bottom: 56px; }
   .why-head .display-lg { font-size: 46px; line-height: 1.08; margin-bottom: 20px; }
   .why-head .display-lg .leak { color: var(--text2); }
 
@@ -121,12 +123,14 @@ const PROBLEMS = [
   .problem-mark {
     width: 22px; height: 22px; margin-top: 2px;
     border-radius: 50%;
-    border: 1.5px dashed rgba(139, 144, 153, 0.45);
+    border: 1px solid var(--teal-border);
+    background: var(--teal-bg);
     display: flex; align-items: center; justify-content: center;
-    color: var(--text3);
+    color: var(--teal);
   }
   .problem-claim { font-family: var(--font-display); font-weight: 700; font-size: 16.5px; color: var(--text); margin: 0 0 5px; letter-spacing: -0.01em; }
   .problem-line { font-family: var(--font-body); font-size: 14.5px; line-height: 1.55; color: var(--text2); margin: 0; }
+  .problem-line em { color: var(--text); font-style: italic; }
 
   .graphic-shell {
     position: sticky; top: 24px;

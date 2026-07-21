@@ -2,11 +2,11 @@
 import Base from '../layouts/Base.astro';
 
 const APPLY_MAILTO =
-  "mailto:earlyaccess@paracosm.gg?subject=Harbor%20early%20access&body=Hi%2C%0A%0AOur%20studio%3A%20%0AOur%20game%20(Steam%20link)%3A%20%0AWhy%20we're%20interested%3A%20%0A";
+  "mailto:earlyaccess@harborlauncher.com?subject=Harbor%20early%20access&body=Hi%2C%0A%0AOur%20studio%3A%20%0AOur%20game%20(Steam%20link)%3A%20%0AWhy%20we're%20interested%3A%20%0A";
 ---
 
 <Base
-  title="Early access — Harbor"
+  title="Early access · Harbor"
   description="Be one of the first developers shipping Harbor. Full launcher, six months free for accepted partners, and a direct line to the founder."
 >
   <!-- ===== Hero ===== -->
@@ -17,10 +17,10 @@ const APPLY_MAILTO =
         <span class="pill-dot"></span>
         Design-partner program · limited spots
       </span>
-      <h1 class="hero-headline" style="font-size:42px;line-height:1.08;">
-        Be one of the first<br />
-        developers shipping<br />
-        <span class="text-teal">Harbor.</span>
+      <h1 class="hero-headline" style="font-size:42px;line-height:1.12;">
+        Own the launch,<br />
+        keep the players,<br />
+        <span class="text-teal">be one of the first with Harbor.</span>
       </h1>
       <p class="hero-paragraph">
         We're onboarding a small group of studios to ship Harbor before launch. You get the full
@@ -48,14 +48,14 @@ const APPLY_MAILTO =
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 14h5"/></svg>
           </div>
           <h3 class="card-title">The full launcher + every module</h3>
-          <p class="card-body">White-label launcher with patch notes, news, beta signups, and surveys. All of it, branded to your game. New modules land in your build as we ship them.</p>
+          <p class="card-body">White-label launcher with email capture, patch notes, news, and surveys. All of it, branded to your game. New modules land in your build as we ship them.</p>
         </div>
         <div class="card">
           <div class="card-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
           </div>
           <h3 class="card-title">Six months free</h3>
-          <p class="card-body">Accepted partners pay nothing for the first six months. No card, no invoice. You're helping us get it right; that's the deal. After that, partners move to a subscription at a rate we set together.</p>
+          <p class="card-body">Accepted partners pay nothing for the first six months. No card, no invoice. You're helping us get it right; that's the deal.</p>
         </div>
         <div class="card">
           <div class="card-icon blue">
@@ -72,35 +72,6 @@ const APPLY_MAILTO =
           <p class="card-body">You're not filing tickets into a void. The founder building Harbor is on the other end for setup, requests, and the occasional 11pm "can it do this?"</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ===== What we ask ===== -->
-  <section class="section">
-    <div class="container">
-      <div class="grid" style="grid-template-columns:0.85fr 1.15fr;gap:56px;align-items:start;" data-stack>
-        <div class="section-head" style="margin-bottom:0;">
-          <span class="eyebrow eyebrow-blue">What we ask</span>
-          <h2 class="display-lg">Two things, both reasonable.</h2>
-          <p class="lede">A design partnership runs both ways. Here's the part that's on you.</p>
-        </div>
-        <ul class="feature-list" style="gap:14px;">
-          <li class="card" style="display:flex;gap:18px;align-items:flex-start;">
-            <span class="card-num" style="margin:0;font-size:22px;min-width:34px;">01</span>
-            <div>
-              <p class="feature-title" style="font-size:17px;margin-bottom:6px;">A biweekly feedback call</p>
-              <p class="feature-desc">Thirty minutes, every other week. What's working, what's in the way, what you'd ship next. This is the whole reason the program exists. Your real usage steers the roadmap.</p>
-            </div>
-          </li>
-          <li class="card" style="display:flex;gap:18px;align-items:flex-start;">
-            <span class="card-num" style="margin:0;font-size:22px;min-width:34px;">02</span>
-            <div>
-              <p class="feature-title" style="font-size:17px;margin-bottom:6px;">Move to a subscription at month six</p>
-              <p class="feature-desc">When the free window ends, partners transition to a paid plan. Pricing starts at $20/mo, with a $40/mo tier for advanced modules, and partners help set where those lines land. No surprise bill; we'll talk well before month six.</p>
-            </div>
-          </li>
-        </ul>
-      </div>
 
       <div class="callout blue" style="margin-top:44px;">
         <span class="callout-icon">
@@ -111,35 +82,30 @@ const APPLY_MAILTO =
     </div>
   </section>
 
-  <!-- ===== Pricing framing ===== -->
-  <section class="section section-ink">
+  <!-- ===== Pricing ===== -->
+  <section class="section">
     <div class="container">
       <div class="section-head center">
         <span class="eyebrow">After the free window</span>
-        <h2 class="display-lg">Honest pricing, set with partners.</h2>
-        <p class="lede">Free for accepted partners while we build together. When you transition, here's the shape of it, and partners help set the lines.</p>
+        <h2 class="display-lg">Simple, flat pricing.</h2>
+        <p class="lede">
+          Free for accepted partners for six months. After that, plans start at $40/mo, with
+          advanced modules on the Pro tier.
+        </p>
       </div>
-      <div class="price-grid" style="max-width:760px;margin:0 auto;">
-        <div class="price-card">
-          <p class="price-name">Base</p>
-          <div class="price-amount">$20<span> / mo</span></div>
-          <ul class="price-list">
-            <li><span class="price-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> The white-label launcher</li>
-            <li><span class="price-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Patch notes &amp; news</li>
-            <li><span class="price-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> CDN delivery</li>
-          </ul>
-        </div>
-        <div class="price-card is-feature">
-          <p class="price-name" style="color:var(--teal);">Pro</p>
-          <div class="price-amount">$40<span> / mo</span></div>
-          <ul class="price-list">
-            <li><span class="price-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Everything in Base</li>
-            <li><span class="price-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Beta signups &amp; surveys</li>
-            <li><span class="price-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span> Advanced modules as they ship</li>
-          </ul>
-        </div>
+      <div class="flat-price">
+        <div class="flat-price-amount"><span class="from">From</span>$40<span class="per"> / mo, per game</span></div>
+        <p class="flat-price-sub">
+          Flat SaaS pricing per game. <strong>No revenue share, no cut of your sales, ever.</strong>
+          We'll talk pricing well before month six; no surprise bill.
+        </p>
+        <ul class="flat-price-list">
+          <li><span class="price-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><strong>No revenue share</strong>: a flat subscription, never a percentage</span></li>
+          <li><span class="price-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><strong>Email capture included</strong> on every plan</span></li>
+          <li><span class="price-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><strong>Surveys and analytics</strong> on the Pro tier</span></li>
+          <li><span class="price-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><strong>Six months free</strong> for accepted partners</span></li>
+        </ul>
       </div>
-      <p class="form-note" style="text-align:center;max-width:760px;margin-left:auto;margin-right:auto;">Accepted partners pay nothing for the first six months. Players never pay anything, ever.</p>
     </div>
   </section>
 
@@ -153,13 +119,93 @@ const APPLY_MAILTO =
       <div class="hero-cta-row">
         <a href={APPLY_MAILTO} class="btn btn-primary btn-lg">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-          earlyaccess@paracosm.gg
+          earlyaccess@harborlauncher.com
         </a>
       </div>
       <p class="form-note">We read every email and reply within a couple of days.</p>
     </div>
   </section>
 </Base>
+
+<style>
+  .flat-price {
+    max-width: 760px;
+    margin: 0 auto;
+    background: var(--harbor-ink);
+    border: 1px solid var(--teal-border);
+    border-radius: var(--r-lg);
+    padding: 36px 40px;
+  }
+  .flat-price-amount {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 44px;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .flat-price-amount .from {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text2);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-right: 8px;
+  }
+  .flat-price-amount .per {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text3);
+    letter-spacing: 0;
+  }
+  .flat-price-sub {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text2);
+    margin: 10px 0 0;
+  }
+  .flat-price-sub strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .flat-price-list {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 20px 0 0;
+    border-top: 1px solid var(--harbor-line);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 24px;
+  }
+  .flat-price-list li {
+    display: flex;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.5;
+  }
+  .flat-price-list .price-check {
+    color: var(--teal);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .flat-price-list strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  @media (max-width: 760px) {
+    .flat-price {
+      padding: 26px 22px;
+    }
+    .flat-price-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
 
 <script>
   // Fire a PostHog conversion event for the early-access view (production only;
