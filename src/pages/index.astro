@@ -86,11 +86,11 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
 
       {/* Hero media. Interim still frame; swap the <img> for the short looping
           clip (player opting in / answering a survey) once it's recorded. */}
-      <div class="hero-media" aria-hidden="true">
+      <div class="hero-media">
         <div class="hero-media-frame">
-          <img src="/demo-poster.webp" alt="" loading="eager" decoding="async" />
+          <img src="/demo-poster.webp" alt="A white-label Harbor launcher showing patch notes and a Play button" loading="eager" decoding="async" />
         </div>
-        <span class="hero-media-chip"><span class="pill-dot"></span> Your launcher, at the moment of Play</span>
+        <span class="hero-media-chip"><span class="pill-dot" aria-hidden="true"></span> Your launcher, at the moment of Play</span>
       </div>
     </div>
   </section>

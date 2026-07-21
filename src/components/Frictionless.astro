@@ -2,8 +2,8 @@
 // "Frictionless for players" — answers the launcher-backlash objection
 // proactively, with design facts rather than promises. Links to the
 // /tos-compliance page as the long-form proof.
-const DESIGN_FACTS = [
-  { lead: 'No account, ever.', rest: '' },
+const DESIGN_FACTS: { lead: string; rest?: string }[] = [
+  { lead: 'No account, ever.' },
   { lead: 'Email is opt-in only.', rest: 'Skip and play.' },
   { lead: 'Skippable in one click,', rest: 'and you can skip it entirely for returning players.' },
   { lead: 'Fail-open.', rest: 'If Harbor ever breaks, your game launches anyway.' },
@@ -34,7 +34,7 @@ const DESIGN_FACTS = [
             <span class="fl-check" aria-hidden="true">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
             </span>
-            <span class="fl-text"><strong>{f.lead}</strong> {f.rest}</span>
+            <span class="fl-text"><strong>{f.lead}</strong>{f.rest && ` ${f.rest}`}</span>
           </li>
         ))
       }

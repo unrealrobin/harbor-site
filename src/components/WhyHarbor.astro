@@ -4,6 +4,9 @@
 // problem-anchored, so none of it reads as a Harbor shortcoming). Graphic A: a
 // field of player dots, only a small fraction lit today; toggling to "every
 // launch" lights the whole field.
+// Authored, trusted content — `line` renders via set:html so the Valve quote
+// can be italicized. Do NOT source this from untrusted input (CMS/API/build
+// data) without escaping first.
 const VALUE_ITEMS = [
   {
     claim: 'A relationship you own.',
@@ -15,7 +18,7 @@ const VALUE_ITEMS = [
   },
   {
     claim: 'Guaranteed to be seen.',
-    line: 'Even Valve says it: “Not all of your customers will see your event…” Harbor sits on the one screen every player passes through, every session.',
+    line: 'Even Valve says it: <em>“Not all of your customers will see your event…”</em> Harbor sits on the one screen every player passes through, every session.',
   },
   {
     claim: 'Yours to take anywhere.',
@@ -48,7 +51,7 @@ const VALUE_ITEMS = [
               </span>
               <div>
                 <p class="problem-claim">{p.claim}</p>
-                <p class="problem-line">{p.line}</p>
+                <p class="problem-line" set:html={p.line} />
               </div>
             </div>
           ))
@@ -165,7 +168,7 @@ const VALUE_ITEMS = [
     padding: 8px 16px; border-radius: var(--r-pill);
     transition: all var(--dur-base) var(--ease); white-space: nowrap;
   }
-  .pf-toggle button.active { background: var(--teal); color: #062014; }
+  .pf-toggle button.active { background: var(--teal); color: var(--teal-contrast); }
 
   .turn {
     position: relative;

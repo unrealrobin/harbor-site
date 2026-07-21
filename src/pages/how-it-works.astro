@@ -103,7 +103,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: 'When is Harbor shipping?',
-    a: "Targeting Q3 2026. We're onboarding a small group of design partners before then. Get on the list and you'll hear first, or read the early-access offer to come on as a partner now.",
+    a: 'Targeting Q3 2026. We\'re onboarding a small group of design partners before then. <a href="/" class="text-teal" style="text-decoration:underline;text-underline-offset:2px;">Get on the list</a> and you\'ll hear first, or <a href="/early-access" class="text-teal" style="text-decoration:underline;text-underline-offset:2px;">read the early-access offer</a> to come on as a partner now.',
   },
 ];
 ---
@@ -186,7 +186,7 @@ const FAQS: { q: string; a: string }[] = [
               <span class="cs-line" style="width:80%"></span>
               <span class="cs-line" style="width:62%"></span>
               <span class="cs-line" style="width:71%"></span>
-              <span class="cs-swatches"><i></i><i></i><i class="on"></i><i></i></span>
+              <span class="cs-swatches"><span></span><span></span><span class="on"></span><span></span></span>
             </div>
             <div class="cs-stage">
               <span class="cs-title"></span>
@@ -441,13 +441,13 @@ const FAQS: { q: string; a: string }[] = [
     gap: 8px;
     margin-top: 6px;
   }
-  .cs-swatches i {
+  .cs-swatches span {
     width: 20px;
     height: 20px;
     border-radius: 6px;
     background: rgba(139, 144, 153, 0.14);
   }
-  .cs-swatches i.on {
+  .cs-swatches span.on {
     background: var(--teal);
   }
   .cs-stage {
@@ -472,7 +472,7 @@ const FAQS: { q: string; a: string }[] = [
     font-family: var(--font-display);
     font-size: 12.5px;
     font-weight: 700;
-    color: #062014;
+    color: var(--teal-contrast);
     background: var(--teal);
     border-radius: var(--r-sm);
     padding: 8px 22px;

@@ -201,7 +201,7 @@ input:focus-visible {
 .btn:disabled { opacity: 0.6; cursor: not-allowed; }
 .btn-primary {
   background: var(--teal);
-  color: #062014;
+  color: var(--teal-contrast);
   border-color: var(--teal);
 }
 .btn-primary:hover:not(:disabled) {
