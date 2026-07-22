@@ -1,0 +1,206 @@
+---
+// "What you get back" — the five value props. "Own your list" is the flagship
+// and renders as the full-width lead card. Every stat here comes from the
+// approved citations bank in the Notion copy plan; nothing Harbor-specific.
+// Authored, trusted content — `proof` renders via set:html. Do NOT source it
+// from untrusted input (CMS/API/build data) without escaping first.
+const PROPS = [
+  {
+    title: 'Put your community in front of every player',
+    body: 'Only a small fraction of your players ever go looking for your Discord. Harbor puts the invite in front of every session: the whole player base, not the self-selected slice.',
+    icon: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
+    circle: { cx: 9, cy: 7, r: 4 },
+    proof: null,
+  },
+  {
+    title: "Your channels, at the moment they're paying attention",
+    body: 'Your socials and links, surfaced to every player at launch. The channels that drive indie discovery, in front of the people most likely to share them.',
+    icon: 'M4 11a9 9 0 0 1 9 9M4 4a16 16 0 0 1 16 16',
+    circle: { cx: 5, cy: 19, r: 1.5 },
+    proof: null,
+  },
+  {
+    title: 'Hear the quiet majority',
+    body: "In most communities, about 1% of players produce most of the feedback, and they're not representative. Harbor surveys reach everyone who plays: anonymous, no login, one click.",
+    icon: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2zM8 10h8M8 13h5',
+    circle: null,
+    proof: 'In-context prompts get answered. In-app surveys average a <strong>27.5% response rate</strong>.',
+  },
+  {
+    title: "Momentum for the game you're shipping now",
+    body: 'Harbor puts the review-and-wishlist ask in front of your active players, the people most likely to say yes.',
+    icon: 'M3 17l6-6 4 4 8-8M14 7h7v7',
+    circle: null,
+    proof: 'Reviews decide launches: games that hit <strong>200+ reviews</strong> in their first month of Early Access reached 1,000+ by 1.0 in <strong>73% of cases</strong>.',
+  },
+];
+---
+
+<section class="section section-ink" id="value-props">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">What you get back</span>
+      <h2 class="display-lg">Five pieces of the player relationship, returned to you.</h2>
+      <p class="lede">
+        The storefront keeps the relationship aggregate and gated. Harbor hands each piece back,
+        starting with the only one you can take with you.
+      </p>
+    </div>
+
+    <div class="vp-grid">
+      <div class="vp-card vp-lead">
+        <span class="vp-flag">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
+          The flagship · included on every plan
+        </span>
+        <h3 class="vp-title">Own your list</h3>
+        <p class="vp-body">
+          One opt-in prompt at the moment of play, and you walk away with the thing no storefront
+          will ever hand over: your players' actual contacts, in a list you own, export, and keep.
+          Always optional for the player, never a gate. Skip it and the game just launches.
+        </p>
+        <p class="vp-proof">
+          <span class="vp-proof-icon" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></span>
+          <span>One email to an owned list has driven <strong>1,200 wishlists</strong> for an indie studio (Failbetter Games).</span>
+        </p>
+      </div>
+
+      {
+        PROPS.map((p) => (
+          <div class="vp-card">
+            <span class="vp-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d={p.icon} />
+                {p.circle && <circle cx={p.circle.cx} cy={p.circle.cy} r={p.circle.r} />}
+              </svg>
+            </span>
+            <h3 class="vp-title">{p.title}</h3>
+            <p class="vp-body">{p.body}</p>
+            {p.proof && (
+              <p class="vp-proof">
+                <span class="vp-proof-icon" aria-hidden="true">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                </span>
+                <span set:html={p.proof} />
+              </p>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .vp-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .vp-card {
+    background: var(--harbor-ink);
+    border: 1px solid var(--harbor-line);
+    border-radius: var(--r-lg);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color var(--dur-base) var(--ease);
+  }
+  .vp-card:hover {
+    border-color: var(--harbor-line-strong);
+  }
+  .vp-lead {
+    grid-column: 1 / -1;
+    border-color: var(--teal-border);
+    background: linear-gradient(180deg, var(--teal-bg), var(--harbor-ink));
+    padding: 40px;
+  }
+  .vp-lead:hover {
+    border-color: var(--teal-border);
+  }
+  .vp-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--teal-bg);
+    border: 1px solid var(--teal-border);
+    color: var(--teal);
+    margin-bottom: 18px;
+  }
+  .vp-flag {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-display);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--teal);
+    background: var(--teal-bg);
+    border: 1px solid var(--teal-border);
+    border-radius: var(--r-pill);
+    padding: 4px 11px;
+    margin-bottom: 16px;
+  }
+  .vp-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin: 0 0 10px;
+  }
+  .vp-lead .vp-title {
+    font-size: 26px;
+    margin-bottom: 14px;
+  }
+  .vp-body {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    line-height: 1.62;
+    color: var(--text2);
+    margin: 0;
+  }
+  .vp-lead .vp-body {
+    font-size: 16px;
+    max-width: 720px;
+  }
+  .vp-proof {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin: 0;
+    margin-top: auto;
+    padding-top: 16px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--text2);
+  }
+  .vp-proof-icon {
+    color: var(--teal);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .vp-proof :global(strong) {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  @media (max-width: 760px) {
+    .vp-grid {
+      grid-template-columns: 1fr;
+    }
+    .vp-lead {
+      padding: 28px 24px;
+    }
+    .vp-lead .vp-title {
+      font-size: 22px;
+    }
+  }
+</style>

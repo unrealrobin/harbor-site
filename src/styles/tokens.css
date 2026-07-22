@@ -14,6 +14,7 @@
   --teal: #1fcf8e;
   --teal-bg: rgba(31, 207, 142, 0.08);
   --teal-border: rgba(31, 207, 142, 0.22);
+  --teal-contrast: #062014; /* text on solid teal fills */
 
   /* Blue (secondary accent) */
   --blue: #5ec8ff;

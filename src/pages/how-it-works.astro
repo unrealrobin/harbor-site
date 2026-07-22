@@ -1,45 +1,34 @@
 ---
 import Base from '../layouts/Base.astro';
+import DemoVideo from '../components/DemoVideo.astro';
 
 const STEPS = [
   {
     n: '01',
     title: 'Customize your launcher',
-    desc: 'Name it, theme it, point it at your game, and turn modules on — all in the Harbor web app. Your branding, your colors, your voice. No files to hand-edit.',
+    desc: 'Name it, theme it, point it at your game, and turn modules on, all in the Harbor web app. Your branding, your colors, your voice. No files to hand-edit.',
     note: 'Invite-only for now',
   },
   {
     n: '02',
     title: 'Download your launcher',
-    desc: 'The web app builds a ready-to-ship harbor-launcher.exe. Download it and drop it next to your game — it replaces your current launcher, or sits in front of a bare exe.',
+    desc: 'The web app builds a ready-to-ship harbor-launcher.exe. Download it and drop it next to your game. It replaces your current launcher, or sits in front of a bare exe.',
   },
   {
     n: '03',
     title: 'Own the moment they hit Play',
-    desc: "Every session, your players land on your news, updates, and dev notes — in your voice, on your terms. It's the one guaranteed touchpoint the storefront never gave you.",
+    desc: "Every session, your players land on your news, updates, and dev notes, in your voice, on your terms. It's the one guaranteed touchpoint the storefront never gave you.",
   },
 ];
 
-const CONFIG_JSON = `{
-  "app_id": "paracosm/dierobot",
-  "game_exe": "./Windows/DieRobot.exe",
-  "branding": {
-    "game_name": "Die Robot",
-    "studio_name": "Paracosm",
-    "play_button_text": "Play"
-  },
-  "modules": [
-    { "type": "patch_notes",  "enabled": true },
-    { "type": "news",         "enabled": true },
-    { "type": "dev_comments", "enabled": true }
-  ],
-  "theme": {
-    "accent_color": "#FF6B00"
-  }
-}`;
-
-// status: 'included' (base tier, live) | 'pro' (live, Pro tier) | 'soon' (in development)
+// status: 'included' (standard plan) | 'pro' (Pro tier) | 'soon' (in development)
 const MODULES = [
+  {
+    name: 'Email Capture',
+    status: 'included',
+    icon: 'M3 7l9 6 9-6M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z',
+    desc: 'Opt-in and campaign-segmented: know whether a contact came from a beta signup or a patch-notes follow. Players see "get updates from the dev," and it\'s always skippable.',
+  },
   {
     name: 'Patch Notes',
     status: 'included',
@@ -62,38 +51,66 @@ const MODULES = [
     name: 'Surveys',
     status: 'pro',
     icon: 'M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 1 4 0v1H9zM8 13l2 2 4-4',
-    desc: 'In-launcher questions with open, multiple-choice, and NPS formats.',
+    desc: 'In-launcher questions with open, multiple-choice, NPS, and poll formats. Results stay private or share back to players. Anonymous, no login, one click.',
   },
   {
-    name: 'Email Capture',
-    status: 'soon',
-    icon: 'M3 7l9 6 9-6M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z',
-    desc: 'Collect player emails and tester interest with one click, gated by branch or key.',
+    name: 'Analytics',
+    status: 'pro',
+    icon: 'M3 17l6-6 4 4 8-8M14 7h7v7',
+    desc: 'Impressions, clicks, opt-ins, and responses for every module you run. The evidence for what your players actually do with the moment.',
   },
   {
     name: 'Discord Integration',
     status: 'soon',
     icon: 'M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-6l-4 3v-3H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zM8.5 10h.01M15.5 10h.01',
-    desc: 'Invite, OAuth link, and live server stats, right in the launcher.',
-  },
-  {
-    name: 'Voting System',
-    status: 'soon',
-    icon: 'M7 11v8H4a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1zM7 11l3.5-7a2 2 0 0 1 2 2v3h5a2 2 0 0 1 2 2.3l-1.2 6A2 2 0 0 1 16.3 19H7',
-    desc: 'Let players pick the next feature, boss, or cosmetic.',
+    desc: 'Live channel activity that prompts players to click and join. Can stand in for the news tab. Lands on the Pro tier.',
   },
 ];
 
 const STATUS_LABEL: Record<string, string> = {
   included: 'Included',
-  pro: 'Pro',
+  pro: 'Pro tier',
   soon: 'In development',
 };
+
+// Authored, trusted content — rendered with set:html so answers can carry
+// inline links. Do NOT source this from untrusted input (CMS/API/build data)
+// without escaping first.
+const FAQS: { q: string; a: string }[] = [
+  {
+    q: 'Do players install Harbor, or do I?',
+    a: 'You do. Harbor ships as harbor-launcher.exe alongside your build. Players never install anything separately. They launch your game the way they always have, and see your Harbor launcher instead of whatever was there before (or nothing).',
+  },
+  {
+    q: 'Does it work with Steam, Epic, and GOG?',
+    a: 'Yes. Harbor sits between the storefront and your game executable. Whatever launched your game before now launches Harbor, and Harbor launches your game. No storefront integration or approval is required to ship it. <a href="/tos-compliance" class="text-teal" style="text-decoration:underline;text-underline-offset:2px;">See exactly what Harbor does and doesn’t do →</a>',
+  },
+  {
+    q: 'How much does it change for my players?',
+    a: "One screen they can move past in a single click: your patch notes, news, and dev comments, then Play. They don't download anything, don't sign in, and there's no Harbor branding anywhere. You can set it to skip straight to the game for returning players.",
+  },
+  {
+    q: 'What does it cost, and what about my players?',
+    a: 'Harbor is billed to the studio, never the player. Plans start at $40/mo, and advanced modules like surveys and analytics live on the Pro tier. The first design partners get six months free. Players pay nothing, see no ads, and their data is never sold.',
+  },
+  {
+    q: 'What do I actually own?',
+    a: 'Your list and your data. Email opt-ins are collected with clear player consent, segmented by what prompted the sign-up, and exportable at any time. Engagement analytics belong to you. If you leave Harbor, it all goes with you.',
+  },
+  {
+    q: 'Will players hate it?',
+    a: 'The launchers players hate demand accounts, force emails, and gate the game. Harbor does none of those: no account, opt-in-only email, skippable in one click, never DRM. <a href="/#frictionless" class="text-teal" style="text-decoration:underline;text-underline-offset:2px;">See the frictionless-by-design list</a>, or <a href="/tos-compliance" class="text-teal" style="text-decoration:underline;text-underline-offset:2px;">read the transparency page →</a>',
+  },
+  {
+    q: 'When is Harbor shipping?',
+    a: 'Targeting Q3 2026. We\'re onboarding a small group of design partners before then. <a href="/" class="text-teal" style="text-decoration:underline;text-underline-offset:2px;">Get on the list</a> and you\'ll hear first, or <a href="/early-access" class="text-teal" style="text-decoration:underline;text-underline-offset:2px;">read the early-access offer</a> to come on as a partner now.',
+  },
+];
 ---
 
 <Base
-  title="How it works — Harbor"
-  description="How Harbor works: a launcher binary, a JSON config, and the Harbor web app. Plus every module you can turn on — patch notes, news, dev comments, surveys, and more."
+  title="How it works · Harbor"
+  description="How Harbor works: a launcher binary, the Harbor web app, and modules you switch on. Email capture, surveys, analytics, patch notes, and more."
 >
   <!-- ===== Hero ===== -->
   <section class="hero hero-page">
@@ -108,13 +125,13 @@ const STATUS_LABEL: Record<string, string> = {
         <span class="text-teal">Ships in an afternoon.</span>
       </h1>
       <p class="hero-paragraph">
-        Harbor is a launcher binary, a JSON config, and the Harbor web app. No SDK, no build step,
-        nothing to host. Here's the whole thing, end to end.
+        Harbor is a launcher binary and the Harbor web app. No SDK, no build step, nothing to host.
+        Here's the whole thing, end to end.
       </p>
     </div>
   </section>
 
-  <!-- ===== Steps + config ===== -->
+  <!-- ===== Steps + analytics ===== -->
   <section class="section">
     <div class="container">
       <div class="steps">
@@ -132,28 +149,66 @@ const STATUS_LABEL: Record<string, string> = {
         }
       </div>
 
-      <div class="json-block">
+      <div class="analytics-band">
+        <span class="ab-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8" /><path d="M14 7h7v7" /></svg>
+        </span>
+        <p>
+          <strong>Every module reports back</strong>: impressions, clicks, opt-ins, and responses, in
+          a dashboard built for your game studio.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Demo video ===== -->
+  <DemoVideo />
+
+  <!-- ===== The web app ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="config-block">
+        {/* Placeholder slot: swap the skeleton for a real web-configurator
+            screenshot when one is captured. */}
         <div class="code-panel">
           <div class="code-head">
             <span class="code-dot"></span>
             <span class="code-dot"></span>
             <span class="code-dot"></span>
-            <span class="code-file mono">harbor.config.json</span>
+            <span class="code-file mono">app.harborlauncher.com · configurator</span>
           </div>
-          <pre class="code-body mono"><code>{CONFIG_JSON}</code></pre>
+          <div class="config-skeleton" role="img" aria-label="The Harbor web configurator">
+            <div class="cs-side">
+              <span class="cs-pill on"></span>
+              <span class="cs-pill"></span>
+              <span class="cs-pill"></span>
+              <span class="cs-pill"></span>
+              <span class="cs-line" style="width:80%"></span>
+              <span class="cs-line" style="width:62%"></span>
+              <span class="cs-line" style="width:71%"></span>
+              <span class="cs-swatches"><span></span><span></span><span class="on"></span><span></span></span>
+            </div>
+            <div class="cs-stage">
+              <span class="cs-title"></span>
+              <span class="cs-line" style="width:74%"></span>
+              <span class="cs-line" style="width:58%"></span>
+              <span class="cs-line" style="width:66%"></span>
+              <span class="cs-play">Play</span>
+            </div>
+          </div>
         </div>
-        <div class="json-copy">
-          <span class="eyebrow">It's just JSON</span>
+        <div class="config-copy">
+          <span class="eyebrow">The web app</span>
           <h2 class="display-lg" style="font-size:28px;margin-bottom:16px;">Configured in the web app.</h2>
-          <p class="json-p">
-            Modules, theme, play button, and social links are all set from the Harbor web app — no
-            SDK, no build step, nothing to host. Under the hood it's one clean JSON config, so your
-            setup is never a black box.
+          <p class="config-p">
+            Modules, theme, play button, and your social links are all set from the Harbor web app.
+            No SDK, no build step, nothing to host. Change your colors or your copy and the launcher
+            picks it up without shipping a new build.
           </p>
-          <p class="json-p">
-            Set it up, download your launcher, and reach your players — all from the web app. It's
-            invite-only right now — email
-            <a href="mailto:earlyaccess@paracosm.gg" class="text-teal" style="text-decoration:underline;text-underline-offset:2px;">earlyaccess@paracosm.gg</a>
+          <p class="config-p">
+            Set it up, download your launcher, and reach your players, all from the web app. It's
+            invite-only right now: email
+            <a href="mailto:earlyaccess@harborlauncher.com" class="text-teal" style="text-decoration:underline;text-underline-offset:2px;">earlyaccess@harborlauncher.com</a>
             to request access for your studio.
           </p>
         </div>
@@ -198,6 +253,10 @@ const STATUS_LABEL: Record<string, string> = {
           </p>
         </div>
       </div>
+
+      <p class="module-note">
+        Your social links are always there too, on every layout. Not a module, just part of the launcher.
+      </p>
     </div>
   </section>
 
@@ -215,6 +274,31 @@ const STATUS_LABEL: Record<string, string> = {
       </div>
     </div>
   </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section" id="faq">
+    <div class="container container-narrow">
+      <div class="section-head center">
+        <span class="eyebrow">FAQ</span>
+        <h2 class="display-lg">Things devs ask us.</h2>
+      </div>
+      <div class="faq-list">
+        {
+          FAQS.map((faq) => (
+            <details class="faq-item">
+              <summary class="faq-question">
+                <span>{faq.q}</span>
+                <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m9 18 6-6-6-6" />
+                </svg>
+              </summary>
+              <div class="faq-answer" set:html={faq.a} />
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 </Base>
 
 <style>
@@ -223,7 +307,6 @@ const STATUS_LABEL: Record<string, string> = {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 32px;
-    margin-bottom: 56px;
   }
   .step-num {
     display: inline-block;
@@ -266,14 +349,39 @@ const STATUS_LABEL: Record<string, string> = {
     padding: 4px 10px;
   }
 
-  /* ----- JSON block ----- */
-  .json-block {
+  /* ----- Analytics band ----- */
+  .analytics-band {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    margin-top: 56px;
+    padding: 26px 28px;
+    border: 1px solid var(--teal-border);
+    background: linear-gradient(180deg, var(--teal-bg), rgba(31, 207, 142, 0.02));
+    border-radius: var(--r-lg);
+  }
+  .analytics-band .ab-icon {
+    color: var(--teal);
+    flex-shrink: 0;
+  }
+  .analytics-band p {
+    font-family: var(--font-body);
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--text2);
+    margin: 0;
+  }
+  .analytics-band strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ----- Web app block ----- */
+  .config-block {
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
     gap: 48px;
     align-items: center;
-    padding-top: 56px;
-    border-top: 1px solid var(--harbor-line);
   }
   .code-panel {
     background: var(--harbor-deep);
@@ -299,26 +407,85 @@ const STATUS_LABEL: Record<string, string> = {
     font-size: 12px;
     color: var(--text2);
   }
-  .code-body {
-    margin: 0;
-    padding: 18px 20px;
-    font-size: 13px;
-    line-height: 1.7;
-    color: var(--text2);
-    overflow-x: auto;
+  .config-skeleton {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 18px;
+    padding: 20px;
+    min-height: 300px;
   }
-  .json-copy .eyebrow {
+  .cs-side {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-right: 1px solid var(--harbor-line);
+    padding-right: 18px;
+  }
+  .cs-pill {
+    height: 26px;
+    border-radius: var(--r-sm);
+    background: rgba(139, 144, 153, 0.1);
+  }
+  .cs-pill.on {
+    background: var(--teal-bg);
+    border: 1px solid var(--teal-border);
+  }
+  .cs-line {
+    display: block;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(139, 144, 153, 0.14);
+  }
+  .cs-swatches {
+    display: flex;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .cs-swatches span {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    background: rgba(139, 144, 153, 0.14);
+  }
+  .cs-swatches span.on {
+    background: var(--teal);
+  }
+  .cs-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--harbor-ink);
+    border: 1px solid var(--harbor-line);
+    border-radius: var(--r-md);
+    padding: 22px;
+  }
+  .cs-title {
+    display: block;
+    width: 46%;
+    height: 14px;
+    border-radius: 5px;
+    background: rgba(240, 242, 245, 0.22);
+  }
+  .cs-play {
+    align-self: flex-end;
+    margin-top: auto;
+    font-family: var(--font-display);
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--teal-contrast);
+    background: var(--teal);
+    border-radius: var(--r-sm);
+    padding: 8px 22px;
+  }
+  .config-copy .eyebrow {
     margin-bottom: 12px;
   }
-  .json-p {
+  .config-p {
     font-family: var(--font-body);
     font-size: 16px;
     line-height: 1.6;
     color: var(--text2);
     margin: 0 0 16px;
-  }
-  .json-copy .btn {
-    margin-top: 10px;
   }
 
   /* ----- Modules ----- */
@@ -430,13 +597,19 @@ const STATUS_LABEL: Record<string, string> = {
     line-height: 1;
     margin-bottom: 12px;
   }
+  .module-note {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    color: var(--text3);
+    margin: 24px 0 0;
+  }
 
   @media (max-width: 980px) {
     .steps {
       grid-template-columns: 1fr;
       gap: 24px;
     }
-    .json-block {
+    .config-block {
       grid-template-columns: 1fr;
       gap: 28px;
     }
@@ -447,6 +620,10 @@ const STATUS_LABEL: Record<string, string> = {
   @media (max-width: 600px) {
     .module-grid {
       grid-template-columns: 1fr;
+    }
+    .config-skeleton {
+      grid-template-columns: 110px 1fr;
+      min-height: 240px;
     }
   }
 </style>
