@@ -56,8 +56,8 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
         </p>
 
         <p class="hero-trust">
-          No player accounts.<span class="sep">·</span>No DRM.<span class="sep">·</span>One
-          skippable screen.<span class="sep">·</span>Game launches like it always has.
+          No player accounts.<span class="sep" aria-hidden="true">·</span>No DRM.<span class="sep" aria-hidden="true">·</span>One
+          skippable screen.<span class="sep" aria-hidden="true">·</span>Game launches like it always has.
         </p>
 
         <form id="waitlist-form" class="email-form">
@@ -294,6 +294,8 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
         if (!res.ok || !result.ok) {
           throw new Error(result.error || 'Something went wrong. Try again?');
         }
+        // Event name frozen for analytics continuity (button copy has changed
+        // since launch); renaming it would fork the PostHog funnel history.
         window.posthog?.capture('notify_me_submit', { location });
         form.setAttribute('hidden', '');
         success?.removeAttribute('hidden');
