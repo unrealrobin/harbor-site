@@ -36,7 +36,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
       <div class="hero-inner">
         <span class="pill pill-teal" style="margin-bottom:28px;">
           <span class="pill-dot"></span>
-          Pre-launch · partner program open
+          Early access · partner program open
         </span>
 
         <h1 class="hero-headline">
@@ -46,13 +46,18 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
 
         <p class="hero-paragraph">
           Steam sells your game and keeps your players. Harbor is a lightweight, white-label
-          launcher that turns the moment the player hits Play into a relationship you own: your
-          updates, your community, your surveys, and an opt-in email list that's yours to keep.
+          launcher that turns the moment the player hits Play into a relationship you own:
+          your updates, your community, your surveys.
+        </p>
+
+        <p class="hero-keyline">
+          <strong class="text-teal">Your players' emails, for the first time:</strong> an opt-in
+          list you own, export, and keep.
         </p>
 
         <p class="hero-trust">
-          No player accounts.<span class="sep">·</span>No DRM.<span class="sep">·</span>One
-          skippable screen, then the game launches like it always has.
+          No player accounts.<span class="sep" aria-hidden="true">·</span>No DRM.<span class="sep" aria-hidden="true">·</span>One
+          skippable screen.<span class="sep" aria-hidden="true">·</span>Game launches like it always has.
         </p>
 
         <form id="waitlist-form" class="email-form">
@@ -67,7 +72,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
             aria-label="Email address"
             class="input email-input"
           />
-          <button type="submit" class="btn btn-primary btn-lg">Notify me</button>
+          <button type="submit" class="btn btn-primary btn-lg">Get access</button>
           <span class="form-error" id="waitlist-error" role="alert" hidden></span>
         </form>
 
@@ -76,21 +81,27 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
             <span class="pill-dot"></span>
             You're in.
           </span>
-          <p class="form-success-msg">We'll let you know when Harbor ships.</p>
+          <p class="form-success-msg">We'll be in touch about access.</p>
         </div>
-
-        <p class="form-note">
-          Or, <a href="/how-it-works" class="text-teal" style="text-decoration:underline;text-underline-offset:2px;">see how it works →</a>
-        </p>
       </div>
 
       {/* Hero media. Interim still frame; swap the <img> for the short looping
           clip (player opting in / answering a survey) once it's recorded. */}
       <div class="hero-media">
-        <div class="hero-media-frame">
-          <img src="/demo-poster.webp" alt="A white-label Harbor launcher showing patch notes and a Play button" loading="eager" decoding="async" />
-        </div>
+        <button type="button" class="hero-media-frame" id="hero-zoom" aria-haspopup="dialog" aria-label="Enlarge screenshot: a white-label Harbor launcher for the game Die Robot showing news, dev comments, an email opt-in, and a Play button">
+          <img src="/demo-poster.webp" alt="A white-label Harbor launcher for the game Die Robot showing news, dev comments, an email opt-in, and a Play button" loading="eager" decoding="async" />
+          <span class="hero-zoom-hint" aria-hidden="true">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3M11 8v6M8 11h6" /></svg>
+            Enlarge
+          </span>
+        </button>
         <span class="hero-media-chip"><span class="pill-dot" aria-hidden="true"></span> Your launcher, at the moment of Play</span>
+        <dialog class="hero-lightbox" id="hero-lightbox" aria-label="Launcher screenshot, enlarged">
+          <img src="/demo-poster.webp" alt="A white-label Harbor launcher for the game Die Robot showing news, dev comments, an email opt-in, and a Play button" loading="lazy" decoding="async" />
+          <button type="button" class="hero-lightbox-close" id="hero-lightbox-close" aria-label="Close enlarged screenshot">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+          </button>
+        </dialog>
       </div>
     </div>
   </section>
@@ -154,7 +165,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
             <span class="callout-icon" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 8h.01M11 12h1v4h1" /></svg>
             </span>
-            <p class="callout-body">The player's experience is one extra screen they can skip in a click. The studio gets <strong>the relationship the storefront was keeping for itself.</strong></p>
+            <p class="callout-body">The player's experience is one extra screen they can skip in one click. The studio gets <strong>the relationship the storefront was keeping for itself.</strong></p>
           </div>
         </div>
       </div>
@@ -169,7 +180,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
     <div class="container" style="text-align:center;max-width:640px;">
       <span class="eyebrow">FAQ</span>
       <p class="lede" style="margin-bottom:24px;">
-        Pricing, storefront rules, what changes for players: things devs ask us, answered.
+        Pricing, storefront rules, player experience: things devs ask us, answered.
       </p>
       <a href="/how-it-works#faq" class="btn btn-ghost btn-lg">Read the FAQ →</a>
     </div>
@@ -181,13 +192,22 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
     position: relative;
     z-index: 2;
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 56px;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
     align-items: center;
   }
   .hero-cols .hero-inner {
     position: static;
     max-width: none;
+  }
+  .hero-keyline {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    margin: 0 0 18px;
   }
   .hero-trust {
     font-family: var(--font-display);
@@ -203,16 +223,93 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
     margin: 0 7px;
   }
   .hero-media-frame {
-    border: 1px solid var(--harbor-line-strong);
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 1px solid var(--teal-border);
     border-radius: var(--r-lg);
     overflow: hidden;
     background: var(--harbor-ink);
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    box-shadow:
+      0 24px 80px rgba(0, 0, 0, 0.45),
+      0 0 44px var(--teal-glow);
+    cursor: zoom-in;
+  }
+  .hero-media-frame:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
   }
   .hero-media-frame img {
     display: block;
     width: 100%;
     height: auto;
+  }
+  .hero-zoom-hint {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-display);
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text);
+    background: rgba(10, 12, 16, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid var(--harbor-line);
+    border-radius: var(--r-pill);
+    padding: 5px 11px;
+    pointer-events: none;
+  }
+  .hero-lightbox {
+    max-width: min(1180px, 92vw);
+    padding: 0;
+    border: 1px solid var(--harbor-line-strong);
+    border-radius: var(--r-lg);
+    background: var(--harbor-ink);
+    overflow: hidden;
+  }
+  .hero-lightbox::backdrop {
+    background: rgba(10, 12, 16, 0.8);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  /* Native <dialog> doesn't lock background scroll on its own. */
+  :global(body:has(.hero-lightbox[open])) {
+    overflow: hidden;
+  }
+  .hero-lightbox img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 88vh;
+    object-fit: contain;
+  }
+  .hero-lightbox-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--harbor-line-strong);
+    background: rgba(10, 12, 16, 0.7);
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color var(--dur-base) var(--ease);
+  }
+  .hero-lightbox-close:hover {
+    border-color: var(--teal-border);
+  }
+  .hero-lightbox-close:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 2px;
   }
   .hero-media-chip {
     display: inline-flex;
@@ -235,7 +332,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
       gap: 44px;
     }
     .hero-media {
-      max-width: 560px;
+      max-width: 640px;
     }
   }
   @media (max-width: 760px) {
@@ -282,6 +379,8 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
         if (!res.ok || !result.ok) {
           throw new Error(result.error || 'Something went wrong. Try again?');
         }
+        // Event name frozen for analytics continuity (button copy has changed
+        // since launch); renaming it would fork the PostHog funnel history.
         window.posthog?.capture('notify_me_submit', { location });
         form.setAttribute('hidden', '');
         success?.removeAttribute('hidden');
@@ -292,10 +391,24 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
           errorEl.removeAttribute('hidden');
         }
         button.disabled = false;
-        button.textContent = 'Notify me';
+        button.textContent = 'Get access';
       }
     });
   }
 
   wireForm('waitlist-form', 'waitlist-success', 'waitlist-error', 'hero');
+
+  // Hero screenshot lightbox. Native <dialog> supplies Esc-to-close, focus
+  // trapping, and the backdrop; we only wire open, close, and backdrop clicks.
+  const zoomBtn = document.getElementById('hero-zoom');
+  const lightbox = document.getElementById('hero-lightbox') as HTMLDialogElement | null;
+  const closeBtn = document.getElementById('hero-lightbox-close');
+  if (zoomBtn && lightbox && typeof lightbox.showModal === 'function') {
+    zoomBtn.addEventListener('click', () => lightbox.showModal());
+    closeBtn?.addEventListener('click', () => lightbox.close());
+    lightbox.addEventListener('click', (event) => {
+      // Clicks on the backdrop register with the <dialog> itself as target.
+      if (event.target === lightbox) lightbox.close();
+    });
+  }
 </script>
