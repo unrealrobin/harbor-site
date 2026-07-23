@@ -36,7 +36,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
       <div class="hero-inner">
         <span class="pill pill-teal" style="margin-bottom:28px;">
           <span class="pill-dot"></span>
-          Pre-launch · partner program open
+          Early access · partner program open
         </span>
 
         <h1 class="hero-headline">
@@ -46,13 +46,18 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
 
         <p class="hero-paragraph">
           Steam sells your game and keeps your players. Harbor is a lightweight, white-label
-          launcher that turns the moment the player hits Play into a relationship you own: your
-          updates, your community, your surveys, and an opt-in email list that's yours to keep.
+          launcher that turns the moment the player hits Play into a relationship you own:
+          your updates, your community, your surveys.
+        </p>
+
+        <p class="hero-keyline">
+          <strong class="text-teal">Your players' emails, for the first time:</strong> an opt-in
+          list you own, export, and keep.
         </p>
 
         <p class="hero-trust">
           No player accounts.<span class="sep">·</span>No DRM.<span class="sep">·</span>One
-          skippable screen, then the game launches like it always has.
+          skippable screen.<span class="sep">·</span>Game launches like it always has.
         </p>
 
         <form id="waitlist-form" class="email-form">
@@ -67,7 +72,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
             aria-label="Email address"
             class="input email-input"
           />
-          <button type="submit" class="btn btn-primary btn-lg">Notify me</button>
+          <button type="submit" class="btn btn-primary btn-lg">Get access</button>
           <span class="form-error" id="waitlist-error" role="alert" hidden></span>
         </form>
 
@@ -76,19 +81,15 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
             <span class="pill-dot"></span>
             You're in.
           </span>
-          <p class="form-success-msg">We'll let you know when Harbor ships.</p>
+          <p class="form-success-msg">We'll be in touch about access.</p>
         </div>
-
-        <p class="form-note">
-          Or, <a href="/how-it-works" class="text-teal" style="text-decoration:underline;text-underline-offset:2px;">see how it works →</a>
-        </p>
       </div>
 
       {/* Hero media. Interim still frame; swap the <img> for the short looping
           clip (player opting in / answering a survey) once it's recorded. */}
       <div class="hero-media">
         <div class="hero-media-frame">
-          <img src="/demo-poster.webp" alt="A white-label Harbor launcher showing patch notes and a Play button" loading="eager" decoding="async" />
+          <img src="/demo-poster.webp" alt="A white-label Harbor launcher for the game Die Robot showing news, dev comments, an email opt-in, and a Play button" loading="eager" decoding="async" />
         </div>
         <span class="hero-media-chip"><span class="pill-dot" aria-hidden="true"></span> Your launcher, at the moment of Play</span>
       </div>
@@ -154,7 +155,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
             <span class="callout-icon" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 8h.01M11 12h1v4h1" /></svg>
             </span>
-            <p class="callout-body">The player's experience is one extra screen they can skip in a click. The studio gets <strong>the relationship the storefront was keeping for itself.</strong></p>
+            <p class="callout-body">The player's experience is one extra screen they can skip in one click. The studio gets <strong>the relationship the storefront was keeping for itself.</strong></p>
           </div>
         </div>
       </div>
@@ -169,7 +170,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
     <div class="container" style="text-align:center;max-width:640px;">
       <span class="eyebrow">FAQ</span>
       <p class="lede" style="margin-bottom:24px;">
-        Pricing, storefront rules, what changes for players: things devs ask us, answered.
+        Pricing, storefront rules, player experience: things devs ask us, answered.
       </p>
       <a href="/how-it-works#faq" class="btn btn-ghost btn-lg">Read the FAQ →</a>
     </div>
@@ -189,6 +190,15 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
     position: static;
     max-width: none;
   }
+  .hero-keyline {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    margin: 0 0 18px;
+  }
   .hero-trust {
     font-family: var(--font-display);
     font-size: 14.5px;
@@ -203,11 +213,13 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
     margin: 0 7px;
   }
   .hero-media-frame {
-    border: 1px solid var(--harbor-line-strong);
+    border: 1px solid var(--teal-border);
     border-radius: var(--r-lg);
     overflow: hidden;
     background: var(--harbor-ink);
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    box-shadow:
+      0 24px 80px rgba(0, 0, 0, 0.45),
+      0 0 44px var(--teal-glow);
   }
   .hero-media-frame img {
     display: block;
@@ -292,7 +304,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
           errorEl.removeAttribute('hidden');
         }
         button.disabled = false;
-        button.textContent = 'Notify me';
+        button.textContent = 'Get access';
       }
     });
   }
