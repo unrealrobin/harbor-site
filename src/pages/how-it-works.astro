@@ -1,6 +1,5 @@
 ---
 import Base from '../layouts/Base.astro';
-import DemoVideo from '../components/DemoVideo.astro';
 
 const STEPS = [
   {
@@ -161,8 +160,8 @@ const FAQS: { q: string; a: string }[] = [
     </div>
   </section>
 
-  <!-- ===== Demo video ===== -->
-  <DemoVideo />
+  {/* Demo video section (DemoVideo.astro) removed while the recording shows an
+      outdated launcher build; restore it with a new VIDEO_ID once re-recorded. */}
 
   <!-- ===== The web app ===== -->
   <section class="section">
@@ -207,9 +206,7 @@ const FAQS: { q: string; a: string }[] = [
           </p>
           <p class="config-p">
             Set it up, download your launcher, and reach your players, all from the web app. It's
-            invite-only right now: email
-            <a href="mailto:earlyaccess@harborlauncher.com" class="text-teal" style="text-decoration:underline;text-underline-offset:2px;">earlyaccess@harborlauncher.com</a>
-            to request access for your studio.
+            invite-only right now: email <a href="mailto:earlyaccess@harborlauncher.com" class="text-teal" style="text-decoration:underline;text-underline-offset:2px;">earlyaccess@harborlauncher.com</a> to request access for your studio.
           </p>
         </div>
       </div>
