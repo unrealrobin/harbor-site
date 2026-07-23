@@ -88,7 +88,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
       {/* Hero media. Interim still frame; swap the <img> for the short looping
           clip (player opting in / answering a survey) once it's recorded. */}
       <div class="hero-media">
-        <button type="button" class="hero-media-frame" id="hero-zoom" aria-haspopup="dialog" aria-label="Enlarge the launcher screenshot">
+        <button type="button" class="hero-media-frame" id="hero-zoom" aria-haspopup="dialog" aria-label="Enlarge screenshot: a white-label Harbor launcher for the game Die Robot showing news, dev comments, an email opt-in, and a Play button">
           <img src="/demo-poster.webp" alt="A white-label Harbor launcher for the game Die Robot showing news, dev comments, an email opt-in, and a Play button" loading="eager" decoding="async" />
           <span class="hero-zoom-hint" aria-hidden="true">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3M11 8v6M8 11h6" /></svg>
@@ -99,7 +99,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
         <dialog class="hero-lightbox" id="hero-lightbox" aria-label="Launcher screenshot, enlarged">
           <img src="/demo-poster.webp" alt="A white-label Harbor launcher for the game Die Robot showing news, dev comments, an email opt-in, and a Play button" loading="lazy" decoding="async" />
           <button type="button" class="hero-lightbox-close" id="hero-lightbox-close" aria-label="Close enlarged screenshot">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12" /></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
           </button>
         </dialog>
       </div>
@@ -276,6 +276,10 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
     background: rgba(10, 12, 16, 0.8);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
+  }
+  /* Native <dialog> doesn't lock background scroll on its own. */
+  :global(body:has(.hero-lightbox[open])) {
+    overflow: hidden;
   }
   .hero-lightbox img {
     display: block;
