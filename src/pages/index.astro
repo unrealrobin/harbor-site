@@ -82,7 +82,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
             Enlarge
           </span>
         </button>
-        <p class="hero-media-cap">Your launcher — at the moment of Play</p>
+        <p class="hero-media-cap">Your launcher, the moment players press play</p>
         <dialog class="hero-lightbox" id="hero-lightbox" aria-label="Launcher screenshot, enlarged">
           <img src="/demo-poster.webp" alt="A white-label Harbor launcher for the game Die Robot showing news, dev comments, an email opt-in, and a Play button" loading="lazy" decoding="async" />
           <button type="button" class="hero-lightbox-close" id="hero-lightbox-close" aria-label="Close enlarged screenshot">
@@ -95,7 +95,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
 
   <!-- ===== Stat band ===== -->
   <ul class="stat-band">
-    <li><b aria-hidden="true">01</b>White-label</li>
+    <li><b aria-hidden="true">01</b>Customizable launcher</li>
     <li><b aria-hidden="true">02</b>No player accounts</li>
     <li><b aria-hidden="true">03</b>Skippable in one click</li>
     <li><b aria-hidden="true">04</b>Game launches as normal</li>
@@ -187,20 +187,27 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
      type, asymmetric 5/7 grid, launcher bleeding off the right edge. */
   .hero-xl {
     background: var(--harbor-deep);
-    padding: clamp(44px, 6vw, 88px) 0 0;
+    padding: clamp(28px, 3vw, 48px) 0 0;
     overflow-x: clip; /* the bleed crops here — body must never scroll sideways */
+    /* Landing view = header (65px) + hero + stat band (73px) in one viewport. */
+    height: calc(100svh - 138px);
+    min-height: 560px;
+    display: flex;
+    flex-direction: column;
   }
   .hero-display {
     font-family: var(--font-display-expanded);
     font-weight: 900;
     font-stretch: 125%;
-    font-size: clamp(52px, 10.4vw, 148px);
+    /* vh term keeps the landing view intact on short screens */
+    font-size: clamp(48px, min(10.4vw, 11vh), 148px);
     line-height: 0.95;
     letter-spacing: -0.028em;
     color: var(--text);
     margin: 0 0 0 4vw;
     max-width: 96vw;
     text-wrap: balance;
+    flex: none;
   }
   .hd-alt {
     display: block;
@@ -210,14 +217,17 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
     display: grid;
     grid-template-columns: minmax(320px, 5fr) 7fr;
     gap: 0 3vw;
-    align-items: start;
-    margin-top: clamp(28px, 4vw, 64px);
+    align-items: stretch;
+    margin-top: clamp(20px, 2.5vw, 40px);
+    flex: 1;
+    min-height: 0;
   }
   .hero-copy {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 10px 0 72px 4vw;
+    justify-content: center;
+    padding: 0 0 24px 4vw;
   }
   .hero-keyline {
     font-family: var(--font-display);
@@ -258,13 +268,17 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
   }
   .hero-media {
     position: relative;
-    margin-top: clamp(6px, 1.5vw, 24px);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
   }
   .hero-media-frame {
     position: relative;
     display: block;
     width: 110%;
     max-width: none;
+    flex: 1;
+    min-height: 0;
     padding: 0;
     border: 1px solid var(--harbor-line-strong);
     border-radius: var(--r-md) 0 0 var(--r-md);
@@ -273,14 +287,16 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
     box-shadow: -30px 40px 80px rgba(0, 0, 0, 0.5);
     cursor: zoom-in;
   }
-  .hero-media-frame:focus-visible {
-    outline: 2px solid var(--teal);
-    outline-offset: 3px;
-  }
   .hero-media-frame img {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: left top;
+  }
+  .hero-media-frame:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
   }
   .hero-zoom-hint {
     position: absolute;
@@ -349,12 +365,14 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
     outline-offset: 2px;
   }
   .hero-media-cap {
+    flex: none;
     font-family: var(--font-mono);
     font-size: 11.5px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+    text-align: left;
     color: var(--text3);
-    margin: 14px 0 0;
+    margin: 16px 0 clamp(24px, 3vw, 40px);
   }
   .faq-pointer {
     border-top: 1px solid var(--harbor-line);
@@ -362,18 +380,26 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
   }
 
   @media (max-width: 980px) {
+    /* Stacked layout can't honestly fit one viewport — release the lock. */
+    .hero-xl {
+      height: auto;
+      min-height: 0;
+    }
     .hero-cols {
       grid-template-columns: 1fr;
       gap: 0;
     }
     .hero-copy {
       padding-bottom: 44px;
-    }
-    .hero-media {
-      margin-top: 0;
+      justify-content: flex-start;
     }
     .hero-media-frame {
       width: 108%;
+      flex: none;
+    }
+    .hero-media-frame img {
+      height: auto;
+      object-fit: fill;
     }
     .stat-band {
       grid-template-columns: 1fr 1fr;
