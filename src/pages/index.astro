@@ -32,7 +32,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
   <!-- ===== Hero ===== -->
   <section class="hero-xl">
     <h1 class="hero-display">
-      Own the moment<span class="hd-alt">of Play.</span>
+      Own the moment <span class="hd-alt">of Play.</span>
     </h1>
     <div class="hero-cols">
       <div class="hero-copy">
@@ -95,10 +95,10 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
 
   <!-- ===== Stat band ===== -->
   <ul class="stat-band">
-    <li><b>01</b>White-label</li>
-    <li><b>02</b>No player accounts</li>
-    <li><b>03</b>Skippable in one click</li>
-    <li><b>04</b>Game launches as normal</li>
+    <li><b aria-hidden="true">01</b>White-label</li>
+    <li><b aria-hidden="true">02</b>No player accounts</li>
+    <li><b aria-hidden="true">03</b>Skippable in one click</li>
+    <li><b aria-hidden="true">04</b>Game launches as normal</li>
   </ul>
 
   <!-- ===== Why Harbor ===== -->
@@ -381,6 +381,9 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
     .stat-band li {
       border-left: 0;
       padding-left: 4vw;
+    }
+    .stat-band li:nth-child(n + 3) {
+      border-top: 1px solid var(--harbor-line);
     }
   }
   @media (max-width: 640px) {

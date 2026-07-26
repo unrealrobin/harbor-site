@@ -294,6 +294,14 @@ input:focus-visible {
   overflow: hidden;
   padding: 96px 0 88px;
 }
+/* Interior-page dotgrid layer (how-it-works, early-access, 404). The homepage
+   hero no longer uses it; remove with the interior heroes in HAR-218. */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.6;
+  pointer-events: none;
+}
 .hero-inner {
   position: relative;
   z-index: 2;
