@@ -137,6 +137,18 @@ import Base from '../layouts/Base.astro';
 </script>
 
 <style>
+  /* The signup destination: every CTA on the site lands here. Fill the
+     viewport so arriving via #apply never shows the pricing section above. */
+  #apply {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100svh - 65px);
+    scroll-margin-top: 65px;
+  }
+  #apply :global(.display-lg) {
+    font-size: clamp(32px, 4.4vw, 60px);
+  }
   .flat-price {
     max-width: 760px;
     margin: 0 auto;

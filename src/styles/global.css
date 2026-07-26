@@ -40,6 +40,9 @@ input:focus-visible {
   background-size: 24px 24px;
 }
 
+/* Anchored sections land below the sticky header, not under it. */
+section[id] { scroll-margin-top: 80px; }
+
 .hairline { border-top: 1px solid var(--harbor-line); }
 .mono { font-family: var(--font-mono); }
 .text-teal { color: var(--teal); }
