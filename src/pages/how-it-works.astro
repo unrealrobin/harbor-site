@@ -127,7 +127,7 @@ const FAQS: { q: string; a: string }[] = [
   </section>
 
   <!-- ===== Steps + analytics ===== -->
-  <section class="section">
+  <section class="section section-light">
     <div class="container">
       <div class="steps" data-rv-group>
         {
@@ -260,7 +260,7 @@ const FAQS: { q: string; a: string }[] = [
   </section>
 
   <!-- ===== FAQ ===== -->
-  <section class="section" id="faq">
+  <section class="section section-light" id="faq">
     <div class="container container-narrow">
       <div class="section-head center">
         <span class="eyebrow">FAQ</span>
@@ -302,26 +302,26 @@ const FAQS: { q: string; a: string }[] = [
     display: inline-block;
     font-size: 13px;
     font-weight: 600;
-    color: var(--teal);
+    color: var(--flip-accent);
     letter-spacing: 0.04em;
     margin-bottom: 14px;
   }
   .step-num-total {
-    color: var(--text3);
+    color: color-mix(in srgb, var(--flip-ink) 45%, transparent);
   }
   .step-title {
     font-family: var(--font-display);
     font-size: 19px;
     font-weight: 700;
     letter-spacing: -0.01em;
-    color: var(--text);
+    color: var(--flip-ink);
     margin: 0 0 8px;
   }
   .step-desc {
     font-family: var(--font-body);
     font-size: 15px;
     line-height: 1.6;
-    color: var(--text2);
+    color: var(--flip-muted);
     margin: 0;
   }
   .step-note {
@@ -332,7 +332,7 @@ const FAQS: { q: string; a: string }[] = [
     font-weight: 600;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: var(--text2);
+    color: color-mix(in srgb, var(--flip-ink) 55%, transparent);
     background: var(--bg3);
     border: 1px solid var(--harbor-line-strong);
     border-radius: var(--r-sm);
@@ -346,19 +346,19 @@ const FAQS: { q: string; a: string }[] = [
     align-items: center;
     margin-top: 56px;
     padding: 26px 28px;
-    border: 1px solid var(--teal-border);
-    background: linear-gradient(180deg, var(--teal-bg), rgba(31, 207, 142, 0.02));
+    border: 1px solid color-mix(in srgb, var(--flip-accent) 32%, transparent);
+    background: color-mix(in srgb, var(--flip-accent) 7%, transparent);
     border-radius: var(--r-lg);
   }
   .analytics-band p {
     font-family: var(--font-body);
     font-size: 15.5px;
     line-height: 1.6;
-    color: var(--text2);
+    color: var(--flip-muted);
     margin: 0;
   }
   .analytics-band strong {
-    color: var(--text);
+    color: var(--flip-ink);
     font-weight: 600;
   }
 

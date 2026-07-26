@@ -320,6 +320,19 @@ input:focus-visible {
   gap: 16px;
   flex-wrap: wrap;
 }
+/* ----- Light section (ground inversion) -----
+   Brand doc: light sections are capped per page and never adjacent. Dark
+   panels (faq cards, price panel, wireframes) keep their own colors on a
+   light ground — that contrast is the point. */
+.section-light {
+  background: var(--flip-bg);
+  color: var(--flip-ink);
+}
+.section-light .eyebrow { color: var(--flip-accent); }
+.section-light .display-lg { color: var(--flip-ink); }
+.section-light .lede { color: var(--flip-muted); }
+.section-light .text-teal { color: var(--flip-accent); }
+
 /* ----- Directional scroll entrances (brand doc motion rule) -----
    Elements tagged data-rv slide in from their anchored side (set --rv inline;
    default is a rise). A group parent tagged data-rv-group staggers its
