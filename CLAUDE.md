@@ -139,3 +139,12 @@ Defined in `.claude/commands/`. Invoke as `/start-task`, `/finish-task`, `/check
 - **`/start-task HAR-XXX`** — Branch from `main`, set Linear status to In Progress, fetch issue context.
 - **`/finish-task`** — Run tests + build + reviewers, push branch, ask user to confirm PR, open PR + set Linear to In Review on yes.
 - **`/check-pkg <name>`** — Look up the latest stable version on the npm registry. Always run before `npm install <name>`.
+- **`/design-review [page]`** — Audit against the brand doc (banned/required patterns, felt-difference test vs the north-star mock, accessibility). Read-only; outputs FAIL/WARN/NOTE findings citing rules.
+- **`/restyle <section>`** — One opinionated design change per invocation, tokens-first, verified at 375/768/1280.
+- **`/land-copy`** — Write or review site copy in Harbor's voice (12-second rule, enemy-naming, banned hype list).
+
+The three design commands read their rules from the Obsidian vault:
+`RLOV/Harbor/02 Technical/harborlauncher-site Design/Brand & Art Direction.md`
+(plus `north-star-mock.html` and `design-refs/` beside it). Those documents are
+deliberately **not** in this repo — do not recreate them here. If the vault is
+unavailable, the commands stop rather than review from memory.
