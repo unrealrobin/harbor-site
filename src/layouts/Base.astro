@@ -1,4 +1,5 @@
 ---
+import '../styles/fonts.css';
 import '../styles/global.css';
 import PostHog from '../components/posthog.astro';
 import Header from '../components/Header.astro';
@@ -17,9 +18,6 @@ const {
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL('/og.png', Astro.site).href;
-
-const fontHref =
-  'https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500;600&display=swap';
 
 // Analytics: resolved at build time. Render PostHog only on the Netlify
 // production deploy (see src/lib/analytics.ts). The snippet itself lives in
@@ -55,20 +53,10 @@ const loadAnalytics = shouldLoadAnalytics(process.env.CONTEXT);
         is the official is:inline component (src/components/posthog.astro). */}
     {loadAnalytics && <PostHog />}
 
-    <!-- Fonts: preconnect + preload, then attach the stylesheet via JS so it
-         doesn't block render. <noscript> fallback applies them without JS. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href={fontHref} />
-    <script is:inline define:vars={{ fontHref }}>
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = fontHref;
-      document.head.appendChild(link);
-    </script>
-    <noscript>
-      <link rel="stylesheet" href={fontHref} />
-    </noscript>
+    <!-- Fonts: self-hosted woff2 (see src/styles/fonts.css). Preload the two
+         faces used above the fold; mono loads on demand. -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/archivo-expanded-900.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/archivo-var.woff2" crossorigin />
   </head>
   <body>
     <Header />

@@ -43,7 +43,7 @@ input:focus-visible {
 .hairline { border-top: 1px solid var(--harbor-line); }
 .mono { font-family: var(--font-mono); }
 .text-teal { color: var(--teal); }
-.text-blue { color: var(--blue); }
+.text-blue { color: var(--teal); }
 
 /* ----- Logo ----- */
 .logo {
@@ -131,8 +131,8 @@ input:focus-visible {
   gap: 8px;
   height: 28px;
   padding: 0 12px;
-  border-radius: var(--r-pill);
-  font-family: var(--font-display);
+  border-radius: var(--r-md);
+  font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -147,13 +147,12 @@ input:focus-visible {
   height: 6px;
   border-radius: 50%;
   background: var(--teal);
-  box-shadow: 0 0 8px var(--teal);
 }
 
 /* ----- Eyebrow + section type ----- */
 .eyebrow {
   display: inline-block;
-  font-family: var(--font-display);
+  font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
@@ -161,7 +160,7 @@ input:focus-visible {
   color: var(--teal);
   margin-bottom: 16px;
 }
-.eyebrow-blue { color: var(--blue); }
+.eyebrow-blue { color: var(--text2); }
 
 .display-lg {
   font-family: var(--font-display);
@@ -292,7 +291,7 @@ input:focus-visible {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background: var(--harbor-halo), var(--harbor-deep);
+  background: var(--harbor-deep);
   overflow: hidden;
   padding: 96px 0 88px;
 }
@@ -382,7 +381,7 @@ input:focus-visible {
   color: var(--teal);
   margin-bottom: 18px;
 }
-.card-icon.blue { background: var(--blue-bg); border-color: var(--blue-border); color: var(--blue); }
+.card-icon.blue { background: var(--bg3); border-color: var(--harbor-line-strong); color: var(--text2); }
 .card-num {
   font-family: var(--font-display);
   font-size: 13px;
@@ -443,10 +442,10 @@ input:focus-visible {
   background: var(--teal-bg);
   border: 1px solid var(--teal-border);
 }
-.callout.blue { background: var(--blue-bg); border-color: var(--blue-border); }
+.callout.blue { background: var(--bg3); border-color: var(--harbor-line-strong); }
 .callout.plain { background: var(--harbor-ink); border-color: var(--harbor-line); }
 .callout-icon { color: var(--teal); flex-shrink: 0; margin-top: 1px; }
-.callout.blue .callout-icon { color: var(--blue); }
+.callout.blue .callout-icon { color: var(--text2); }
 .callout.plain .callout-icon { color: var(--text2); }
 .callout-body { font-family: var(--font-body); font-size: 14.5px; line-height: 1.6; color: var(--text2); margin: 0; }
 .callout-body strong { color: var(--text); font-weight: 600; }
@@ -476,7 +475,7 @@ input:focus-visible {
 /* ----- CTA band ----- */
 .cta-band {
   position: relative;
-  background: var(--harbor-halo), var(--harbor-ink);
+  background: var(--harbor-ink);
   border-top: 1px solid var(--harbor-line);
   border-bottom: 1px solid var(--harbor-line);
   padding: 88px 0;

@@ -1,0 +1,30 @@
+/* Self-hosted fonts (latin subsets, /public/fonts). No runtime Google Fonts —
+   the files are pinned, preloaded in Base.astro, and immune to third-party
+   changes. Non-latin glyphs fall back to the system stack. */
+
+/* Display: Archivo Expanded Black — static instance (wdth 125, wght 900). */
+@font-face {
+  font-family: 'Archivo Expanded';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('/fonts/archivo-expanded-900.woff2') format('woff2');
+}
+
+/* Body: Archivo, variable weight, normal width. */
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/archivo-var.woff2') format('woff2');
+}
+
+/* Utility: JetBrains Mono, variable weight. */
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/jetbrains-mono-var.woff2') format('woff2');
+}
