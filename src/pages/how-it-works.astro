@@ -112,18 +112,14 @@ const FAQS: { q: string; a: string }[] = [
   description="How Harbor works: a launcher binary, the Harbor web app, and modules you switch on. Email capture, surveys, analytics, patch notes, and more."
 >
   <!-- ===== Hero ===== -->
-  <section class="hero hero-page">
-    <div class="dotgrid hero-grid"></div>
-    <div class="container hero-inner">
-      <span class="pill pill-teal" style="margin-bottom:24px;">
-        <span class="pill-dot"></span>
-        How it works
-      </span>
-      <h1 class="hero-headline" style="font-size:44px;line-height:1.08;">
+  <section class="hero-int">
+    <div class="container" data-rv-group>
+      <span class="eyebrow" data-rv>How it works</span>
+      <h1 class="hero-int-title" data-rv>
         One download. No backend.<br />
         <span class="text-teal">Ships in an afternoon.</span>
       </h1>
-      <p class="hero-paragraph">
+      <p class="lede" data-rv>
         Harbor is a launcher binary and the Harbor web app. No SDK, no build step, nothing to host.
         Here's the whole thing, end to end.
       </p>
@@ -133,10 +129,10 @@ const FAQS: { q: string; a: string }[] = [
   <!-- ===== Steps + analytics ===== -->
   <section class="section">
     <div class="container">
-      <div class="steps">
+      <div class="steps" data-rv-group>
         {
           STEPS.map((s) => (
-            <div class="step">
+            <div class="step" data-rv>
               <span class="step-num mono">
                 {s.n} <span class="step-num-total">/ 03</span>
               </span>
@@ -148,10 +144,7 @@ const FAQS: { q: string; a: string }[] = [
         }
       </div>
 
-      <div class="analytics-band">
-        <span class="ab-icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8" /><path d="M14 7h7v7" /></svg>
-        </span>
+      <div class="analytics-band" data-rv>
         <p>
           <strong>Every module reports back</strong>: impressions, clicks, opt-ins, and responses, in
           a dashboard built for your game studio.
@@ -169,7 +162,7 @@ const FAQS: { q: string; a: string }[] = [
       <div class="config-block">
         {/* Placeholder slot: swap the skeleton for a real web-configurator
             screenshot when one is captured. */}
-        <div class="code-panel">
+        <div class="code-panel" data-rv style="--rv: translateX(-36px)">
           <div class="code-head">
             <span class="code-dot"></span>
             <span class="code-dot"></span>
@@ -196,7 +189,7 @@ const FAQS: { q: string; a: string }[] = [
             </div>
           </div>
         </div>
-        <div class="config-copy">
+        <div class="config-copy" data-rv style="--rv: translateX(36px)">
           <span class="eyebrow">The web app</span>
           <h2 class="display-lg" style="font-size:28px;margin-bottom:16px;">Configured in the web app.</h2>
           <p class="config-p">
@@ -225,16 +218,11 @@ const FAQS: { q: string; a: string }[] = [
         </p>
       </div>
 
-      <div class="module-grid">
+      <div class="module-grid" data-rv-group>
         {
           MODULES.map((m) => (
-            <div class:list={['module-card', { 'is-soon': m.status === 'soon' }]}>
+            <div class:list={['module-card', { 'is-soon': m.status === 'soon' }]} data-rv>
               <div class="module-top">
-                <span class="module-icon">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                    <path d={m.icon} />
-                  </svg>
-                </span>
                 <span class:list={['module-badge', `is-${m.status}`]}>{STATUS_LABEL[m.status]}</span>
               </div>
               <h3 class="module-name">{m.name}</h3>
@@ -242,7 +230,7 @@ const FAQS: { q: string; a: string }[] = [
             </div>
           ))
         }
-        <div class="module-card module-more">
+        <div class="module-card module-more" data-rv>
           <span class="module-more-plus" aria-hidden="true">+</span>
           <h3 class="module-name">Many more to come</h3>
           <p class="module-desc">
@@ -259,8 +247,7 @@ const FAQS: { q: string; a: string }[] = [
 
   <!-- ===== CTA ===== -->
   <section class="cta-band">
-    <div class="dotgrid cta-band-grid"></div>
-    <div class="container cta-band-inner" style="max-width:680px;">
+    <div class="container cta-band-inner" style="max-width:680px;" data-rv>
       <span class="eyebrow">Ready in an afternoon</span>
       <h2 class="display-lg" style="margin-bottom:16px;">Come on as a partner.</h2>
       <p class="lede" style="margin-bottom:28px;">
@@ -279,10 +266,10 @@ const FAQS: { q: string; a: string }[] = [
         <span class="eyebrow">FAQ</span>
         <h2 class="display-lg">Things devs ask us.</h2>
       </div>
-      <div class="faq-list">
+      <div class="faq-list" data-rv-group>
         {
           FAQS.map((faq) => (
-            <details class="faq-item">
+            <details class="faq-item" data-rv>
               <summary class="faq-question">
                 <span>{faq.q}</span>
                 <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -297,6 +284,12 @@ const FAQS: { q: string; a: string }[] = [
     </div>
   </section>
 </Base>
+
+<script>
+  import { initReveal } from '../lib/reveal';
+
+  initReveal();
+</script>
 
 <style>
   /* ----- Steps ----- */
@@ -356,10 +349,6 @@ const FAQS: { q: string; a: string }[] = [
     border: 1px solid var(--teal-border);
     background: linear-gradient(180deg, var(--teal-bg), rgba(31, 207, 142, 0.02));
     border-radius: var(--r-lg);
-  }
-  .analytics-band .ab-icon {
-    color: var(--teal);
-    flex-shrink: 0;
   }
   .analytics-band p {
     font-family: var(--font-body);
@@ -421,7 +410,7 @@ const FAQS: { q: string; a: string }[] = [
   .cs-pill {
     height: 26px;
     border-radius: var(--r-sm);
-    background: rgba(139, 144, 153, 0.1);
+    background: rgba(233, 244, 238, 0.08);
   }
   .cs-pill.on {
     background: var(--teal-bg);
@@ -431,7 +420,7 @@ const FAQS: { q: string; a: string }[] = [
     display: block;
     height: 8px;
     border-radius: 4px;
-    background: rgba(139, 144, 153, 0.14);
+    background: rgba(233, 244, 238, 0.12);
   }
   .cs-swatches {
     display: flex;
@@ -442,7 +431,7 @@ const FAQS: { q: string; a: string }[] = [
     width: 20px;
     height: 20px;
     border-radius: 6px;
-    background: rgba(139, 144, 153, 0.14);
+    background: rgba(233, 244, 238, 0.12);
   }
   .cs-swatches span.on {
     background: var(--teal);
@@ -461,7 +450,7 @@ const FAQS: { q: string; a: string }[] = [
     width: 46%;
     height: 14px;
     border-radius: 5px;
-    background: rgba(240, 242, 245, 0.22);
+    background: rgba(233, 244, 238, 0.22);
   }
   .cs-play {
     align-self: flex-end;
@@ -510,17 +499,6 @@ const FAQS: { q: string; a: string }[] = [
     justify-content: space-between;
     margin-bottom: 16px;
   }
-  .module-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: var(--r-md);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--teal-bg);
-    color: var(--teal);
-    border: 1px solid var(--teal-border);
-  }
   .module-name {
     font-family: var(--font-display);
     font-size: 16px;
@@ -567,11 +545,6 @@ const FAQS: { q: string; a: string }[] = [
      copy stays at full AA contrast. */
   .module-card.is-soon {
     background: var(--harbor-deep);
-  }
-  .module-card.is-soon .module-icon {
-    background: rgba(255, 255, 255, 0.03);
-    color: var(--text3);
-    border-color: var(--harbor-line);
   }
   .module-card.is-soon .module-name {
     color: var(--text2);

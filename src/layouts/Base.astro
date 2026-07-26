@@ -58,6 +58,15 @@ const loadAnalytics = shouldLoadAnalytics(process.env.CONTEXT);
     <link rel="preload" as="font" type="font/woff2" href="/fonts/archivo-expanded-var.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/archivo-var.woff2" crossorigin />
     <link rel="preload" as="font" type="font/woff2" href="/fonts/jetbrains-mono-var.woff2" crossorigin />
+    <noscript>
+      <style>
+        /* JS off → no observer will ever reveal data-rv elements; show them. */
+        [data-rv] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
   </head>
   <body>
     <Header />

@@ -25,16 +25,6 @@ const WHAT_BULLETS: { title: string; desc: string }[] = [
 ---
 
 <Base>
-  <noscript>
-    <style>
-      /* JS off → no observer will ever reveal data-rv elements; show them. */
-      [data-rv] {
-        opacity: 1 !important;
-        transform: none !important;
-      }
-    </style>
-  </noscript>
-
   <!-- ===== Hero ===== -->
   <section class="hero-xl">
     <h1 class="hero-display">
@@ -674,33 +664,13 @@ const WHAT_BULLETS: { title: string; desc: string }[] = [
 
 <script>
   import { wireForm } from '../lib/waitlist-form';
+  import { initReveal } from '../lib/reveal';
 
   wireForm('waitlist-form', 'waitlist-success', 'waitlist-error', 'hero');
   wireForm('cta-form', 'cta-success', 'cta-error', 'footer-cta');
 
-  // Directional scroll entrances (brand doc motion rule): observe every
-  // data-rv element, reveal once, stagger siblings inside data-rv-group
-  // parents. Under prefers-reduced-motion the CSS never hides anything, so
-  // no observer is needed at all.
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.querySelectorAll('[data-rv-group]').forEach((group) => {
-      group.querySelectorAll<HTMLElement>('[data-rv]').forEach((el, i) => {
-        el.style.transitionDelay = `${i * 90}ms`;
-      });
-    });
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-            io.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    document.querySelectorAll('[data-rv]').forEach((el) => io.observe(el));
-  }
+  // Directional scroll entrances — shared implementation in src/lib/reveal.ts.
+  initReveal();
 
   // Hero screenshot lightbox. Native <dialog> supplies Esc-to-close, focus
   // trapping, and the backdrop; we only wire open, close, and backdrop clicks.

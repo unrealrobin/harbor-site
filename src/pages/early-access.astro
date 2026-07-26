@@ -8,24 +8,20 @@ import Base from '../layouts/Base.astro';
   description="Be one of the first developers shipping Harbor. Full launcher, six months free for accepted partners, and a direct line to the founder."
 >
   <!-- ===== Hero ===== -->
-  <section class="hero hero-page">
-    <div class="dotgrid hero-grid"></div>
-    <div class="container hero-inner">
-      <span class="pill pill-teal" style="margin-bottom:24px;">
-        <span class="pill-dot"></span>
-        Design-partner program · limited spots
-      </span>
-      <h1 class="hero-headline" style="font-size:42px;line-height:1.12;">
+  <section class="hero-int">
+    <div class="container" data-rv-group>
+      <span class="eyebrow" data-rv>Design-partner program · limited spots</span>
+      <h1 class="hero-int-title" data-rv>
         Own the launch,<br />
         keep the players,<br />
-        be one of the first, with <span class="text-teal">Harbor</span>.
+        <span class="text-teal">be one of the first.</span>
       </h1>
-      <p class="hero-paragraph">
+      <p class="lede" data-rv>
         We're onboarding a small group of studios to ship Harbor before launch. You get the full
         product and help shape it; we get honest feedback from people who actually run a live game.
         Accepted partners ship free for six months, and it's a real working relationship, not a beta list.
       </p>
-      <div class="hero-cta-row">
+      <div class="hero-cta-row" data-rv style="margin-top: 28px;">
         <a href="#apply" class="btn btn-primary btn-lg">Apply to be a partner</a>
       </div>
     </div>
@@ -39,32 +35,20 @@ import Base from '../layouts/Base.astro';
         <h2 class="display-lg">The whole thing, not a trimmed-down trial.</h2>
         <p class="lede">Every partner ships the full launcher with all current modules. No feature gating during the program.</p>
       </div>
-      <div class="grid grid-2">
-        <div class="card">
-          <div class="card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 14h5"/></svg>
-          </div>
+      <div class="grid grid-2" data-rv-group>
+        <div class="card" data-rv>
           <h3 class="card-title">The full launcher + every module</h3>
           <p class="card-body">White-label launcher with email capture, patch notes, news, and surveys. All of it, branded to your game. New modules land in your build as we ship them.</p>
         </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          </div>
+        <div class="card" data-rv>
           <h3 class="card-title">Six months free</h3>
           <p class="card-body">Accepted partners pay nothing for the first six months. No card, no invoice. You're helping us get it right; that's the deal.</p>
         </div>
-        <div class="card">
-          <div class="card-icon neutral">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 16 0"/><path d="M2 12h2M20 12h2M12 2v2"/><circle cx="12" cy="13" r="3"/></svg>
-          </div>
+        <div class="card" data-rv>
           <h3 class="card-title">CDN delivery, handled</h3>
           <p class="card-body">Your launcher and its content are served from a global CDN, so patch notes and news land fast wherever your players are. We run the infrastructure; you don't think about it.</p>
         </div>
-        <div class="card">
-          <div class="card-icon neutral">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
+        <div class="card" data-rv>
           <h3 class="card-title">A direct line to the founder</h3>
           <p class="card-body">You're not filing tickets into a void. The founder building Harbor is on the other end for setup, requests, and the occasional 11pm "can it do this?"</p>
         </div>
@@ -90,7 +74,7 @@ import Base from '../layouts/Base.astro';
           advanced modules on the Pro tier.
         </p>
       </div>
-      <div class="flat-price">
+      <div class="flat-price" data-rv>
         <div class="flat-price-amount"><span class="from">From</span>$40<span class="per"> / mo, per game</span></div>
         <p class="flat-price-sub">
           Flat SaaS pricing per game. <strong>No revenue share, no cut of your sales, ever.</strong>
@@ -108,7 +92,6 @@ import Base from '../layouts/Base.astro';
 
   <!-- ===== Apply / signup ===== -->
   <section class="cta-band" id="apply">
-    <div class="dotgrid cta-band-grid"></div>
     <div class="container cta-band-inner" style="max-width:680px;">
       <span class="eyebrow">Early access</span>
       <h2 class="display-lg" style="margin-bottom:16px;">Sign up for early access.</h2>
@@ -147,8 +130,10 @@ import Base from '../layouts/Base.astro';
 
 <script>
   import { wireForm } from '../lib/waitlist-form';
+  import { initReveal } from '../lib/reveal';
 
   wireForm('ea-form', 'ea-success', 'ea-error', 'early-access-page');
+  initReveal();
 </script>
 
 <style>

@@ -162,13 +162,15 @@ input:focus-visible {
 .eyebrow-muted { color: var(--text2); }
 
 .display-lg {
-  font-family: var(--font-display);
-  font-size: 34px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  line-height: 1.1;
+  font-family: var(--font-display-expanded);
+  font-stretch: 125%;
+  font-size: clamp(27px, 3.2vw, 44px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
   color: var(--text);
   margin: 0;
+  text-wrap: balance;
 }
 .lede {
   font-family: var(--font-body);
@@ -285,39 +287,24 @@ input:focus-visible {
 [hidden] { display: none !important; }
 
 /* ----- Hero ----- */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
+/* ----- Interior-page hero (how-it-works, early-access, 404) ----- */
+.hero-int {
   background: var(--harbor-deep);
-  overflow: hidden;
-  padding: 96px 0 88px;
+  padding: clamp(48px, 6vw, 88px) 0 clamp(40px, 5vw, 64px);
 }
-/* Interior-page dotgrid layer (how-it-works, early-access, 404). The homepage
-   hero no longer uses it; remove with the interior heroes in HAR-218. */
-.hero-grid {
-  position: absolute;
-  inset: 0;
-  opacity: 0.6;
-  pointer-events: none;
-}
-.hero-inner {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  max-width: 760px;
-}
-.hero-headline {
-  font-family: var(--font-display);
-  font-size: 72px;
-  line-height: 1.12;
-  font-weight: 800;
-  letter-spacing: 0;
-  margin: 0 0 24px;
+.hero-int-title {
+  font-family: var(--font-display-expanded);
+  font-stretch: 125%;
+  font-weight: 900;
+  font-size: clamp(38px, 5.8vw, 82px);
+  line-height: 0.97;
+  letter-spacing: -0.026em;
   color: var(--text);
+  margin: 0 0 22px;
+  text-wrap: balance;
+}
+.hero-int .lede {
+  max-width: 58ch;
 }
 .hero-paragraph {
   font-family: var(--font-body);
@@ -333,12 +320,6 @@ input:focus-visible {
   gap: 16px;
   flex-wrap: wrap;
 }
-.hero-page {
-  /* shorter hero for interior pages */
-  padding: 72px 0 56px;
-  min-height: 0;
-}
-
 /* ----- Directional scroll entrances (brand doc motion rule) -----
    Elements tagged data-rv slide in from their anchored side (set --rv inline;
    default is a rise). A group parent tagged data-rv-group staggers its
@@ -596,13 +577,10 @@ input:focus-visible {
 
 /* ----- Responsive ----- */
 @media (max-width: 760px) {
-  .hero { padding: 72px 0 56px; }
-  .hero-headline { font-size: 48px; }
   .hero-paragraph { font-size: 17px; }
   .container { padding: 0 22px; }
   .section { padding: 64px 0; }
   .cta-band { padding: 64px 0; }
-  .display-lg { font-size: 27px; }
   .display-md { font-size: 21px; }
   .grid-2, .price-grid { grid-template-columns: 1fr; }
   [data-stack] { grid-template-columns: 1fr !important; gap: 40px !important; }
@@ -640,5 +618,4 @@ input:focus-visible {
   .hero-cta-row { width: 100%; }
 }
 @media (max-width: 420px) {
-  .hero-headline { font-size: 40px; }
 }
