@@ -29,7 +29,7 @@ const VALUE_ITEMS = [
 
 <section class="why" aria-labelledby="why-title">
   <div class="container why-cols">
-    <div class="why-head">
+    <div class="why-head" data-rv style="--rv: translateX(-36px)">
       <span class="eyebrow">Why Harbor</span>
       <h2 class="why-title" id="why-title">
         You sold the game. <span class="dim">You never got the player.</span>
@@ -40,10 +40,10 @@ const VALUE_ITEMS = [
       </p>
     </div>
 
-    <div class="row-list">
+    <div class="row-list" data-rv-group>
       {
         VALUE_ITEMS.map((p, i) => (
-          <div class="row">
+          <div class="row" data-rv style="--rv: translateX(36px)">
             <span class="row-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
             <div>
               <h3 class="row-title">{p.claim}</h3>
@@ -58,15 +58,15 @@ const VALUE_ITEMS = [
 
 <!-- The polarity flip — the page's single light section. -->
 <section class="flip" aria-labelledby="flip-title">
-  <div class="container">
-    <span class="eyebrow flip-eyebrow">The moment</span>
-    <h2 class="flip-title" id="flip-title">But every one of them presses Play.</h2>
-    <p class="flip-body">
+  <div class="container" data-rv-group>
+    <span class="eyebrow flip-eyebrow" data-rv>The moment</span>
+    <h2 class="flip-title" id="flip-title" data-rv>But every one of them presses Play.</h2>
+    <p class="flip-body" data-rv>
       That launch is the one moment you're <strong>guaranteed their attention</strong>, every session,
       and it's the moment Harbor hands back to you. It's how a one-time buyer becomes
       a <strong>lifelong fan</strong>.
     </p>
-    <a href="/early-access#apply" class="flip-cta">Get early access</a>
+    <a href="/early-access#apply" class="flip-cta" data-rv>Get early access</a>
   </div>
 </section>
 

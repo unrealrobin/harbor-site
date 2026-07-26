@@ -14,7 +14,7 @@ const DESIGN_FACTS: { lead: string; rest?: string }[] = [
 
 <section class="frictionless" id="frictionless" aria-labelledby="frictionless-title">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head" data-rv>
       <span class="eyebrow fl-eyebrow">Players first</span>
       <h2 class="fl-title" id="frictionless-title">Frictionless for players.</h2>
       <p class="fl-lede">
@@ -23,10 +23,10 @@ const DESIGN_FACTS: { lead: string; rest?: string }[] = [
       </p>
     </div>
 
-    <ul class="fl-list">
+    <ul class="fl-list" data-rv-group>
       {
         DESIGN_FACTS.map((f) => (
-          <li class="fl-item">
+          <li class="fl-item" data-rv>
             <span class="fl-check" aria-hidden="true">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
             </span>
@@ -36,7 +36,7 @@ const DESIGN_FACTS: { lead: string; rest?: string }[] = [
       }
     </ul>
 
-    <div class="callout neutral fl-close">
+    <div class="callout neutral fl-close" data-rv>
       <span class="callout-icon" aria-hidden="true">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 16v-4M12 8h.01" /></svg>
       </span>

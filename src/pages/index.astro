@@ -25,6 +25,16 @@ const WHAT_BULLETS: { title: string; desc: string }[] = [
 ---
 
 <Base>
+  <noscript>
+    <style>
+      /* JS off → no observer will ever reveal data-rv elements; show them. */
+      [data-rv] {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    </style>
+  </noscript>
+
   <!-- ===== Hero ===== -->
   <section class="hero-xl">
     <h1 class="hero-display">
@@ -90,17 +100,17 @@ const WHAT_BULLETS: { title: string; desc: string }[] = [
   </section>
 
   <!-- ===== Stat band ===== -->
-  <ul class="stat-band">
-    <li><b aria-hidden="true">01</b>Customizable launcher</li>
-    <li><b aria-hidden="true">02</b>No player accounts</li>
-    <li><b aria-hidden="true">03</b>Skippable in one click</li>
-    <li><b aria-hidden="true">04</b>Game launches as normal</li>
+  <ul class="stat-band" data-rv-group>
+    <li data-rv><b aria-hidden="true">01</b>Customizable launcher</li>
+    <li data-rv><b aria-hidden="true">02</b>No player accounts</li>
+    <li data-rv><b aria-hidden="true">03</b>Skippable in one click</li>
+    <li data-rv><b aria-hidden="true">04</b>Game launches as normal</li>
   </ul>
 
   <!-- ===== What is Harbor ===== -->
   <section class="what section-ink" id="what">
     <div class="container what-cols">
-      <div>
+      <div data-rv style="--rv: translateX(-36px)">
         <span class="eyebrow">What is Harbor</span>
         <h2 class="what-title">A surface you own, at the moment that matters.</h2>
         <div class="row-list">
@@ -118,7 +128,7 @@ const WHAT_BULLETS: { title: string; desc: string }[] = [
         </div>
       </div>
 
-      <div class="wf-flow" aria-label="The storefront launches Harbor, your branded launcher, which launches your game">
+      <div class="wf-flow" data-rv style="--rv: translateX(36px)" aria-label="The storefront launches Harbor, your branded launcher, which launches your game">
         <div class="wf-step">
           <span>Storefront</span>
           <span class="wf-sub">Steam · Epic · GOG</span>
@@ -173,8 +183,8 @@ const WHAT_BULLETS: { title: string; desc: string }[] = [
   <!-- ===== CTA close ===== -->
   <section class="cta-close">
     <div class="container">
-      <h2 class="cta-title">Sell the game. <span class="text-teal">Keep the player.</span></h2>
-      <form id="cta-form" class="email-form">
+      <h2 class="cta-title" data-rv>Sell the game. <span class="text-teal">Keep the player.</span></h2>
+      <form id="cta-form" class="email-form" data-rv style="--rvd: 0.12s">
         <p class="honeypot" aria-hidden="true">
           <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
         </p>
@@ -667,6 +677,30 @@ const WHAT_BULLETS: { title: string; desc: string }[] = [
 
   wireForm('waitlist-form', 'waitlist-success', 'waitlist-error', 'hero');
   wireForm('cta-form', 'cta-success', 'cta-error', 'footer-cta');
+
+  // Directional scroll entrances (brand doc motion rule): observe every
+  // data-rv element, reveal once, stagger siblings inside data-rv-group
+  // parents. Under prefers-reduced-motion the CSS never hides anything, so
+  // no observer is needed at all.
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('[data-rv-group]').forEach((group) => {
+      group.querySelectorAll<HTMLElement>('[data-rv]').forEach((el, i) => {
+        el.style.transitionDelay = `${i * 90}ms`;
+      });
+    });
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    document.querySelectorAll('[data-rv]').forEach((el) => io.observe(el));
+  }
 
   // Hero screenshot lightbox. Native <dialog> supplies Esc-to-close, focus
   // trapping, and the backdrop; we only wire open, close, and backdrop clicks.

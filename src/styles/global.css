@@ -339,6 +339,27 @@ input:focus-visible {
   min-height: 0;
 }
 
+/* ----- Directional scroll entrances (brand doc motion rule) -----
+   Elements tagged data-rv slide in from their anchored side (set --rv inline;
+   default is a rise). A group parent tagged data-rv-group staggers its
+   children. One-shot: the observer unobserves after entry. Hidden states
+   exist ONLY under no-preference; reduced-motion users get a static page,
+   and a <noscript> fallback un-hides everything when JS is off. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-rv] {
+    opacity: 0;
+    transform: var(--rv, translateY(26px));
+    transition:
+      opacity 0.7s var(--ease),
+      transform 0.7s var(--ease);
+    transition-delay: var(--rvd, 0s);
+  }
+  [data-rv].in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* ----- Numbered hairline rows (Why claims, What touchpoints) ----- */
 .row-list { border-top: 1px solid var(--harbor-line-strong); }
 .row {
