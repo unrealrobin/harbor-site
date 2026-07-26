@@ -4,26 +4,22 @@ import WhyHarbor from '../components/WhyHarbor.astro';
 import ValueProps from '../components/ValueProps.astro';
 import Frictionless from '../components/Frictionless.astro';
 
-const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
+const WHAT_BULLETS: { title: string; desc: string }[] = [
   {
     title: 'It sits between the storefront and your game',
     desc: 'Steam, Epic, or GOG launches Harbor; Harbor launches your game. Nothing about how players start your game changes.',
-    icon: 'M5 12h14M13 6l6 6-6 6',
   },
   {
     title: 'Fully white-label',
     desc: 'Your name, logo, colors, fonts, and play button. There is no Harbor branding shown to your players, ever.',
-    icon: 'M8 12l2.5 2.5L16 9',
   },
   {
     title: 'Zero player install',
     desc: "Harbor ships as a file alongside your build. Players don't download anything, sign in to anything, or know it's there.",
-    icon: 'M12 3v12M7 10l5 5 5-5M5 21h14',
   },
   {
     title: 'See what lands',
     desc: 'Every module reports engagement: clicks on your Discord link, survey responses, email opt-ins. You know what your players actually do with the moment.',
-    icon: 'M3 17l6-6 4 4 8-8M14 7h7v7',
   },
 ];
 ---
@@ -108,60 +104,64 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
   <ValueProps />
 
   <!-- ===== What is Harbor ===== -->
-  <section class="section section-ink" id="what">
-    <div class="container">
-      <div class="grid" style="grid-template-columns:1fr 1fr;gap:56px;align-items:center;" data-stack>
-        <div>
-          <span class="eyebrow">What is Harbor</span>
-          <h2 class="display-lg" style="margin-bottom:18px;">A surface you own, at the moment that matters.</h2>
-          <p class="lede" style="margin-bottom:28px;">
-            Your players already open your game several times a week. Harbor turns that launch moment
-            into a channel you control. Show a patch note, drop a beta invite, or just say something
-            in your own voice. It's the part of the player relationship the storefront keeps for itself.
-          </p>
-          <ul class="feature-list">
-            {
-              WHAT_BULLETS.map((b) => (
-                <li class="feature-item">
-                  <span class="feature-bullet" aria-hidden="true">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d={b.icon} /></svg>
-                  </span>
-                  <div>
-                    <p class="feature-title">{b.title}</p>
-                    <p class="feature-desc">{b.desc}</p>
-                  </div>
-                </li>
-              ))
-            }
-          </ul>
+  <section class="what section-ink" id="what">
+    <div class="container what-cols">
+      <div>
+        <span class="eyebrow">What is Harbor</span>
+        <h2 class="what-title">A surface you own, at the moment that matters.</h2>
+        <div class="row-list">
+          {
+            WHAT_BULLETS.map((b, i) => (
+              <div class="row">
+                <span class="row-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3 class="row-title">{b.title}</h3>
+                  <p class="row-desc">{b.desc}</p>
+                </div>
+              </div>
+            ))
+          }
         </div>
-        <div>
-          <div class="flow" aria-label="Storefront launches Harbor, Harbor launches your game">
-            <div class="flow-node">
-              <div class="flow-node-label">Storefront</div>
-              <div class="flow-node-sub">Steam · Epic · GOG</div>
+      </div>
+
+      <div class="wf-flow" aria-label="The storefront launches Harbor, your branded launcher, which launches your game">
+        <div class="wf-step">
+          <span>Storefront</span>
+          <span class="wf-sub">Steam · Epic · GOG</span>
+        </div>
+        <div class="wf-arrow" aria-hidden="true">↓</div>
+
+        {/* Wireframe of the player-facing launcher: tabs, news lines, email
+            opt-in, Play. Same skeleton idiom as the configurator wireframe on
+            /how-it-works. */}
+        <div class="launcher-wf" role="img" aria-label="Wireframe of your branded launcher: navigation tabs, news posts, an email opt-in field, and a Play button">
+          <div class="lw-head">
+            <span class="lw-dot"></span>
+            <span class="lw-dot"></span>
+            <span class="lw-dot"></span>
+            <span class="lw-file mono">yourgame · your launcher</span>
+          </div>
+          <div class="lw-body">
+            <div class="lw-tabs">
+              <span class="lw-tab on"></span>
+              <span class="lw-tab"></span>
+              <span class="lw-tab"></span>
             </div>
-            <div class="flow-arrow" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-            </div>
-            <div class="flow-node is-harbor">
-              <div class="flow-node-label text-teal">Harbor</div>
-              <div class="flow-node-sub">your branded launcher</div>
-            </div>
-            <div class="flow-arrow" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-            </div>
-            <div class="flow-node">
-              <div class="flow-node-label">Your game</div>
-              <div class="flow-node-sub">launches as normal</div>
+            <span class="lw-title"></span>
+            <span class="lw-line" style="width: 74%"></span>
+            <span class="lw-line" style="width: 58%"></span>
+            <span class="lw-line" style="width: 66%"></span>
+            <div class="lw-footer">
+              <span class="lw-input"></span>
+              <span class="lw-play">Play</span>
             </div>
           </div>
-          <div class="callout plain" style="margin-top:20px;">
-            <span class="callout-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 8h.01M11 12h1v4h1" /></svg>
-            </span>
-            <p class="callout-body">The player's experience is one extra screen they can skip in one click. The studio gets <strong>the relationship the storefront was keeping for itself.</strong></p>
-          </div>
+        </div>
+
+        <div class="wf-arrow" aria-hidden="true">↓</div>
+        <div class="wf-step">
+          <span>Your game</span>
+          <span class="wf-sub">Launches as normal</span>
         </div>
       </div>
     </div>
@@ -374,6 +374,138 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
     color: var(--text3);
     margin: 16px 0 clamp(24px, 3vw, 40px);
   }
+  /* ----- What is Harbor: touchpoint rows + launcher wireframe flow ----- */
+  .what {
+    padding: clamp(72px, 8vw, 120px) 0;
+  }
+  .what :global(.what-cols) {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 4vw;
+    align-items: start;
+  }
+  .what-title {
+    font-family: var(--font-display-expanded);
+    font-stretch: 125%;
+    font-weight: 900;
+    font-size: clamp(28px, 3.4vw, 48px);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin: 0 0 28px;
+    text-wrap: balance;
+  }
+  .wf-flow {
+    display: flex;
+    flex-direction: column;
+  }
+  .wf-step {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text);
+    border: 1px solid var(--harbor-line-strong);
+    border-radius: var(--r-md);
+    padding: 14px 18px;
+  }
+  .wf-sub {
+    color: var(--text3);
+    font-size: 11.5px;
+  }
+  .wf-arrow {
+    font-family: var(--font-mono);
+    color: var(--text3);
+    padding: 8px 0 8px 20px;
+  }
+  .launcher-wf {
+    background: var(--harbor-deep);
+    border: 1px solid var(--teal-border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+  }
+  .lw-head {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--harbor-line);
+  }
+  .lw-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--bg4);
+  }
+  .lw-file {
+    margin-left: 8px;
+    font-size: 11.5px;
+    color: var(--text2);
+  }
+  .lw-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px;
+    min-height: 220px;
+  }
+  .lw-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .lw-tab {
+    width: 54px;
+    height: 20px;
+    border-radius: var(--r-sm);
+    background: rgba(233, 244, 238, 0.08);
+  }
+  .lw-tab.on {
+    background: var(--teal-bg);
+    border: 1px solid var(--teal-border);
+  }
+  .lw-title {
+    display: block;
+    width: 46%;
+    height: 13px;
+    border-radius: 5px;
+    background: rgba(233, 244, 238, 0.22);
+  }
+  .lw-line {
+    display: block;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(233, 244, 238, 0.1);
+  }
+  .lw-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: auto;
+    padding-top: 14px;
+  }
+  .lw-input {
+    flex: 1;
+    height: 26px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--harbor-line-strong);
+    background: var(--harbor-ink);
+  }
+  .lw-play {
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 650;
+    color: var(--teal-contrast);
+    background: var(--teal);
+    border-radius: var(--r-sm);
+    padding: 6px 18px;
+  }
+
   .faq-pointer {
     border-top: 1px solid var(--harbor-line);
     padding: 72px 0;
@@ -417,6 +549,12 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
     .hero-display {
       font-stretch: 100%;
       letter-spacing: -0.02em;
+    }
+  }
+  @media (max-width: 980px) {
+    .what :global(.what-cols) {
+      grid-template-columns: 1fr;
+      gap: 40px;
     }
   }
   @media (max-width: 760px) {

@@ -1,9 +1,9 @@
 ---
-// "Why Harbor" — the ownership section. Concedes Steam's toolkit, then leads
-// each item with what Harbor gives back (value-add headlines, never
-// problem-anchored, so none of it reads as a Harbor shortcoming). Graphic A: a
-// field of player dots, only a small fraction lit today; toggling to "every
-// launch" lights the whole field.
+// "Why Harbor" — the ownership section, north-star composition: heading +
+// lede left, the four value claims as numbered hairline rows right. Followed
+// by the polarity flip ("But every one of them presses Play.") — the page's
+// SINGLE light section (brand doc: one flip per page, it's drama because
+// it's rare).
 // Authored, trusted content — `line` renders via set:html so the Valve quote
 // can be italicized. Do NOT source this from untrusted input (CMS/API/build
 // data) without escaping first.
@@ -28,12 +28,11 @@ const VALUE_ITEMS = [
 ---
 
 <section class="why" aria-labelledby="why-title">
-  <div class="dotgrid why-grid-bg"></div>
-  <div class="container why-inner">
+  <div class="container why-cols">
     <div class="why-head">
       <span class="eyebrow">Why Harbor</span>
-      <h2 class="display-lg" id="why-title">
-        You sold the game. <span class="leak">You never got the player.</span>
+      <h2 class="why-title" id="why-title">
+        You sold the game. <span class="dim">You never got the player.</span>
       </h2>
       <p class="lede">
         Steam's tools are real: announcements, wishlist emails, a community hub. But the
@@ -41,260 +40,116 @@ const VALUE_ITEMS = [
       </p>
     </div>
 
-    <div class="why-body">
-      <div class="problems">
-        {
-          VALUE_ITEMS.map((p) => (
-            <div class="problem">
-              <span class="problem-mark" aria-hidden="true">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
-              </span>
-              <div>
-                <p class="problem-claim">{p.claim}</p>
-                <p class="problem-line" set:html={p.line} />
-              </div>
+    <div class="row-list">
+      {
+        VALUE_ITEMS.map((p, i) => (
+          <div class="row">
+            <span class="row-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3 class="row-title">{p.claim}</h3>
+              <p class="row-desc" set:html={p.line} />
             </div>
-          ))
-        }
-      </div>
-
-      <div class="graphic-shell">
-        <div class="pf-top">
-          <span class="pf-title">Everyone who owns your game</span>
-          <div class="pf-legend">
-            <span class="pf-leg"><span class="pf-leg-dot" style="background:var(--teal);box-shadow:0 0 6px var(--teal);"></span> reached</span>
-            <span class="pf-leg"><span class="pf-leg-dot" style="background:rgba(139,144,153,0.3);"></span> not</span>
           </div>
-        </div>
-        <div class="field" id="main-field" data-total="160" style="--cols:16;" aria-hidden="true"></div>
-        <div class="pf-toggle" role="group" aria-label="Reach with and without Harbor">
-          <button class="active" id="btn-today" type="button" aria-pressed="true">Without Harbor</button>
-          <button id="btn-launch" type="button" aria-pressed="false">With Harbor</button>
-        </div>
-        <p class="pf-caption" id="pf-caption">
-          Scattered across Steam, Discord, and your socials, you reach only a fraction.
-        </p>
-      </div>
+        ))
+      }
     </div>
+  </div>
+</section>
 
-    <div class="turn">
-      <div class="dotgrid turn-grid"></div>
-      <div class="turn-inner">
-        <h3 class="turn-statement">But every one of them <span class="hl">presses Play.</span></h3>
-        <p class="turn-body">
-          That launch is the one moment you're <strong>guaranteed their attention</strong>, every session,
-          and it's the moment Harbor hands back to you. It's how a one-time buyer becomes a regular,
-          and a regular becomes a <strong>lifelong fan</strong> who follows you to your next game.
-        </p>
-        <a
-          href="mailto:earlyaccess@harborlauncher.com?subject=Harbor%20early%20access"
-          class="btn btn-primary btn-lg turn-cta"
-        >
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg>
-          Email earlyaccess@harborlauncher.com to get started
-        </a>
-      </div>
-    </div>
+<!-- The polarity flip — the page's single light section. -->
+<section class="flip" aria-labelledby="flip-title">
+  <div class="container">
+    <span class="eyebrow flip-eyebrow">The moment</span>
+    <h2 class="flip-title" id="flip-title">But every one of them presses Play.</h2>
+    <p class="flip-body">
+      That launch is the one moment you're <strong>guaranteed their attention</strong>, every session,
+      and it's the moment Harbor hands back to you. It's how a one-time buyer becomes a regular,
+      and a regular becomes a <strong>lifelong fan</strong> who follows you to your next game.
+    </p>
+    <a
+      href="mailto:earlyaccess@harborlauncher.com?subject=Harbor%20early%20access"
+      class="flip-cta"
+    >
+      Email earlyaccess@harborlauncher.com to get started
+    </a>
   </div>
 </section>
 
 <style is:global>
   .why {
-    position: relative;
     background: var(--harbor-deep);
-    padding: 104px 0;
-    overflow: hidden;
+    padding: clamp(72px, 8vw, 120px) 0;
   }
-  .why-grid-bg { position: absolute; inset: 0; opacity: 0.5; pointer-events: none; }
-  .why-inner { position: relative; z-index: 2; }
-  .why-head { max-width: 780px; margin-bottom: 56px; }
-  .why-head .display-lg { font-size: 46px; line-height: 1.08; margin-bottom: 20px; }
-  .why-head .display-lg .leak { color: var(--text2); }
-
-  .why-body { display: grid; grid-template-columns: 1.05fr 1.2fr; gap: 64px; align-items: start; }
-
-  .problems { display: flex; flex-direction: column; gap: 8px; }
-  .problem {
+  .why-cols {
     display: grid;
-    grid-template-columns: 26px 1fr;
-    gap: 14px;
-    padding: 20px 4px;
-    border-top: 1px solid var(--harbor-line);
+    grid-template-columns: 5fr 7fr;
+    gap: 4vw;
     align-items: start;
   }
-  .problem:last-child { border-bottom: 1px solid var(--harbor-line); }
-  .problem-mark {
-    width: 22px; height: 22px; margin-top: 2px;
-    border-radius: 50%;
-    border: 1px solid var(--teal-border);
-    background: var(--teal-bg);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--teal);
+  .why-title {
+    font-family: var(--font-display-expanded);
+    font-stretch: 125%;
+    font-weight: 900;
+    font-size: clamp(30px, 3.9vw, 56px);
+    line-height: 1.02;
+    letter-spacing: -0.022em;
+    color: var(--text);
+    margin: 0 0 20px;
+    text-wrap: balance;
   }
-  .problem-claim { font-family: var(--font-display); font-weight: 700; font-size: 16.5px; color: var(--text); margin: 0 0 5px; letter-spacing: -0.01em; }
-  .problem-line { font-family: var(--font-body); font-size: 14.5px; line-height: 1.55; color: var(--text2); margin: 0; }
-  .problem-line em { color: var(--text); font-style: italic; }
+  .why-title .dim { color: var(--text3); }
+  .why .lede { max-width: 44ch; }
 
-  .graphic-shell {
-    position: sticky; top: 24px;
-    background: var(--harbor-ink);
-    border: 1px solid var(--harbor-line);
-    border-radius: var(--r-lg);
-    padding: 24px 24px 22px;
+  .flip {
+    background: var(--flip-bg);
+    color: var(--flip-ink);
+    padding: clamp(72px, 10vw, 150px) 0;
   }
-  .pf-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
-  .pf-title { font-family: var(--font-display); font-weight: 600; font-size: 13px; color: var(--text2); }
-  .pf-legend { display: flex; align-items: center; gap: 14px; }
-  .pf-leg { display: flex; align-items: center; gap: 6px; font-family: var(--font-display); font-size: 11px; font-weight: 500; color: var(--text2); }
-  .pf-leg-dot { width: 8px; height: 8px; border-radius: 50%; }
-
-  .field { display: grid; grid-template-columns: repeat(var(--cols, 16), 1fr); gap: 7px; margin: 4px 0 6px; }
-  .dot {
-    aspect-ratio: 1 / 1;
-    border-radius: 50%;
-    background-color: rgba(139, 144, 153, 0.16);
-    transition: background-color var(--dur-base) var(--ease);
+  .flip-eyebrow { color: var(--flip-accent); }
+  .flip-title {
+    font-family: var(--font-display-expanded);
+    font-stretch: 125%;
+    font-weight: 900;
+    font-size: clamp(40px, 7.4vw, 118px);
+    line-height: 0.95;
+    letter-spacing: -0.028em;
+    color: var(--flip-ink);
+    margin: 0 0 30px;
+    max-width: 12ch;
   }
-  .dot.on { background-color: var(--teal); }
-  .pf-caption { font-family: var(--font-body); font-size: 13.5px; line-height: 1.5; color: var(--text2); margin: 16px 0 0; min-height: 40px; }
-
-  .pf-toggle {
-    display: inline-flex; padding: 4px; gap: 4px; margin-top: 4px;
-    background: var(--harbor-deep); border: 1px solid var(--harbor-line); border-radius: var(--r-lg);
+  .flip-body {
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--flip-muted);
+    margin: 0 0 34px;
+    max-width: 56ch;
   }
-  .pf-toggle button {
-    font-family: var(--font-display); font-size: 13px; font-weight: 600;
-    color: var(--text2); background: transparent; border: none; cursor: pointer;
-    padding: 8px 16px; border-radius: var(--r-sm);
-    transition: all var(--dur-base) var(--ease); white-space: nowrap;
+  .flip-body strong { color: var(--flip-ink); font-weight: 600; }
+  .flip-cta {
+    display: inline-block;
+    background: var(--flip-ink);
+    color: var(--flip-bg);
+    font-family: var(--font-body);
+    font-weight: 650;
+    font-size: 15px;
+    line-height: 1.35;
+    padding: 13px 24px;
+    border-radius: var(--r-md);
+    text-decoration: none;
+    transition: opacity var(--dur-base) var(--ease);
   }
-  .pf-toggle button.active { background: var(--teal); color: var(--teal-contrast); }
-
-  .turn {
-    position: relative;
-    margin-top: 64px;
-    border: 1px solid var(--teal-border);
-    background: linear-gradient(180deg, var(--teal-bg), rgba(31, 207, 142, 0.02));
-    border-radius: var(--r-lg);
-    padding: 48px 48px 44px;
-    overflow: hidden;
+  .flip-cta:hover { opacity: 0.85; }
+  .flip-cta:focus-visible {
+    outline: 2px solid var(--flip-ink);
+    outline-offset: 3px;
   }
-  .turn-grid { position: absolute; inset: 0; opacity: 0.4; pointer-events: none; }
-  .turn-inner { position: relative; z-index: 2; max-width: 760px; }
-  .turn-statement { font-family: var(--font-display); font-weight: 800; font-size: 36px; line-height: 1.1; letter-spacing: -0.02em; color: var(--text); margin: 0 0 18px; }
-  .turn-statement .hl { color: var(--teal); }
-  .turn-body { font-family: var(--font-body); font-size: 17px; line-height: 1.62; color: var(--text2); margin: 0; max-width: 680px; }
-  .turn-body strong { color: var(--text); font-weight: 600; }
-  .turn-cta { margin-top: 28px; }
 
   @media (max-width: 980px) {
-    .why-body { grid-template-columns: 1fr; gap: 36px; }
-    .graphic-shell { position: static; }
-    .field { --cols: 18 !important; }
+    .why-cols { grid-template-columns: 1fr; gap: 36px; }
   }
   @media (max-width: 760px) {
-    .why { padding: 72px 0; }
-    .why-head .display-lg { font-size: 33px; }
-    .turn { padding: 32px 24px 30px; }
-    .turn-statement { font-size: 27px; }
-    .turn-body { font-size: 15.5px; }
-    .field { --cols: 14 !important; }
-  }
-  @media (max-width: 420px) {
-    .field { --cols: 11 !important; }
-    .turn-cta { white-space: normal; height: auto; min-height: 48px; padding-top: 12px; padding-bottom: 12px; line-height: 1.35; }
+    .why { padding: 64px 0; }
+    .flip { padding: 64px 0; }
   }
 </style>
-
-<script>
-  // Player-field graphic. A fraction of dots are lit "today"; toggling to the
-  // launch state lights the whole field. Respects prefers-reduced-motion.
-  const LIT_FRAC = 0.08;
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  const field = document.getElementById('main-field');
-  const btnToday = document.getElementById('btn-today');
-  const btnLaunch = document.getElementById('btn-launch');
-  const pfCaption = document.getElementById('pf-caption');
-
-  const CAPTION_OFF = 'Scattered across Steam, Discord, and your socials, you reach only a fraction.';
-  const CAPTION_ON = 'On the launch screen, you reach every one of them, every time they play.';
-
-  if (field && btnToday && btnLaunch && pfCaption) {
-    let litBase = 0;
-    let timers: number[] = [];
-    let lit = false;
-    let userInteracted = false;
-
-    function build() {
-      const total = Number(field!.dataset.total ?? '160');
-      litBase = Math.max(1, Math.round(total * LIT_FRAC));
-      timers.forEach(clearTimeout);
-      timers = [];
-      field!.innerHTML = '';
-      for (let i = 0; i < total; i++) {
-        const d = document.createElement('span');
-        d.className = 'dot' + (i < litBase ? ' on' : '');
-        field!.appendChild(d);
-      }
-    }
-
-    function lightField(on: boolean) {
-      if (lit === on) return;
-      lit = on;
-      timers.forEach(clearTimeout);
-      timers = [];
-      const dots = field!.children;
-      const n = dots.length;
-      const step = reduceMotion ? 0 : 7;
-      if (on) {
-        for (let i = litBase; i < n; i++) {
-          timers.push(window.setTimeout(() => dots[i].classList.add('on'), (i - litBase) * step));
-        }
-      } else {
-        for (let i = n - 1; i >= litBase; i--) {
-          timers.push(window.setTimeout(() => dots[i].classList.remove('on'), (n - 1 - i) * step));
-        }
-      }
-    }
-
-    function setState(on: boolean) {
-      lightField(on);
-      btnLaunch!.classList.toggle('active', on);
-      btnToday!.classList.toggle('active', !on);
-      btnLaunch!.setAttribute('aria-pressed', String(on));
-      btnToday!.setAttribute('aria-pressed', String(!on));
-      pfCaption!.textContent = on ? CAPTION_ON : CAPTION_OFF;
-    }
-
-    build();
-    btnToday.addEventListener('click', () => { userInteracted = true; setState(false); });
-    btnLaunch.addEventListener('click', () => { userInteracted = true; setState(true); });
-
-    // Auto-demo once when scrolled into view (skipped under reduced motion).
-    if (!reduceMotion) {
-      let played = false;
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting && !played && !userInteracted) {
-            played = true;
-            window.setTimeout(() => { if (!userInteracted) setState(true); }, 700);
-            window.setTimeout(() => { if (!userInteracted) setState(false); }, 2600);
-          }
-        });
-      }, { threshold: 0.5 });
-      io.observe(field);
-    }
-
-    let rt: number;
-    window.addEventListener('resize', () => {
-      clearTimeout(rt);
-      rt = window.setTimeout(() => {
-        const wasLit = lit;
-        lit = false;
-        build();
-        if (wasLit) { lit = true; for (const d of field!.children) d.classList.add('on'); }
-      }, 180);
-    });
-  }
-</script>

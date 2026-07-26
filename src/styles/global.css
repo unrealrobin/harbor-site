@@ -339,6 +339,39 @@ input:focus-visible {
   min-height: 0;
 }
 
+/* ----- Numbered hairline rows (Why claims, What touchpoints) ----- */
+.row-list { border-top: 1px solid var(--harbor-line-strong); }
+.row {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 18px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--harbor-line);
+}
+.row-n {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text3);
+  padding-top: 6px;
+}
+.row-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+.row-desc {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text2);
+  margin: 0;
+  max-width: 56ch;
+}
+.row-desc em { color: var(--text); font-style: italic; }
+
 /* ----- Generic section ----- */
 .section { padding: 96px 0; }
 .section-ink { background: var(--harbor-ink); border-top: 1px solid var(--harbor-line); }
@@ -396,44 +429,6 @@ input:focus-visible {
 .grid { display: grid; gap: 20px; }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 
-/* ----- Feature row (icon + text) ----- */
-.feature-list {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.feature-item { display: flex; gap: 16px; align-items: flex-start; }
-.feature-bullet {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--r-sm);
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--teal-bg);
-  border: 1px solid var(--teal-border);
-  color: var(--teal);
-  margin-top: 2px;
-}
-.feature-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 16px;
-  margin: 0 0 4px;
-  color: var(--text);
-}
-.feature-desc {
-  font-family: var(--font-body);
-  font-size: 14.5px;
-  line-height: 1.6;
-  color: var(--text2);
-  margin: 0;
-}
-
 /* ----- Callout ----- */
 .callout {
   display: flex;
@@ -450,28 +445,6 @@ input:focus-visible {
 .callout.plain .callout-icon { color: var(--text2); }
 .callout-body { font-family: var(--font-body); font-size: 14.5px; line-height: 1.6; color: var(--text2); margin: 0; }
 .callout-body strong { color: var(--text); font-weight: 600; }
-
-/* ----- Flow diagram (storefront -> harbor -> game) ----- */
-.flow { display: flex; align-items: stretch; gap: 0; width: 100%; }
-.flow-node {
-  flex: 1;
-  background: var(--harbor-ink);
-  border: 1px solid var(--harbor-line);
-  border-radius: var(--r-lg);
-  padding: 22px 20px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-.flow-node.is-harbor {
-  border-color: var(--teal-border);
-  background: linear-gradient(180deg, var(--teal-bg), var(--harbor-ink));
-}
-.flow-node-label { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--text); }
-.flow-node-sub { font-family: var(--font-mono); font-size: 11.5px; color: var(--text3); }
-.flow-arrow { display: flex; align-items: center; justify-content: center; color: var(--text3); padding: 0 10px; flex-shrink: 0; }
 
 /* ----- CTA band ----- */
 .cta-band {
@@ -644,8 +617,6 @@ input:focus-visible {
   .nav-collapse .nav-right { margin-top: 14px; }
   .nav-collapse .nav-right .btn { width: 100%; justify-content: center; }
   .hero-cta-row { width: 100%; }
-  .flow { flex-direction: column; }
-  .flow-arrow { transform: rotate(90deg); padding: 6px 0; }
 }
 @media (max-width: 420px) {
   .hero-headline { font-size: 40px; }

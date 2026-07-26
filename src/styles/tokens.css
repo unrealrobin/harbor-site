@@ -32,6 +32,7 @@
   --flip-bg: #e9f1ec;
   --flip-ink: #0c1410;
   --flip-muted: rgba(12, 20, 16, 0.62);
+  --flip-accent: #0d7a52; /* teal dark enough for AA on the light ground */
 
   /* Type — Archivo family sitewide + mono texture (see fonts.css).
      --font-display-expanded is the hero-scale voice ONLY (Expanded ships a
