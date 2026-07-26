@@ -34,6 +34,11 @@
   --flip-muted: rgba(12, 20, 16, 0.62);
   --flip-accent: #0d7a52; /* teal dark enough for AA on the light ground */
 
+  /* Holo treatment — sanctioned ONLY for the launcher wireframe set-piece
+     (Robin, 2026-07-26). Not a general-purpose glow; the halo ban stands. */
+  --teal-holo: rgba(31, 207, 142, 0.22);
+  --teal-sheen: rgba(94, 231, 183, 0.1);
+
   /* Type — Archivo family sitewide + mono texture (see fonts.css).
      --font-display-expanded is the hero-scale voice ONLY (Expanded ships a
      single 900 instance, so any rule using it renders Black regardless of
