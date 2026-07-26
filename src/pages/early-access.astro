@@ -1,8 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const APPLY_MAILTO =
-  "mailto:earlyaccess@harborlauncher.com?subject=Harbor%20early%20access&body=Hi%2C%0A%0AOur%20studio%3A%20%0AOur%20game%20(Steam%20link)%3A%20%0AWhy%20we're%20interested%3A%20%0A";
 ---
 
 <Base
@@ -29,7 +27,6 @@ const APPLY_MAILTO =
       </p>
       <div class="hero-cta-row">
         <a href="#apply" class="btn btn-primary btn-lg">Apply to be a partner</a>
-        <a href={APPLY_MAILTO} class="btn btn-ghost btn-lg">Email us directly</a>
       </div>
     </div>
   </section>
@@ -109,23 +106,50 @@ const APPLY_MAILTO =
     </div>
   </section>
 
-  <!-- ===== Apply / email CTA ===== -->
+  <!-- ===== Apply / signup ===== -->
   <section class="cta-band" id="apply">
     <div class="dotgrid cta-band-grid"></div>
     <div class="container cta-band-inner" style="max-width:680px;">
-      <span class="eyebrow">Come on as a partner</span>
-      <h2 class="display-lg" style="margin-bottom:16px;">Email us. Tell us about your game.</h2>
-      <p class="lede" style="margin-bottom:30px;">One line about your studio and your Steam page is plenty. If it's a fit, we'll set up a short call and get you shipping. No forms, no funnel.</p>
-      <div class="hero-cta-row">
-        <a href={APPLY_MAILTO} class="btn btn-primary btn-lg">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-          earlyaccess@harborlauncher.com
-        </a>
+      <span class="eyebrow">Early access</span>
+      <h2 class="display-lg" style="margin-bottom:16px;">Sign up for early access.</h2>
+      <p class="lede" style="margin-bottom:30px;">
+        Leave your email and we'll reach out with your personal invite. If it's a fit,
+        we'll set up a short call and get you shipping.
+      </p>
+      <form id="ea-form" class="email-form" style="margin: 0 auto; max-width: 520px; justify-content: center;">
+        <p class="honeypot" aria-hidden="true">
+          <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
+        <input
+          type="email"
+          name="email"
+          placeholder="you@studio.com"
+          required
+          aria-label="Email address"
+          class="input email-input"
+        />
+        <button type="submit" class="btn btn-primary btn-lg">Request invite</button>
+        <span class="form-error" id="ea-error" role="alert" hidden></span>
+      </form>
+      <div class="form-success" id="ea-success" role="status" tabindex="-1" hidden style="align-items:center;">
+        <span class="pill pill-teal">
+          <span class="pill-dot"></span>
+          You're in.
+        </span>
+        <p class="form-success-msg">We'll reach out with your personal invite.</p>
       </div>
-      <p class="form-note">We read every email and reply within a couple of days.</p>
+      <p class="form-note">
+        Prefer email? <a href="mailto:earlyaccess@harborlauncher.com" class="text-teal">earlyaccess@harborlauncher.com</a> works too.
+      </p>
     </div>
   </section>
 </Base>
+
+<script>
+  import { wireForm } from '../lib/waitlist-form';
+
+  wireForm('ea-form', 'ea-success', 'ea-error', 'early-access-page');
+</script>
 
 <style>
   .flat-price {
