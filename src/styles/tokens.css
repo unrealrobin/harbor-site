@@ -14,7 +14,7 @@
   /* Ink — one tinted white; opacity ladder for hierarchy */
   --text: #e9f4ee;
   --text2: rgba(233, 244, 238, 0.65);
-  --text3: rgba(233, 244, 238, 0.42);
+  --text3: rgba(233, 244, 238, 0.55); /* bottom rung ≥ AA 4.5:1 on --bg */
 
   /* Teal (the one accent) */
   --teal: #1fcf8e;
@@ -33,8 +33,12 @@
   --flip-ink: #0c1410;
   --flip-muted: rgba(12, 20, 16, 0.62);
 
-  /* Type — Archivo family sitewide + mono texture (see fonts.css) */
-  --font-display: 'Archivo Expanded', 'Archivo', system-ui, sans-serif;
+  /* Type — Archivo family sitewide + mono texture (see fonts.css).
+     --font-display-expanded is the hero-scale voice ONLY (Expanded ships a
+     single 900 instance, so any rule using it renders Black regardless of
+     declared weight — never point UI chrome at it). */
+  --font-display: 'Archivo', system-ui, sans-serif;
+  --font-display-expanded: 'Archivo Expanded', 'Archivo', system-ui, sans-serif;
   --font-body: 'Archivo', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 

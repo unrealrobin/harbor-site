@@ -43,7 +43,6 @@ input:focus-visible {
 .hairline { border-top: 1px solid var(--harbor-line); }
 .mono { font-family: var(--font-mono); }
 .text-teal { color: var(--teal); }
-.text-blue { color: var(--teal); }
 
 /* ----- Logo ----- */
 .logo {
@@ -160,7 +159,7 @@ input:focus-visible {
   color: var(--teal);
   margin-bottom: 16px;
 }
-.eyebrow-blue { color: var(--text2); }
+.eyebrow-muted { color: var(--text2); }
 
 .display-lg {
   font-family: var(--font-display);
@@ -381,7 +380,7 @@ input:focus-visible {
   color: var(--teal);
   margin-bottom: 18px;
 }
-.card-icon.blue { background: var(--bg3); border-color: var(--harbor-line-strong); color: var(--text2); }
+.card-icon.neutral { background: var(--bg3); border-color: var(--harbor-line-strong); color: var(--text2); }
 .card-num {
   font-family: var(--font-display);
   font-size: 13px;
@@ -442,10 +441,10 @@ input:focus-visible {
   background: var(--teal-bg);
   border: 1px solid var(--teal-border);
 }
-.callout.blue { background: var(--bg3); border-color: var(--harbor-line-strong); }
+.callout.neutral { background: var(--bg3); border-color: var(--harbor-line-strong); }
 .callout.plain { background: var(--harbor-ink); border-color: var(--harbor-line); }
 .callout-icon { color: var(--teal); flex-shrink: 0; margin-top: 1px; }
-.callout.blue .callout-icon { color: var(--text2); }
+.callout.neutral .callout-icon { color: var(--text2); }
 .callout.plain .callout-icon { color: var(--text2); }
 .callout-body { font-family: var(--font-body); font-size: 14.5px; line-height: 1.6; color: var(--text2); margin: 0; }
 .callout-body strong { color: var(--text); font-weight: 600; }
