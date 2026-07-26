@@ -294,12 +294,6 @@ input:focus-visible {
   overflow: hidden;
   padding: 96px 0 88px;
 }
-.hero-grid {
-  position: absolute;
-  inset: 0;
-  opacity: 0.6;
-  pointer-events: none;
-}
 .hero-inner {
   position: relative;
   z-index: 2;

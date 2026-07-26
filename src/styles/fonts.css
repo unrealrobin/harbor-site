@@ -2,13 +2,16 @@
    the files are pinned, preloaded in Base.astro, and immune to third-party
    changes. Non-latin glyphs fall back to the system stack. */
 
-/* Display: Archivo Expanded Black — static instance (wdth 125, wght 900). */
+/* Display: Archivo Black, variable width (62–125%). The width axis is the
+   mobile strategy for viewport-scale type: narrow the stretch before
+   shrinking the size (brand doc). Default usage: font-stretch 125%. */
 @font-face {
   font-family: 'Archivo Expanded';
   font-style: normal;
   font-weight: 900;
+  font-stretch: 62% 125%;
   font-display: swap;
-  src: url('/fonts/archivo-expanded-900.woff2') format('woff2');
+  src: url('/fonts/archivo-expanded-var.woff2') format('woff2');
 }
 
 /* Body: Archivo, variable weight, normal width. */
