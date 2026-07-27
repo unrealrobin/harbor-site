@@ -263,7 +263,7 @@ const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
     font-weight: 900;
     font-stretch: 125%;
     /* vh term keeps the landing view intact on short screens */
-    font-size: clamp(48px, min(10.4vw, 11vh), 148px);
+    font-size: clamp(48px, min(10.4vw, 13vh), 148px);
     line-height: 0.95;
     letter-spacing: -0.028em;
     color: var(--text);
@@ -271,6 +271,9 @@ const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
     max-width: 96vw;
     text-wrap: balance;
     flex: none;
+    /* The title always paints over the launcher when they interlock. */
+    position: relative;
+    z-index: 2;
   }
   .hd-alt {
     display: block;
@@ -329,6 +332,9 @@ const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
     display: flex;
     flex-direction: column;
     min-height: 0;
+    /* Interlock: the launcher rises beside the short second headline line
+       ("of Play."), filling the top-right void instead of floating below. */
+    margin-top: clamp(-150px, -13vh, -48px);
   }
   .hero-media-frame {
     position: relative;
