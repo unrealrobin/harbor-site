@@ -504,7 +504,7 @@ const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
   .lw-co {
     position: absolute;
     top: var(--co-top);
-    right: calc(100% + 24px);
+    right: calc(100% - 12px);
     transform: translateY(-50%);
     font-family: var(--font-mono);
     font-size: 10.5px;
@@ -512,14 +512,19 @@ const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
     text-transform: uppercase;
     color: var(--teal);
     white-space: nowrap;
+    /* Notch into the panel edge instead of reaching toward the text column,
+       so the labels can never collide with the row copy. */
+    background: var(--harbor-ink);
+    padding: 3px 8px;
+    border: 1px solid var(--teal-border);
+    border-radius: var(--r-sm);
   }
   .lw-co::after {
     content: '';
     position: absolute;
     left: 100%;
     top: 50%;
-    width: 20px;
-    margin-left: 4px;
+    width: 14px;
     border-top: 1px solid var(--teal-border);
   }
   .wf-step {
