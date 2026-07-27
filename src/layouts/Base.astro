@@ -1,4 +1,5 @@
 ---
+import '../styles/fonts.css';
 import '../styles/global.css';
 import PostHog from '../components/posthog.astro';
 import Header from '../components/Header.astro';
@@ -12,14 +13,11 @@ interface Props {
 
 const {
   title = 'Harbor · Sell the game. Keep the player.',
-  description = 'Harbor is a white-label launcher that turns the moment the player hits Play into a relationship you own: updates, community, surveys, and an opt-in email list that is yours to keep.',
+  description = 'Harbor is a white-label launcher that ships with your game. Every time a player hits Play, they pass through a screen you own: your news, your surveys, and an email list you keep.',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL('/og.png', Astro.site).href;
-
-const fontHref =
-  'https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500;600&display=swap';
 
 // Analytics: resolved at build time. Render PostHog only on the Netlify
 // production deploy (see src/lib/analytics.ts). The snippet itself lives in
@@ -55,19 +53,19 @@ const loadAnalytics = shouldLoadAnalytics(process.env.CONTEXT);
         is the official is:inline component (src/components/posthog.astro). */}
     {loadAnalytics && <PostHog />}
 
-    <!-- Fonts: preconnect + preload, then attach the stylesheet via JS so it
-         doesn't block render. <noscript> fallback applies them without JS. -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href={fontHref} />
-    <script is:inline define:vars={{ fontHref }}>
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = fontHref;
-      document.head.appendChild(link);
-    </script>
+    <!-- Fonts: self-hosted woff2 (see src/styles/fonts.css). Preload the two
+         faces used above the fold; mono loads on demand. -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/archivo-expanded-var.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/archivo-var.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/jetbrains-mono-var.woff2" crossorigin />
     <noscript>
-      <link rel="stylesheet" href={fontHref} />
+      <style>
+        /* JS off → no observer will ever reveal data-rv elements; show them. */
+        [data-rv] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
     </noscript>
   </head>
   <body>

@@ -1,47 +1,57 @@
+/* Design tokens. Authority: Brand & Art Direction.md in the vault
+   (RLOV/Harbor/02 Technical/harborlauncher-site Design/). Rewritten for the
+   redesign (HAR-216): every neutral carries teal's hue — no flat gray
+   anywhere — and hierarchy comes from an opacity ladder of one tinted white,
+   not separate gray hexes. One accent (teal, ~7% budget). */
 :root {
-  /* Surfaces */
-  --bg: #0d0f12;
-  --bg2: #13161b;
-  --bg3: #1a1e25;
-  --bg4: #21262f;
+  /* Surfaces — teal-tinted near-black ramp. Section grounds step through
+     these to create rhythm (brand doc: no flat same-bg section stacking). */
+  --bg: #0b0f0d;
+  --bg2: #0f1512;
+  --bg3: #121a15;
+  --bg4: #17211b;
 
-  /* Text */
-  --text: #f0f2f5;
-  --text2: #8b9099;
-  --text3: #555d6b;
+  /* Ink — one tinted white; opacity ladder for hierarchy */
+  --text: #e9f4ee;
+  --text2: rgba(233, 244, 238, 0.65);
+  --text3: rgba(233, 244, 238, 0.55); /* bottom rung ≥ AA 4.5:1 on --bg */
 
-  /* Teal (primary) */
+  /* Teal (the one accent) */
   --teal: #1fcf8e;
   --teal-bg: rgba(31, 207, 142, 0.08);
   --teal-border: rgba(31, 207, 142, 0.22);
-  --teal-glow: rgba(31, 207, 142, 0.16);
   --teal-contrast: #062014; /* text on solid teal fills */
 
-  /* Blue (secondary accent) */
-  --blue: #5ec8ff;
-  --blue-bg: rgba(94, 200, 255, 0.08);
-  --blue-border: rgba(94, 200, 255, 0.22);
+  /* Harbor grounds + hairlines */
+  --harbor-deep: #080c0a;
+  --harbor-ink: #0d1210;
+  --harbor-line: rgba(233, 244, 238, 0.07);
+  --harbor-line-strong: rgba(233, 244, 238, 0.14);
 
-  /* Harbor */
-  --harbor-deep: #0a0c10;
-  --harbor-ink: #11141a;
-  --harbor-line: rgba(255, 255, 255, 0.06);
-  --harbor-line-strong: rgba(255, 255, 255, 0.12);
+  /* Polarity flip — the page's single light section (HAR-218) */
+  --flip-bg: #e9f1ec;
+  --flip-ink: #0c1410;
+  --flip-muted: rgba(12, 20, 16, 0.62);
+  --flip-accent: #0d7a52; /* teal dark enough for AA on the light ground */
 
-  --harbor-halo:
-    radial-gradient(ellipse 70% 50% at 80% 0%, rgba(31, 207, 142, 0.18), transparent 60%),
-    radial-gradient(ellipse 50% 50% at 10% 100%, rgba(94, 200, 255, 0.10), transparent 60%);
+  /* Holo treatment — sanctioned ONLY for the launcher wireframe set-piece
+     (Robin, 2026-07-26). Not a general-purpose glow; the halo ban stands. */
+  --teal-holo: rgba(31, 207, 142, 0.22);
+  --teal-sheen: rgba(94, 231, 183, 0.1);
 
-  /* Type */
-  --font-display: 'Sora', system-ui, sans-serif;
-  --font-body: 'DM Sans', system-ui, sans-serif;
+  /* Type — Archivo family sitewide + mono texture (see fonts.css).
+     --font-display-expanded is the hero-scale voice ONLY (Expanded ships a
+     single 900 instance, so any rule using it renders Black regardless of
+     declared weight — never point UI chrome at it). */
+  --font-display: 'Archivo', system-ui, sans-serif;
+  --font-display-expanded: 'Archivo Expanded', 'Archivo', system-ui, sans-serif;
+  --font-body: 'Archivo', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
-  /* Radius */
+  /* Radius — one working radius; pills are banned (brand doc) */
   --r-sm: 7px;
   --r-md: 10px;
   --r-lg: 14px;
-  --r-pill: 99px;
 
   /* Motion */
   --dur-base: 150ms;

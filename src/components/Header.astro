@@ -1,8 +1,7 @@
 ---
 // Sticky site header with a mobile hamburger menu (≤760px). Nav links only
 // point at routes that exist today.
-const EARLY_ACCESS_MAILTO =
-  "mailto:earlyaccess@harborlauncher.com?subject=Harbor%20early%20access";
+const EARLY_ACCESS_HREF = "/early-access#apply";
 
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
@@ -37,7 +36,7 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
         >
       </nav>
       <div class="nav-right">
-        <a href={EARLY_ACCESS_MAILTO} class="btn btn-primary btn-sm">Get early access</a>
+        <a href={EARLY_ACCESS_HREF} class="btn btn-primary btn-sm">Get early access</a>
       </div>
     </div>
   </div>

@@ -40,10 +40,12 @@ input:focus-visible {
   background-size: 24px 24px;
 }
 
+/* Anchored sections land below the sticky header, not under it. */
+section[id] { scroll-margin-top: 80px; }
+
 .hairline { border-top: 1px solid var(--harbor-line); }
 .mono { font-family: var(--font-mono); }
 .text-teal { color: var(--teal); }
-.text-blue { color: var(--blue); }
 
 /* ----- Logo ----- */
 .logo {
@@ -131,8 +133,8 @@ input:focus-visible {
   gap: 8px;
   height: 28px;
   padding: 0 12px;
-  border-radius: var(--r-pill);
-  font-family: var(--font-display);
+  border-radius: var(--r-md);
+  font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -147,13 +149,12 @@ input:focus-visible {
   height: 6px;
   border-radius: 50%;
   background: var(--teal);
-  box-shadow: 0 0 8px var(--teal);
 }
 
 /* ----- Eyebrow + section type ----- */
 .eyebrow {
   display: inline-block;
-  font-family: var(--font-display);
+  font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
@@ -161,16 +162,18 @@ input:focus-visible {
   color: var(--teal);
   margin-bottom: 16px;
 }
-.eyebrow-blue { color: var(--blue); }
+.eyebrow-muted { color: var(--text2); }
 
 .display-lg {
-  font-family: var(--font-display);
-  font-size: 34px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  line-height: 1.1;
+  font-family: var(--font-display-expanded);
+  font-stretch: 125%;
+  font-size: clamp(27px, 3.2vw, 44px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
   color: var(--text);
   margin: 0;
+  text-wrap: balance;
 }
 .lede {
   font-family: var(--font-body);
@@ -287,37 +290,24 @@ input:focus-visible {
 [hidden] { display: none !important; }
 
 /* ----- Hero ----- */
-.hero {
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  background: var(--harbor-halo), var(--harbor-deep);
-  overflow: hidden;
-  padding: 96px 0 88px;
+/* ----- Interior-page hero (how-it-works, early-access, 404) ----- */
+.hero-int {
+  background: var(--harbor-deep);
+  padding: clamp(48px, 6vw, 88px) 0 clamp(40px, 5vw, 64px);
 }
-.hero-grid {
-  position: absolute;
-  inset: 0;
-  opacity: 0.6;
-  pointer-events: none;
-}
-.hero-inner {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  max-width: 760px;
-}
-.hero-headline {
-  font-family: var(--font-display);
-  font-size: 72px;
-  line-height: 1.12;
-  font-weight: 800;
-  letter-spacing: 0;
-  margin: 0 0 24px;
+.hero-int-title {
+  font-family: var(--font-display-expanded);
+  font-stretch: 125%;
+  font-weight: 900;
+  font-size: clamp(38px, 5.8vw, 82px);
+  line-height: 0.97;
+  letter-spacing: -0.026em;
   color: var(--text);
+  margin: 0 0 22px;
+  text-wrap: balance;
+}
+.hero-int .lede {
+  max-width: 58ch;
 }
 .hero-paragraph {
   font-family: var(--font-body);
@@ -333,11 +323,72 @@ input:focus-visible {
   gap: 16px;
   flex-wrap: wrap;
 }
-.hero-page {
-  /* shorter hero for interior pages */
-  padding: 72px 0 56px;
-  min-height: 0;
+/* ----- Light section (ground inversion) -----
+   Brand doc: light sections are capped per page and never adjacent. Dark
+   panels (faq cards, price panel, wireframes) keep their own colors on a
+   light ground — that contrast is the point. */
+.section-light {
+  background: var(--flip-bg);
+  color: var(--flip-ink);
 }
+.section-light .eyebrow { color: var(--flip-accent); }
+.section-light .display-lg { color: var(--flip-ink); }
+.section-light .lede { color: var(--flip-muted); }
+.section-light .text-teal { color: var(--flip-accent); }
+
+/* ----- Directional scroll entrances (brand doc motion rule) -----
+   Elements tagged data-rv slide in from their anchored side (set --rv inline;
+   default is a rise). A group parent tagged data-rv-group staggers its
+   children. One-shot: the observer unobserves after entry. Hidden states
+   exist ONLY under no-preference; reduced-motion users get a static page,
+   and a <noscript> fallback un-hides everything when JS is off. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-rv] {
+    opacity: 0;
+    transform: var(--rv, translateY(26px));
+    transition:
+      opacity 0.7s var(--ease),
+      transform 0.7s var(--ease);
+    transition-delay: var(--rvd, 0s);
+  }
+  [data-rv].in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ----- Numbered hairline rows (Why claims, What touchpoints) ----- */
+.row-list { border-top: 1px solid var(--harbor-line-strong); }
+.row {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 18px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--harbor-line);
+}
+.row-n {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text3);
+  padding-top: 6px;
+}
+.row-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  margin: 0 0 8px;
+}
+.row-desc {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text2);
+  margin: 0;
+  max-width: 56ch;
+}
+.row-desc em { color: var(--text); font-style: italic; }
 
 /* ----- Generic section ----- */
 .section { padding: 96px 0; }
@@ -382,7 +433,7 @@ input:focus-visible {
   color: var(--teal);
   margin-bottom: 18px;
 }
-.card-icon.blue { background: var(--blue-bg); border-color: var(--blue-border); color: var(--blue); }
+.card-icon.neutral { background: var(--bg3); border-color: var(--harbor-line-strong); color: var(--text2); }
 .card-num {
   font-family: var(--font-display);
   font-size: 13px;
@@ -396,44 +447,6 @@ input:focus-visible {
 .grid { display: grid; gap: 20px; }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
 
-/* ----- Feature row (icon + text) ----- */
-.feature-list {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.feature-item { display: flex; gap: 16px; align-items: flex-start; }
-.feature-bullet {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--r-sm);
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--teal-bg);
-  border: 1px solid var(--teal-border);
-  color: var(--teal);
-  margin-top: 2px;
-}
-.feature-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 16px;
-  margin: 0 0 4px;
-  color: var(--text);
-}
-.feature-desc {
-  font-family: var(--font-body);
-  font-size: 14.5px;
-  line-height: 1.6;
-  color: var(--text2);
-  margin: 0;
-}
-
 /* ----- Callout ----- */
 .callout {
   display: flex;
@@ -443,40 +456,18 @@ input:focus-visible {
   background: var(--teal-bg);
   border: 1px solid var(--teal-border);
 }
-.callout.blue { background: var(--blue-bg); border-color: var(--blue-border); }
+.callout.neutral { background: var(--bg3); border-color: var(--harbor-line-strong); }
 .callout.plain { background: var(--harbor-ink); border-color: var(--harbor-line); }
 .callout-icon { color: var(--teal); flex-shrink: 0; margin-top: 1px; }
-.callout.blue .callout-icon { color: var(--blue); }
+.callout.neutral .callout-icon { color: var(--text2); }
 .callout.plain .callout-icon { color: var(--text2); }
 .callout-body { font-family: var(--font-body); font-size: 14.5px; line-height: 1.6; color: var(--text2); margin: 0; }
 .callout-body strong { color: var(--text); font-weight: 600; }
 
-/* ----- Flow diagram (storefront -> harbor -> game) ----- */
-.flow { display: flex; align-items: stretch; gap: 0; width: 100%; }
-.flow-node {
-  flex: 1;
-  background: var(--harbor-ink);
-  border: 1px solid var(--harbor-line);
-  border-radius: var(--r-lg);
-  padding: 22px 20px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-.flow-node.is-harbor {
-  border-color: var(--teal-border);
-  background: linear-gradient(180deg, var(--teal-bg), var(--harbor-ink));
-}
-.flow-node-label { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--text); }
-.flow-node-sub { font-family: var(--font-mono); font-size: 11.5px; color: var(--text3); }
-.flow-arrow { display: flex; align-items: center; justify-content: center; color: var(--text3); padding: 0 10px; flex-shrink: 0; }
-
 /* ----- CTA band ----- */
 .cta-band {
   position: relative;
-  background: var(--harbor-halo), var(--harbor-ink);
+  background: var(--harbor-ink);
   border-top: 1px solid var(--harbor-line);
   border-bottom: 1px solid var(--harbor-line);
   padding: 88px 0;
@@ -602,13 +593,10 @@ input:focus-visible {
 
 /* ----- Responsive ----- */
 @media (max-width: 760px) {
-  .hero { padding: 72px 0 56px; }
-  .hero-headline { font-size: 48px; }
   .hero-paragraph { font-size: 17px; }
   .container { padding: 0 22px; }
   .section { padding: 64px 0; }
   .cta-band { padding: 64px 0; }
-  .display-lg { font-size: 27px; }
   .display-md { font-size: 21px; }
   .grid-2, .price-grid { grid-template-columns: 1fr; }
   [data-stack] { grid-template-columns: 1fr !important; gap: 40px !important; }
@@ -644,9 +632,6 @@ input:focus-visible {
   .nav-collapse .nav-right { margin-top: 14px; }
   .nav-collapse .nav-right .btn { width: 100%; justify-content: center; }
   .hero-cta-row { width: 100%; }
-  .flow { flex-direction: column; }
-  .flow-arrow { transform: rotate(90deg); padding: 6px 0; }
 }
 @media (max-width: 420px) {
-  .hero-headline { font-size: 40px; }
 }

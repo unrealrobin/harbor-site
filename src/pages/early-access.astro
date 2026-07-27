@@ -1,8 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const APPLY_MAILTO =
-  "mailto:earlyaccess@harborlauncher.com?subject=Harbor%20early%20access&body=Hi%2C%0A%0AOur%20studio%3A%20%0AOur%20game%20(Steam%20link)%3A%20%0AWhy%20we're%20interested%3A%20%0A";
 ---
 
 <Base
@@ -10,26 +8,21 @@ const APPLY_MAILTO =
   description="Be one of the first developers shipping Harbor. Full launcher, six months free for accepted partners, and a direct line to the founder."
 >
   <!-- ===== Hero ===== -->
-  <section class="hero hero-page">
-    <div class="dotgrid hero-grid"></div>
-    <div class="container hero-inner">
-      <span class="pill pill-teal" style="margin-bottom:24px;">
-        <span class="pill-dot"></span>
-        Design-partner program · limited spots
-      </span>
-      <h1 class="hero-headline" style="font-size:42px;line-height:1.12;">
+  <section class="hero-int">
+    <div class="container" data-rv-group>
+      <span class="eyebrow" data-rv>Design-partner program · limited spots</span>
+      <h1 class="hero-int-title" data-rv>
         Own the launch,<br />
         keep the players,<br />
-        be one of the first, with <span class="text-teal">Harbor</span>.
+        <span class="text-teal">be one of the first.</span>
       </h1>
-      <p class="hero-paragraph">
+      <p class="lede" data-rv>
         We're onboarding a small group of studios to ship Harbor before launch. You get the full
         product and help shape it; we get honest feedback from people who actually run a live game.
         Accepted partners ship free for six months, and it's a real working relationship, not a beta list.
       </p>
-      <div class="hero-cta-row">
-        <a href="#apply" class="btn btn-primary btn-lg">Apply to be a partner</a>
-        <a href={APPLY_MAILTO} class="btn btn-ghost btn-lg">Email us directly</a>
+      <div class="hero-cta-row" data-rv style="margin-top: 28px;">
+        <a href="#apply" class="btn btn-primary btn-lg">Get your invite</a>
       </div>
     </div>
   </section>
@@ -42,48 +35,36 @@ const APPLY_MAILTO =
         <h2 class="display-lg">The whole thing, not a trimmed-down trial.</h2>
         <p class="lede">Every partner ships the full launcher with all current modules. No feature gating during the program.</p>
       </div>
-      <div class="grid grid-2">
-        <div class="card">
-          <div class="card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 14h5"/></svg>
-          </div>
+      <div class="grid grid-2" data-rv-group>
+        <div class="card" data-rv>
           <h3 class="card-title">The full launcher + every module</h3>
           <p class="card-body">White-label launcher with email capture, patch notes, news, and surveys. All of it, branded to your game. New modules land in your build as we ship them.</p>
         </div>
-        <div class="card">
-          <div class="card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          </div>
+        <div class="card" data-rv>
           <h3 class="card-title">Six months free</h3>
           <p class="card-body">Accepted partners pay nothing for the first six months. No card, no invoice. You're helping us get it right; that's the deal.</p>
         </div>
-        <div class="card">
-          <div class="card-icon blue">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 16 0"/><path d="M2 12h2M20 12h2M12 2v2"/><circle cx="12" cy="13" r="3"/></svg>
-          </div>
+        <div class="card" data-rv>
           <h3 class="card-title">CDN delivery, handled</h3>
           <p class="card-body">Your launcher and its content are served from a global CDN, so patch notes and news land fast wherever your players are. We run the infrastructure; you don't think about it.</p>
         </div>
-        <div class="card">
-          <div class="card-icon blue">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
+        <div class="card" data-rv>
           <h3 class="card-title">A direct line to the founder</h3>
           <p class="card-body">You're not filing tickets into a void. The founder building Harbor is on the other end for setup, requests, and the occasional 11pm "can it do this?"</p>
         </div>
       </div>
 
-      <div class="callout blue" style="margin-top:44px;">
+      <div class="callout neutral" style="margin-top:44px;">
         <span class="callout-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>
         </span>
-        <p class="callout-body"><strong>Worried it might break a storefront rule?</strong> Harbor takes no payments, runs no ads, and never modifies your game. Here's exactly what it does and doesn't do. <a href="/tos-compliance" class="text-blue" style="text-decoration:underline;text-underline-offset:2px;">Read the storefront-transparency page →</a></p>
+        <p class="callout-body"><strong>Worried it might break a storefront rule?</strong> Harbor takes no payments, runs no ads, and never modifies your game. Here's exactly what it does and doesn't do. <a href="/tos-compliance" class="text-teal" style="text-decoration:underline;text-underline-offset:2px;">Read the storefront-transparency page →</a></p>
       </div>
     </div>
   </section>
 
   <!-- ===== Pricing ===== -->
-  <section class="section">
+  <section class="section section-light">
     <div class="container">
       <div class="section-head center">
         <span class="eyebrow">After the free window</span>
@@ -93,7 +74,7 @@ const APPLY_MAILTO =
           advanced modules on the Pro tier.
         </p>
       </div>
-      <div class="flat-price">
+      <div class="flat-price" data-rv>
         <div class="flat-price-amount"><span class="from">From</span>$40<span class="per"> / mo, per game</span></div>
         <p class="flat-price-sub">
           Flat SaaS pricing per game. <strong>No revenue share, no cut of your sales, ever.</strong>
@@ -109,25 +90,65 @@ const APPLY_MAILTO =
     </div>
   </section>
 
-  <!-- ===== Apply / email CTA ===== -->
+  <!-- ===== Apply / signup ===== -->
   <section class="cta-band" id="apply">
-    <div class="dotgrid cta-band-grid"></div>
     <div class="container cta-band-inner" style="max-width:680px;">
-      <span class="eyebrow">Come on as a partner</span>
-      <h2 class="display-lg" style="margin-bottom:16px;">Email us. Tell us about your game.</h2>
-      <p class="lede" style="margin-bottom:30px;">One line about your studio and your Steam page is plenty. If it's a fit, we'll set up a short call and get you shipping. No forms, no funnel.</p>
-      <div class="hero-cta-row">
-        <a href={APPLY_MAILTO} class="btn btn-primary btn-lg">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-          earlyaccess@harborlauncher.com
-        </a>
+      <span class="eyebrow">Early access</span>
+      <h2 class="display-lg" style="margin-bottom:16px;">Sign up for early access.</h2>
+      <p class="lede" style="margin-bottom:30px;">
+        Leave your email and we'll reach out with your personal invite. If it's a fit,
+        we'll set up a short call and get you shipping.
+      </p>
+      <form id="ea-form" class="email-form" style="margin: 0 auto; max-width: 520px; justify-content: center;">
+        <p class="honeypot" aria-hidden="true">
+          <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
+        <input
+          type="email"
+          name="email"
+          placeholder="you@studio.com"
+          required
+          aria-label="Email address"
+          class="input email-input"
+        />
+        <button type="submit" class="btn btn-primary btn-lg">Request invite</button>
+        <span class="form-error" id="ea-error" role="alert" hidden></span>
+      </form>
+      <div class="form-success" id="ea-success" role="status" tabindex="-1" hidden style="align-items:center;">
+        <span class="pill pill-teal">
+          <span class="pill-dot"></span>
+          You're in.
+        </span>
+        <p class="form-success-msg">We'll reach out with your personal invite.</p>
       </div>
-      <p class="form-note">We read every email and reply within a couple of days.</p>
+      <p class="form-note">
+        Prefer email? <a href="mailto:earlyaccess@harborlauncher.com" class="text-teal">earlyaccess@harborlauncher.com</a> works too.
+      </p>
     </div>
   </section>
 </Base>
 
+<script>
+  import { wireForm } from '../lib/waitlist-form';
+  import { initReveal } from '../lib/reveal';
+
+  wireForm('ea-form', 'ea-success', 'ea-error', 'early-access-page');
+  initReveal();
+</script>
+
 <style>
+  /* The signup destination: every CTA on the site lands here. Fill the
+     viewport so arriving via #apply never shows the pricing section above. */
+  #apply {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100svh - 65px);
+    scroll-margin-top: 65px;
+  }
+  #apply :global(.display-lg) {
+    font-size: clamp(32px, 4.4vw, 60px);
+  }
   .flat-price {
     max-width: 760px;
     margin: 0 auto;

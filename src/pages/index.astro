@@ -4,60 +4,44 @@ import WhyHarbor from '../components/WhyHarbor.astro';
 import ValueProps from '../components/ValueProps.astro';
 import Frictionless from '../components/Frictionless.astro';
 
-const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
+// Module names surface here so a first-time visitor sees the feature set
+// without leaving the homepage. Keep in sync with MODULES on /how-it-works.
+const MODULE_NAMES = ['Email Capture', 'Patch Notes', 'News', 'Dev Comments', 'Surveys', 'Analytics'];
+
+const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
   {
     title: 'It sits between the storefront and your game',
     desc: 'Steam, Epic, or GOG launches Harbor; Harbor launches your game. Nothing about how players start your game changes.',
-    icon: 'M5 12h14M13 6l6 6-6 6',
   },
   {
     title: 'Fully white-label',
     desc: 'Your name, logo, colors, fonts, and play button. There is no Harbor branding shown to your players, ever.',
-    icon: 'M8 12l2.5 2.5L16 9',
   },
   {
     title: 'Zero player install',
     desc: "Harbor ships as a file alongside your build. Players don't download anything, sign in to anything, or know it's there.",
-    icon: 'M12 3v12M7 10l5 5 5-5M5 21h14',
   },
   {
-    title: 'See what lands',
-    desc: 'Every module reports engagement: clicks on your Discord link, survey responses, email opt-ins. You know what your players actually do with the moment.',
-    icon: 'M3 17l6-6 4 4 8-8M14 7h7v7',
+    title: 'Module library',
+    desc: 'A growing library of plug-and-play modules that do the player-engagement work for you. Turn on whatever fits your game. New modules land every few patches.',
+    modules: MODULE_NAMES,
   },
 ];
 ---
 
 <Base>
   <!-- ===== Hero ===== -->
-  <section class="hero">
-    <div class="dotgrid hero-grid"></div>
-    <div class="container hero-cols">
-      <div class="hero-inner">
-        <span class="pill pill-teal" style="margin-bottom:28px;">
-          <span class="pill-dot"></span>
-          Early access · partner program open
-        </span>
-
-        <h1 class="hero-headline">
-          Sell the game.<br />
-          <span class="text-teal">Keep the player.</span>
-        </h1>
-
+  <section class="hero-xl">
+    <h1 class="hero-display">
+      Own the moment <span class="hd-alt">of Play.</span>
+    </h1>
+    <div class="hero-cols">
+      <div class="hero-copy">
         <p class="hero-paragraph">
-          Steam sells your game and keeps your players. Harbor is a lightweight, white-label
-          launcher that turns the moment the player hits Play into a relationship you own:
-          your updates, your community, your surveys.
-        </p>
-
-        <p class="hero-keyline">
-          <strong class="text-teal">Your players' emails, for the first time:</strong> an opt-in
-          list you own, export, and keep.
-        </p>
-
-        <p class="hero-trust">
-          No player accounts.<span class="sep" aria-hidden="true">·</span>No DRM.<span class="sep" aria-hidden="true">·</span>One
-          skippable screen.<span class="sep" aria-hidden="true">·</span>Game launches like it always has.
+          Harbor is a white-label launcher that ships with your game. Every time a player hits
+          Play, they pass through a screen you own: your news, your updates, your
+          voice. <strong class="hero-key">And for the first time, your players' emails: an
+          opt-in list you own, export, and keep.</strong>
         </p>
 
         <form id="waitlist-form" class="email-form">
@@ -81,7 +65,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
             <span class="pill-dot"></span>
             You're in.
           </span>
-          <p class="form-success-msg">We'll be in touch about access.</p>
+          <p class="form-success-msg">We'll reach out with your personal invite.</p>
         </div>
       </div>
 
@@ -95,7 +79,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
             Enlarge
           </span>
         </button>
-        <span class="hero-media-chip"><span class="pill-dot" aria-hidden="true"></span> Your launcher, at the moment of Play</span>
+        <p class="hero-media-cap">Your launcher, the moment players press play</p>
         <dialog class="hero-lightbox" id="hero-lightbox" aria-label="Launcher screenshot, enlarged">
           <img src="/demo-poster.webp" alt="A white-label Harbor launcher for the game Die Robot showing news, dev comments, an email opt-in, and a Play button" loading="lazy" decoding="async" />
           <button type="button" class="hero-lightbox-close" id="hero-lightbox-close" aria-label="Close enlarged screenshot">
@@ -106,144 +90,277 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
     </div>
   </section>
 
-  <!-- ===== Why Harbor ===== -->
-  <WhyHarbor />
-
-  <!-- ===== What you get back ===== -->
-  <ValueProps />
+  <!-- ===== Stat band ===== -->
+  <ul class="stat-band" data-rv-group>
+    <li data-rv><b aria-hidden="true">01</b>Customizable launcher</li>
+    <li data-rv><b aria-hidden="true">02</b>No player accounts</li>
+    <li data-rv><b aria-hidden="true">03</b>Skippable in one click</li>
+    <li data-rv><b aria-hidden="true">04</b>Game launches as normal</li>
+  </ul>
 
   <!-- ===== What is Harbor ===== -->
-  <section class="section section-ink" id="what">
-    <div class="container">
-      <div class="grid" style="grid-template-columns:1fr 1fr;gap:56px;align-items:center;" data-stack>
-        <div>
-          <span class="eyebrow">What is Harbor</span>
-          <h2 class="display-lg" style="margin-bottom:18px;">A surface you own, at the moment that matters.</h2>
-          <p class="lede" style="margin-bottom:28px;">
-            Your players already open your game several times a week. Harbor turns that launch moment
-            into a channel you control. Show a patch note, drop a beta invite, or just say something
-            in your own voice. It's the part of the player relationship the storefront keeps for itself.
-          </p>
-          <ul class="feature-list">
-            {
-              WHAT_BULLETS.map((b) => (
-                <li class="feature-item">
-                  <span class="feature-bullet" aria-hidden="true">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d={b.icon} /></svg>
-                  </span>
-                  <div>
-                    <p class="feature-title">{b.title}</p>
-                    <p class="feature-desc">{b.desc}</p>
-                  </div>
-                </li>
-              ))
-            }
-          </ul>
+  <section class="what section-ink" id="what">
+    <div class="container what-cols">
+      <div data-rv style="--rv: translateX(-36px)">
+        <span class="eyebrow">What is Harbor</span>
+        <h2 class="what-title">A surface you own, at the moment that matters.</h2>
+        <div class="row-list">
+          {
+            WHAT_BULLETS.map((b, i) => (
+              <div class="row">
+                <span class="row-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3 class="row-title">{b.title}</h3>
+                  <p class="row-desc">{b.desc}</p>
+                  {b.modules && (
+                    <p class="row-modules">
+                      {b.modules.map((m, j) => (
+                        <>
+                          <span class="row-module">{m}</span>
+                          {j < b.modules!.length - 1 && (
+                            <span class="row-module-sep" aria-hidden="true">
+                              ·
+                            </span>
+                          )}
+                        </>
+                      ))}
+                    </p>
+                  )}
+                </div>
+              </div>
+            ))
+          }
         </div>
-        <div>
-          <div class="flow" aria-label="Storefront launches Harbor, Harbor launches your game">
-            <div class="flow-node">
-              <div class="flow-node-label">Storefront</div>
-              <div class="flow-node-sub">Steam · Epic · GOG</div>
+      </div>
+
+      <div class="wf-flow" data-rv style="--rv: translateX(36px)" aria-label="The storefront launches Harbor, your branded launcher, which launches your game">
+        <div class="wf-step">
+          <span>Storefront</span>
+          <span class="wf-sub">Steam · Epic · GOG</span>
+        </div>
+        <div class="wf-arrow" aria-hidden="true">↓</div>
+
+        {/* Wireframe of the player-facing launcher: module tabs, news lines,
+            a survey, email opt-in, social links, Play. Same skeleton idiom as
+            the configurator wireframe on /how-it-works. Callout labels point
+            at each module (desktop only; the Module-library row carries the
+            names everywhere else). */}
+        <div class="lw-wrap">
+          <div class="launcher-wf" role="img" aria-label="Wireframe of your branded launcher: module tabs, news posts, a survey, an email opt-in field, social links, and a Play button">
+            <div class="lw-head">
+              <span class="lw-dot"></span>
+              <span class="lw-dot"></span>
+              <span class="lw-dot"></span>
+              <span class="lw-file mono">yourgame · your launcher</span>
             </div>
-            <div class="flow-arrow" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-            </div>
-            <div class="flow-node is-harbor">
-              <div class="flow-node-label text-teal">Harbor</div>
-              <div class="flow-node-sub">your branded launcher</div>
-            </div>
-            <div class="flow-arrow" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-            </div>
-            <div class="flow-node">
-              <div class="flow-node-label">Your game</div>
-              <div class="flow-node-sub">launches as normal</div>
+            <div class="lw-body">
+              <div class="lw-tabs">
+                <span class="lw-tab on"></span>
+                <span class="lw-tab"></span>
+                <span class="lw-tab"></span>
+              </div>
+              <span class="lw-title"></span>
+              <span class="lw-line" style="width: 74%"></span>
+              <span class="lw-line" style="width: 58%"></span>
+              <div class="lw-survey">
+                <span class="lw-line" style="width: 44%"></span>
+                <span class="lw-opt"></span>
+                <span class="lw-opt"></span>
+                <span class="lw-opt"></span>
+              </div>
+              <div class="lw-footer">
+                <span class="lw-input"></span>
+                <span class="lw-play">Play</span>
+              </div>
+              <div class="lw-social">
+                <span class="lw-soc"></span>
+                <span class="lw-soc"></span>
+                <span class="lw-soc"></span>
+                <span class="lw-soc"></span>
+              </div>
             </div>
           </div>
-          <div class="callout plain" style="margin-top:20px;">
-            <span class="callout-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 8h.01M11 12h1v4h1" /></svg>
-            </span>
-            <p class="callout-body">The player's experience is one extra screen they can skip in one click. The studio gets <strong>the relationship the storefront was keeping for itself.</strong></p>
+          <div class="lw-callouts" aria-hidden="true">
+            <span class="lw-co" style="--co-top: 22%">News modules</span>
+            <span class="lw-co" style="--co-top: 56%">Surveys</span>
+            <span class="lw-co" style="--co-top: 74%">Email capture</span>
+            <span class="lw-co" style="--co-top: 90%">Social links</span>
           </div>
+        </div>
+
+        <div class="wf-arrow" aria-hidden="true">↓</div>
+        <div class="wf-step">
+          <span>Your game</span>
+          <span class="wf-sub">Launches as normal</span>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ===== Why Harbor (+ the polarity flip, "The moment") ===== -->
+  <WhyHarbor />
+
+  <!-- ===== What you get back ===== -->
+  <ValueProps />
+
   <!-- ===== Frictionless for players ===== -->
   <Frictionless />
 
-  <!-- ===== FAQ pointer ===== -->
-  <section class="section faq-pointer">
-    <div class="container" style="text-align:center;max-width:640px;">
-      <span class="eyebrow">FAQ</span>
-      <p class="lede" style="margin-bottom:24px;">
-        Pricing, storefront rules, player experience: things devs ask us, answered.
-      </p>
-      <a href="/how-it-works#faq" class="btn btn-ghost btn-lg">Read the FAQ →</a>
+  <!-- ===== CTA close ===== -->
+  <section class="cta-close">
+    <div class="container">
+      <h2 class="cta-title" data-rv>Sell the game. <span class="text-teal">Keep the player.</span></h2>
+      <form id="cta-form" class="email-form" data-rv style="--rvd: 0.12s">
+        <p class="honeypot" aria-hidden="true">
+          <label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
+        <input
+          type="email"
+          name="email"
+          placeholder="you@studio.com"
+          required
+          aria-label="Email address"
+          class="input email-input"
+        />
+        <button type="submit" class="btn btn-primary btn-lg">Get access</button>
+        <span class="form-error" id="cta-error" role="alert" hidden></span>
+      </form>
+      <div class="form-success" id="cta-success" role="status" tabindex="-1" hidden>
+        <span class="pill pill-teal">
+          <span class="pill-dot"></span>
+          You're in.
+        </span>
+        <p class="form-success-msg">We'll reach out with your personal invite.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ (minimal) ===== -->
+  <section class="faq-min">
+    <div class="container faq-min-row">
+      <span class="eyebrow faq-min-eyebrow">FAQ</span>
+      <p class="faq-min-copy">Pricing, storefront rules, player experience: answered.</p>
+      <a href="/how-it-works#faq" class="btn btn-ghost">Read the FAQ →</a>
     </div>
   </section>
 </Base>
 
 <style>
-  .hero-cols {
+  /* Structural-break hero (brand doc: felt-difference mandate). Viewport-scale
+     type, asymmetric 5/7 grid, launcher bleeding off the right edge. */
+  .hero-xl {
+    background: var(--harbor-deep);
+    padding: clamp(28px, 3vw, 48px) 0 0;
+    overflow-x: clip; /* the bleed crops here — body must never scroll sideways */
+    /* Landing view = header (65px) + hero + stat band (73px) in one viewport. */
+    height: calc(100svh - 138px);
+    min-height: 560px;
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-display {
+    font-family: var(--font-display-expanded);
+    font-weight: 900;
+    font-stretch: 125%;
+    /* vh term keeps the landing view intact on short screens */
+    font-size: clamp(48px, min(10.4vw, 13vh), 148px);
+    line-height: 0.95;
+    letter-spacing: -0.028em;
+    color: var(--text);
+    margin: 0 0 0 4vw;
+    max-width: 96vw;
+    text-wrap: balance;
+    flex: none;
+    /* The title always paints over the launcher when they interlock. */
     position: relative;
     z-index: 2;
+  }
+  .hd-alt {
+    display: block;
+    color: var(--teal);
+  }
+  .hero-cols {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: center;
+    grid-template-columns: minmax(320px, 5fr) 7fr;
+    gap: 0 3vw;
+    align-items: stretch;
+    margin-top: clamp(20px, 2.5vw, 40px);
+    flex: 1;
+    min-height: 0;
   }
-  .hero-cols .hero-inner {
-    position: static;
-    max-width: none;
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0 0 24px 4vw;
   }
-  .hero-keyline {
-    font-family: var(--font-display);
-    font-size: 17px;
+  .hero-key {
+    color: var(--teal);
     font-weight: 600;
-    line-height: 1.45;
-    color: var(--text);
-    letter-spacing: -0.01em;
-    margin: 0 0 18px;
   }
-  .hero-trust {
-    font-family: var(--font-display);
-    font-size: 14.5px;
-    font-weight: 600;
-    color: var(--text);
-    letter-spacing: -0.01em;
-    margin: 0 0 34px;
+  .stat-band {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--harbor-line);
+    border-bottom: 1px solid var(--harbor-line);
   }
-  .hero-trust .sep {
+  .stat-band li {
+    padding: 18px 24px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text2);
+    border-left: 1px solid var(--harbor-line);
+  }
+  .stat-band li:first-child {
+    border-left: 0;
+    padding-left: 4vw;
+  }
+  .stat-band b {
+    display: block;
     color: var(--text3);
     font-weight: 400;
-    margin: 0 7px;
+    margin-bottom: 3px;
+  }
+  .hero-media {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    /* Interlock: the launcher rises beside the short second headline line
+       ("of Play."), filling the top-right void instead of floating below. */
+    margin-top: clamp(-150px, -13vh, -48px);
   }
   .hero-media-frame {
     position: relative;
     display: block;
-    width: 100%;
+    width: 110%;
+    max-width: none;
+    flex: 1;
+    min-height: 0;
     padding: 0;
-    border: 1px solid var(--teal-border);
-    border-radius: var(--r-lg);
+    border: 1px solid var(--harbor-line-strong);
+    border-radius: var(--r-md) 0 0 var(--r-md);
     overflow: hidden;
     background: var(--harbor-ink);
-    box-shadow:
-      0 24px 80px rgba(0, 0, 0, 0.45),
-      0 0 44px var(--teal-glow);
+    box-shadow: -30px 40px 80px rgba(0, 0, 0, 0.5);
     cursor: zoom-in;
-  }
-  .hero-media-frame:focus-visible {
-    outline: 2px solid var(--teal);
-    outline-offset: 3px;
   }
   .hero-media-frame img {
     display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: left top;
+  }
+  .hero-media-frame:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
   }
   .hero-zoom-hint {
     position: absolute;
@@ -252,7 +369,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-family: var(--font-display);
+    font-family: var(--font-mono);
     font-size: 11.5px;
     font-weight: 600;
     color: var(--text);
@@ -260,7 +377,7 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     border: 1px solid var(--harbor-line);
-    border-radius: var(--r-pill);
+    border-radius: var(--r-sm);
     padding: 5px 11px;
     pointer-events: none;
   }
@@ -311,92 +428,375 @@ const WHAT_BULLETS: { title: string; desc: string; icon: string }[] = [
     outline: 2px solid var(--teal);
     outline-offset: 2px;
   }
-  .hero-media-chip {
-    display: inline-flex;
+  .hero-media-cap {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--text3);
+    margin: 16px 0 clamp(24px, 3vw, 40px);
+  }
+  /* ----- What is Harbor: touchpoint rows + launcher wireframe flow ----- */
+  .what {
+    padding: clamp(72px, 8vw, 120px) 0;
+  }
+  .what :global(.what-cols) {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 4vw;
+    align-items: start;
+  }
+  .what-title {
+    font-family: var(--font-display-expanded);
+    font-stretch: 125%;
+    font-weight: 900;
+    font-size: clamp(28px, 3.4vw, 48px);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin: 0 0 28px;
+    text-wrap: balance;
+  }
+  /* Boxed numbers separate the What touchpoints (vs the Why section's
+     accent-only numbers). */
+  .what :global(.row-n) {
+    width: 28px;
+    height: 28px;
+    display: flex;
     align-items: center;
-    gap: 8px;
-    margin-top: 14px;
-    font-family: var(--font-display);
-    font-size: 12.5px;
-    font-weight: 600;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid var(--harbor-line-strong);
+    border-radius: var(--r-sm);
+    font-size: 11px;
     color: var(--text2);
   }
-  .faq-pointer {
+  /* Module names in the Module-library row — the homepage's first feature
+     reveal, so they stand out: bold, teal. */
+  .what :global(.row-modules) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    row-gap: 4px;
+    margin: 12px 0 0;
+    line-height: 1.6;
+  }
+  .what :global(.row-module) {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 650;
+    color: var(--teal);
+    white-space: nowrap;
+  }
+  .what :global(.row-module-sep) {
+    color: var(--text3);
+    padding: 0 10px;
+  }
+  .wf-flow {
+    display: flex;
+    flex-direction: column;
+    align-self: center; /* diagram centers against the taller text column */
+  }
+  .lw-wrap {
+    position: relative;
+  }
+  .lw-callouts {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .lw-co {
+    position: absolute;
+    top: var(--co-top);
+    right: calc(100% - 12px);
+    transform: translateY(-50%);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    white-space: nowrap;
+    /* Notch into the panel edge instead of reaching toward the text column,
+       so the labels can never collide with the row copy. */
+    background: var(--harbor-ink);
+    padding: 3px 8px;
+    border: 1px solid var(--teal-border);
+    border-radius: var(--r-sm);
+  }
+  .lw-co::after {
+    content: '';
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    width: 14px;
+    border-top: 1px solid var(--teal-border);
+  }
+  .wf-step {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text);
+    border: 1px solid var(--harbor-line-strong);
+    border-radius: var(--r-md);
+    padding: 14px 18px;
+  }
+  .wf-sub {
+    color: var(--text3);
+    font-size: 11.5px;
+  }
+  .wf-arrow {
+    font-family: var(--font-mono);
+    color: var(--text3);
+    padding: 8px 0 8px 20px;
+  }
+  /* Holographic set-piece treatment — sanctioned for this graphic only
+     (brand doc amendment 2026-07-26). */
+  .launcher-wf {
+    position: relative;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--teal) 7%, transparent), transparent 45%),
+      var(--harbor-deep);
+    border: 1px solid var(--teal-border);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px var(--teal-sheen),
+      0 0 48px var(--teal-holo),
+      inset 0 0 34px color-mix(in srgb, var(--teal) 5%, transparent);
+  }
+  .launcher-wf::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      115deg,
+      transparent 32%,
+      var(--teal-sheen) 47%,
+      transparent 62%
+    );
+    pointer-events: none;
+  }
+  .lw-head {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--harbor-line);
+  }
+  .lw-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--bg4);
+  }
+  .lw-file {
+    margin-left: 8px;
+    font-size: 11.5px;
+    color: var(--text2);
+  }
+  .lw-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 18px;
+    min-height: 220px;
+  }
+  .lw-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .lw-tab {
+    width: 54px;
+    height: 20px;
+    border-radius: var(--r-sm);
+    background: color-mix(in srgb, var(--teal) 9%, transparent);
+  }
+  .lw-tab.on {
+    background: var(--teal-bg);
+    border: 1px solid var(--teal-border);
+  }
+  .lw-title {
+    display: block;
+    width: 46%;
+    height: 13px;
+    border-radius: 5px;
+    background: color-mix(in srgb, var(--teal) 38%, transparent);
+  }
+  .lw-line {
+    display: block;
+    height: 8px;
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--teal) 14%, transparent);
+  }
+  .lw-survey {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .lw-survey .lw-line {
+    margin-right: 6px;
+  }
+  .lw-opt {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid var(--teal-border);
+    background: color-mix(in srgb, var(--teal) 6%, transparent);
+  }
+  .lw-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: auto;
+    padding-top: 14px;
+  }
+  .lw-social {
+    display: flex;
+    gap: 8px;
+    padding-top: 12px;
+  }
+  .lw-soc {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--teal) 14%, transparent);
+  }
+  .lw-input {
+    flex: 1;
+    height: 26px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--teal-border);
+    background: var(--harbor-ink);
+  }
+  .lw-play {
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 650;
+    color: var(--teal-contrast);
+    background: var(--teal);
+    border-radius: var(--r-sm);
+    padding: 6px 18px;
+  }
+
+  /* ----- CTA close + minimal FAQ ----- */
+  .cta-close {
+    background: var(--harbor-ink);
     border-top: 1px solid var(--harbor-line);
-    padding: 72px 0;
+    padding: clamp(72px, 9vw, 130px) 0;
+  }
+  .cta-title {
+    font-family: var(--font-display-expanded);
+    font-stretch: 125%;
+    font-weight: 900;
+    font-size: clamp(38px, 6.6vw, 96px);
+    line-height: 0.98;
+    letter-spacing: -0.026em;
+    color: var(--text);
+    margin: 0 0 34px;
+    max-width: 14ch;
+    text-wrap: balance;
+  }
+  .faq-min {
+    border-top: 1px solid var(--harbor-line);
+    padding: 40px 0;
+  }
+  .faq-min :global(.faq-min-row) {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .faq-min-eyebrow {
+    margin-bottom: 0;
+  }
+  .faq-min-copy {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text2);
+    margin: 0;
+    flex: 1;
+    min-width: 240px;
   }
 
   @media (max-width: 980px) {
+    /* Stacked layout can't honestly fit one viewport — release the lock. */
+    .hero-xl {
+      height: auto;
+      min-height: 0;
+    }
     .hero-cols {
       grid-template-columns: 1fr;
-      gap: 44px;
+      gap: 0;
     }
-    .hero-media {
-      max-width: 640px;
+    .hero-copy {
+      padding-bottom: 44px;
+      justify-content: flex-start;
+    }
+    .hero-media-frame {
+      width: 108%;
+      flex: none;
+    }
+    .hero-media-frame img {
+      height: auto;
+      object-fit: fill;
+    }
+    .stat-band {
+      grid-template-columns: 1fr 1fr;
+    }
+    .stat-band li {
+      border-left: 0;
+      padding-left: 4vw;
+    }
+    .stat-band li:nth-child(n + 3) {
+      border-top: 1px solid var(--harbor-line);
+    }
+  }
+  @media (max-width: 640px) {
+    /* Brand doc mobile strategy: narrow the width axis before shrinking size. */
+    .hero-display {
+      font-stretch: 100%;
+      letter-spacing: -0.02em;
+    }
+  }
+  @media (max-width: 980px) {
+    .what :global(.what-cols) {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+  @media (max-width: 1200px) {
+    /* Not enough gap for the pointer labels; the Module-library row names
+       the modules everywhere, so the callouts are desktop garnish. */
+    .lw-callouts {
+      display: none;
     }
   }
   @media (max-width: 760px) {
-    .faq-pointer {
+    .cta-close {
       padding: 56px 0;
     }
   }
 </style>
 
 <script>
-  // Wire the hero waitlist form to the /api/subscribe Netlify Function (adds the
-  // email to the Resend Audience). On success, swap the form for the success
-  // state; on failure, show a readable error. PostHog (production-only) is
-  // optional-chained.
-  function wireForm(formId: string, successId: string, errorId: string, location: string) {
-    const form = document.getElementById(formId) as HTMLFormElement | null;
-    const success = document.getElementById(successId);
-    const errorEl = document.getElementById(errorId);
-    if (!form) return;
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const button = form.querySelector('button[type="submit"]') as HTMLButtonElement;
-      const fields = new FormData(form);
-      const payload = {
-        email: String(fields.get('email') ?? ''),
-        'bot-field': String(fields.get('bot-field') ?? ''),
-      };
-
-      button.disabled = true;
-      button.textContent = 'Sending…';
-      errorEl?.setAttribute('hidden', '');
-
-      try {
-        const res = await fetch('/api/subscribe', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        const result = (await res.json().catch(() => ({ ok: false, error: '' }))) as {
-          ok?: boolean;
-          error?: string;
-        };
-        if (!res.ok || !result.ok) {
-          throw new Error(result.error || 'Something went wrong. Try again?');
-        }
-        // Event name frozen for analytics continuity (button copy has changed
-        // since launch); renaming it would fork the PostHog funnel history.
-        window.posthog?.capture('notify_me_submit', { location });
-        form.setAttribute('hidden', '');
-        success?.removeAttribute('hidden');
-        (success as HTMLElement | null)?.focus();
-      } catch (err) {
-        if (errorEl) {
-          errorEl.textContent = err instanceof Error ? err.message : 'Something went wrong. Try again?';
-          errorEl.removeAttribute('hidden');
-        }
-        button.disabled = false;
-        button.textContent = 'Get access';
-      }
-    });
-  }
+  import { wireForm } from '../lib/waitlist-form';
+  import { initReveal } from '../lib/reveal';
 
   wireForm('waitlist-form', 'waitlist-success', 'waitlist-error', 'hero');
+  wireForm('cta-form', 'cta-success', 'cta-error', 'footer-cta');
+
+  // Directional scroll entrances — shared implementation in src/lib/reveal.ts.
+  initReveal();
 
   // Hero screenshot lightbox. Native <dialog> supplies Esc-to-close, focus
   // trapping, and the backdrop; we only wire open, close, and backdrop clicks.
