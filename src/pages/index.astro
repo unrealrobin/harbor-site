@@ -4,7 +4,11 @@ import WhyHarbor from '../components/WhyHarbor.astro';
 import ValueProps from '../components/ValueProps.astro';
 import Frictionless from '../components/Frictionless.astro';
 
-const WHAT_BULLETS: { title: string; desc: string }[] = [
+// Module names surface here so a first-time visitor sees the feature set
+// without leaving the homepage. Keep in sync with MODULES on /how-it-works.
+const MODULE_NAMES = ['Email Capture', 'Patch Notes', 'News', 'Dev Comments', 'Surveys', 'Analytics'];
+
+const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
   {
     title: 'It sits between the storefront and your game',
     desc: 'Steam, Epic, or GOG launches Harbor; Harbor launches your game. Nothing about how players start your game changes.',
@@ -18,8 +22,9 @@ const WHAT_BULLETS: { title: string; desc: string }[] = [
     desc: "Harbor ships as a file alongside your build. Players don't download anything, sign in to anything, or know it's there.",
   },
   {
-    title: 'See what lands',
-    desc: 'Every module reports engagement: clicks on your Discord link, survey responses, email opt-ins. You know what your players actually do with the moment.',
+    title: 'Module library',
+    desc: "Every feature is a module you switch on. Anything you don't enable never ships in your build.",
+    modules: MODULE_NAMES,
   },
 ];
 ---
@@ -34,13 +39,9 @@ const WHAT_BULLETS: { title: string; desc: string }[] = [
       <div class="hero-copy">
         <p class="hero-paragraph">
           Harbor is a white-label launcher that ships with your game. Every time a player hits
-          Play, they pass through a screen you own: your news, your surveys, and an email list
-          you keep.
-        </p>
-
-        <p class="hero-keyline">
-          <strong class="text-teal">Your players' emails, for the first time:</strong> an opt-in
-          list you own, export, and keep.
+          Play, they pass through a screen you own: your news, your updates, your
+          voice. <strong class="hero-key">And for the first time, your players' emails — an
+          opt-in list you own, export, and keep.</strong>
         </p>
 
         <form id="waitlist-form" class="email-form">
@@ -111,6 +112,20 @@ const WHAT_BULLETS: { title: string; desc: string }[] = [
                 <div>
                   <h3 class="row-title">{b.title}</h3>
                   <p class="row-desc">{b.desc}</p>
+                  {b.modules && (
+                    <p class="row-modules">
+                      {b.modules.map((m, j) => (
+                        <>
+                          <span class="row-module">{m}</span>
+                          {j < b.modules!.length - 1 && (
+                            <span class="row-module-sep" aria-hidden="true">
+                              ·
+                            </span>
+                          )}
+                        </>
+                      ))}
+                    </p>
+                  )}
                 </div>
               </div>
             ))
@@ -125,30 +140,51 @@ const WHAT_BULLETS: { title: string; desc: string }[] = [
         </div>
         <div class="wf-arrow" aria-hidden="true">↓</div>
 
-        {/* Wireframe of the player-facing launcher: tabs, news lines, email
-            opt-in, Play. Same skeleton idiom as the configurator wireframe on
-            /how-it-works. */}
-        <div class="launcher-wf" role="img" aria-label="Wireframe of your branded launcher: navigation tabs, news posts, an email opt-in field, and a Play button">
-          <div class="lw-head">
-            <span class="lw-dot"></span>
-            <span class="lw-dot"></span>
-            <span class="lw-dot"></span>
-            <span class="lw-file mono">yourgame · your launcher</span>
+        {/* Wireframe of the player-facing launcher: module tabs, news lines,
+            a survey, email opt-in, social links, Play. Same skeleton idiom as
+            the configurator wireframe on /how-it-works. Callout labels point
+            at each module (desktop only; the Module-library row carries the
+            names everywhere else). */}
+        <div class="lw-wrap">
+          <div class="launcher-wf" role="img" aria-label="Wireframe of your branded launcher: module tabs, news posts, a survey, an email opt-in field, social links, and a Play button">
+            <div class="lw-head">
+              <span class="lw-dot"></span>
+              <span class="lw-dot"></span>
+              <span class="lw-dot"></span>
+              <span class="lw-file mono">yourgame · your launcher</span>
+            </div>
+            <div class="lw-body">
+              <div class="lw-tabs">
+                <span class="lw-tab on"></span>
+                <span class="lw-tab"></span>
+                <span class="lw-tab"></span>
+              </div>
+              <span class="lw-title"></span>
+              <span class="lw-line" style="width: 74%"></span>
+              <span class="lw-line" style="width: 58%"></span>
+              <div class="lw-survey">
+                <span class="lw-line" style="width: 44%"></span>
+                <span class="lw-opt"></span>
+                <span class="lw-opt"></span>
+                <span class="lw-opt"></span>
+              </div>
+              <div class="lw-footer">
+                <span class="lw-input"></span>
+                <span class="lw-play">Play</span>
+              </div>
+              <div class="lw-social">
+                <span class="lw-soc"></span>
+                <span class="lw-soc"></span>
+                <span class="lw-soc"></span>
+                <span class="lw-soc"></span>
+              </div>
+            </div>
           </div>
-          <div class="lw-body">
-            <div class="lw-tabs">
-              <span class="lw-tab on"></span>
-              <span class="lw-tab"></span>
-              <span class="lw-tab"></span>
-            </div>
-            <span class="lw-title"></span>
-            <span class="lw-line" style="width: 74%"></span>
-            <span class="lw-line" style="width: 58%"></span>
-            <span class="lw-line" style="width: 66%"></span>
-            <div class="lw-footer">
-              <span class="lw-input"></span>
-              <span class="lw-play">Play</span>
-            </div>
+          <div class="lw-callouts" aria-hidden="true">
+            <span class="lw-co" style="--co-top: 22%">News modules</span>
+            <span class="lw-co" style="--co-top: 56%">Surveys</span>
+            <span class="lw-co" style="--co-top: 74%">Email capture</span>
+            <span class="lw-co" style="--co-top: 90%">Social links</span>
           </div>
         </div>
 
@@ -256,14 +292,9 @@ const WHAT_BULLETS: { title: string; desc: string }[] = [
     justify-content: center;
     padding: 0 0 24px 4vw;
   }
-  .hero-keyline {
-    font-family: var(--font-display);
-    font-size: 17px;
+  .hero-key {
+    color: var(--teal);
     font-weight: 600;
-    line-height: 1.45;
-    color: var(--text);
-    letter-spacing: -0.01em;
-    margin: 0 0 18px;
   }
   .stat-band {
     list-style: none;
@@ -436,10 +467,56 @@ const WHAT_BULLETS: { title: string; desc: string }[] = [
     font-size: 11px;
     color: var(--text2);
   }
+  /* Module names in the Module-library row — the homepage's first feature
+     reveal, so they stand out: bold, teal. */
+  .what :global(.row-modules) {
+    margin: 12px 0 0;
+    line-height: 2;
+  }
+  .what :global(.row-module) {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 650;
+    color: var(--teal);
+    white-space: nowrap;
+  }
+  .what :global(.row-module-sep) {
+    color: var(--text3);
+    padding: 0 10px;
+  }
   .wf-flow {
     display: flex;
     flex-direction: column;
     align-self: center; /* diagram centers against the taller text column */
+  }
+  .lw-wrap {
+    position: relative;
+  }
+  .lw-callouts {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .lw-co {
+    position: absolute;
+    top: var(--co-top);
+    right: calc(100% + 24px);
+    transform: translateY(-50%);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    white-space: nowrap;
+  }
+  .lw-co::after {
+    content: '';
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    width: 20px;
+    margin-left: 4px;
+    border-top: 1px solid var(--teal-border);
   }
   .wf-step {
     display: flex;
@@ -544,6 +621,22 @@ const WHAT_BULLETS: { title: string; desc: string }[] = [
     border-radius: 4px;
     background: color-mix(in srgb, var(--teal) 14%, transparent);
   }
+  .lw-survey {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .lw-survey .lw-line {
+    margin-right: 6px;
+  }
+  .lw-opt {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid var(--teal-border);
+    background: color-mix(in srgb, var(--teal) 6%, transparent);
+  }
   .lw-footer {
     display: flex;
     align-items: center;
@@ -551,6 +644,17 @@ const WHAT_BULLETS: { title: string; desc: string }[] = [
     gap: 14px;
     margin-top: auto;
     padding-top: 14px;
+  }
+  .lw-social {
+    display: flex;
+    gap: 8px;
+    padding-top: 12px;
+  }
+  .lw-soc {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--teal) 14%, transparent);
   }
   .lw-input {
     flex: 1;
@@ -653,6 +757,13 @@ const WHAT_BULLETS: { title: string; desc: string }[] = [
     .what :global(.what-cols) {
       grid-template-columns: 1fr;
       gap: 40px;
+    }
+  }
+  @media (max-width: 1200px) {
+    /* Not enough gap for the pointer labels; the Module-library row names
+       the modules everywhere, so the callouts are desktop garnish. */
+    .lw-callouts {
+      display: none;
     }
   }
   @media (max-width: 760px) {
