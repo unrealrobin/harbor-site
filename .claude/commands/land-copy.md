@@ -41,6 +41,8 @@ If missing, STOP.
 
 ## Banned (from the brand doc)
 
+- Em dashes in user-visible copy. Rewrite with a period, colon, or comma.
+  Sweep with a grep for the em dash character before finishing.
 - Supercharge / unleash / seamless / effortless / blazing-fast, and any
   verb-your-noun hype construction.
 - Exclamation points. Emoji in body copy.
