@@ -70,14 +70,17 @@ section[id] { scroll-margin-top: 80px; }
 }
 
 /* ----- Site header / nav ----- */
+/* Opaque, not translucent: page text scrolling under a see-through bar read as
+   noise. The backdrop blur went with it (nothing left to blur), so the header
+   no longer uses the sanctioned glassmorphism exception. Ground is --harbor-ink,
+   NOT --harbor-deep: deep is the body/hero/why ground, so the bar would vanish
+   against it and reappear only over section-ink and the light flips. */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(10, 12, 16, 0.82);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--harbor-line);
+  background: var(--harbor-ink);
+  border-bottom: 1px solid var(--harbor-line-strong);
 }
 .site-header-inner {
   height: 64px;
@@ -114,7 +117,9 @@ section[id] { scroll-margin-top: 80px; }
   height: 40px;
   margin-right: -8px;
   padding: 0;
-  color: var(--text);
+  /* Teal, not the off-white ramp: both icons stroke currentColor, so this
+     colours the bars and the close X together. */
+  color: var(--teal);
   background: transparent;
   border: none;
   border-radius: var(--r-sm);
@@ -240,7 +245,9 @@ section[id] { scroll-margin-top: 80px; }
   border-radius: 9px;
   color: var(--text);
   font-family: var(--font-body);
-  font-size: 15px;
+  /* 16px floor is deliberate: iOS Safari zooms the whole page on focus for any
+     field under 16px, and this is the waitlist input. Do not drop it to 15. */
+  font-size: 16px;
   outline: none;
   transition: border-color var(--dur-base) var(--ease), background var(--dur-base) var(--ease);
 }
@@ -335,6 +342,19 @@ section[id] { scroll-margin-top: 80px; }
 .section-light .display-lg { color: var(--flip-ink); }
 .section-light .lede { color: var(--flip-muted); }
 .section-light .text-teal { color: var(--flip-accent); }
+
+/* Dark self-contained panels keep the dark-ground ramp even inside a light
+   section (brand doc: FAQ cards, the price panel, and wireframes sit on light
+   grounds unchanged). Tag the panel itself with .panel-ink rather than listing
+   panel classes here, so a new dark panel is covered the moment it is written.
+   Without this the four overrides above leak in and repaint the panel's text
+   for the light ground: --flip-accent on its #080c0a measures 3.68:1, failing
+   AA. */
+.section-light .panel-ink { color: var(--text); }
+.section-light .panel-ink .eyebrow,
+.section-light .panel-ink .text-teal { color: var(--teal); }
+.section-light .panel-ink .display-lg { color: var(--text); }
+.section-light .panel-ink .lede { color: var(--text2); }
 
 /* ----- Directional scroll entrances (brand doc motion rule) -----
    Elements tagged data-rv slide in from their anchored side (set --rv inline;

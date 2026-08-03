@@ -53,6 +53,7 @@ const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
             name="email"
             placeholder="you@studio.com"
             required
+            autocomplete="email"
             aria-label="Email address"
             class="input email-input"
           />
@@ -146,7 +147,7 @@ const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
             at each module (desktop only; the Module-library row carries the
             names everywhere else). */}
         <div class="lw-wrap">
-          <div class="launcher-wf" role="img" aria-label="Wireframe of your branded launcher: module tabs, news posts, a survey, an email opt-in field, social links, and a Play button">
+          <div class="launcher-wf panel-ink" role="img" aria-label="Wireframe of your branded launcher: module tabs, news posts, a survey, an email opt-in field, social links, and a Play button">
             <div class="lw-head">
               <span class="lw-dot"></span>
               <span class="lw-dot"></span>
@@ -219,6 +220,7 @@ const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
           name="email"
           placeholder="you@studio.com"
           required
+          autocomplete="email"
           aria-label="Email address"
           class="input email-input"
         />
@@ -737,18 +739,61 @@ const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
     .hero-cols {
       grid-template-columns: 1fr;
       gap: 0;
+      margin-top: 8px;
     }
     .hero-copy {
       padding-bottom: 44px;
+      /* Stacked, nothing sits to the right any more, so the column needs the
+         same 4vw gutter on both sides. Without this the form and paragraph
+         run flush into the right screen edge. */
+      padding-right: 4vw;
       justify-content: flex-start;
     }
+    /* TRIAL (Robin, looking at this): centred hero copy on the stacked layout.
+       Headline centres too so it shares an edge with the paragraph instead of
+       sitting left while the body centres. Revert both to left if it doesn't
+       land. Mobile only: desktop keeps the asymmetric composition. */
+    .hero-display {
+      margin-left: 0;
+      max-width: none;
+      padding: 0 4vw;
+      text-align: center;
+      /* Larger than the shared clamp gives at phone widths (that floor lands
+         on 48px at 375). 15vw grows it with the screen; the 7vh term pulls it
+         back on short viewports so the form keeps its shot at the fold. */
+      font-size: clamp(40px, min(15vw, 7vh), 72px);
+    }
+    .hero-paragraph {
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    /* Stacked, there is no headline void to rise into, and the interlock's
+       negative margin dragged the launcher up over the form's submit button
+       (unreachable: taps hit the image). Sit below the copy with breathing
+       room, inset to the same 4vw gutter as .hero-copy. */
+    .hero-media {
+      margin-top: 0;
+      padding: 8px 4vw 10px;
+      /* TRIAL: Title -> Photo -> Body -> Form. The media is the second grid
+         item in source order; this lifts it above the copy visually. See the
+         focus-order caveat noted to Robin before this ships. */
+      order: -1;
+    }
     .hero-media-frame {
-      width: 108%;
+      width: 100%;
       flex: none;
+      border-radius: var(--r-md);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
     }
     .hero-media-frame img {
+      /* Full launcher capture, uncropped: the whole image is the explainer.
+         Height comes from its own aspect ratio, so the fold budget is made up
+         in surrounding spacing rather than by cropping the product. */
       height: auto;
       object-fit: fill;
+    }
+    .hero-media-cap {
+      margin: 8px 0 4px;
     }
     .stat-band {
       grid-template-columns: 1fr 1fr;
@@ -766,6 +811,24 @@ const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
     .hero-display {
       font-stretch: 100%;
       letter-spacing: -0.02em;
+    }
+  }
+  /* Phone widths. 540px, not 420: the largest iPhones are 428-440 CSS px
+     (Plus 428, Pro Max 430, 16 Pro Max 440), so a narrower breakpoint leaves
+     them on the desktop-ish layout. Force the input to own its line so the
+     button always drops beneath it and centres; relying on natural flex wrap
+     only triggered below ~394px, which is why big phones missed it. */
+  @media (max-width: 540px) {
+    #waitlist-form {
+      justify-content: center;
+    }
+    #waitlist-form .email-input {
+      flex: 0 0 100%;
+    }
+    /* Two thirds of the form width: a deliberate target on its own line,
+       rather than a small auto-width button floating under a full-width field. */
+    #waitlist-form .btn {
+      flex: 0 0 66.6667%;
     }
   }
   @media (max-width: 980px) {
