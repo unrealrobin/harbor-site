@@ -292,6 +292,22 @@ section[id] { scroll-margin-top: 80px; }
   color: #ff5f5f;
   width: 100%;
 }
+/* Privacy notice sitting under an email capture form. Quiet by design: it is
+   a disclosure, not a call to action. */
+.form-legal {
+  font-family: var(--font-body);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text3);
+  margin: 14px auto 0;
+  max-width: 520px;
+}
+.form-legal a {
+  color: var(--text2);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.form-legal a:hover { color: var(--teal); }
 /* !important needed: .email-form and .form-success set display:flex, which
    would otherwise win over the [hidden] attribute when JS toggles state. */
 [hidden] { display: none !important; }
