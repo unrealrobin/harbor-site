@@ -1,0 +1,16 @@
+---
+import { getEntry, render } from 'astro:content';
+import Legal from '../layouts/Legal.astro';
+
+// Prose lives in src/content/legal/terms.md. This route exists so the URL is
+// explicit and permanent: Clerk's legal consent links here, and moving the
+// path would break the consent trail for every studio that already accepted.
+const entry = await getEntry('legal', 'terms');
+if (!entry) throw new Error('Missing src/content/legal/terms.md');
+
+const { Content } = await render(entry);
+---
+
+<Legal {...entry.data}>
+  <Content />
+</Legal>
