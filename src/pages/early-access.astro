@@ -115,6 +115,11 @@ import Base from '../layouts/Base.astro';
         <button type="submit" class="btn btn-primary btn-lg">Request invite</button>
         <span class="form-error" id="ea-error" role="alert" hidden></span>
       </form>
+      {/* This form is where the site actually collects personal data, so the
+          privacy notice belongs here rather than only in the footer. */}
+      <p class="form-legal">
+        We'll only use your address to contact you about Harbor. See our <a href="/privacy">Privacy Policy</a>.
+      </p>
       <div class="form-success" id="ea-success" role="status" tabindex="-1" hidden style="align-items:center;">
         <span class="pill pill-teal">
           <span class="pill-dot"></span>

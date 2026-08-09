@@ -9,11 +9,15 @@ import { shouldLoadAnalytics } from '../lib/analytics';
 interface Props {
   title?: string;
   description?: string;
+  /** Keep the page out of search results. Used by legal documents that are
+      still placeholders, so a holding page is never cached as the real policy. */
+  noindex?: boolean;
 }
 
 const {
   title = 'Harbor · Sell the game. Keep the player.',
   description = 'Harbor is a white-label launcher that ships with your game. Every time a player hits Play, they pass through a screen you own: your news, your surveys, and an email list you keep.',
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -35,6 +39,7 @@ const loadAnalytics = shouldLoadAnalytics(process.env.CONTEXT);
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />

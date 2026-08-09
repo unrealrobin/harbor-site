@@ -1,0 +1,16 @@
+---
+import { getEntry, render } from 'astro:content';
+import Legal from '../layouts/Legal.astro';
+
+// Holding page. Prose lives in src/content/legal/privacy.md and is marked
+// noindex there until the real policy lands. The URL is permanent regardless:
+// Clerk's legal consent links here.
+const entry = await getEntry('legal', 'privacy');
+if (!entry) throw new Error('Missing src/content/legal/privacy.md');
+
+const { Content } = await render(entry);
+---
+
+<Legal {...entry.data} kicker="Paracosm LLC · Policy in preparation">
+  <Content />
+</Legal>
