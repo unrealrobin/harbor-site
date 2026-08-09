@@ -3,6 +3,12 @@
 // point at routes that exist today.
 const EARLY_ACCESS_HREF = "/early-access#apply";
 
+// The header speaks to two audiences and gives each exactly one door. Harbor
+// is invite gated, so early access is how a new studio gets an account, and
+// this is how an existing one gets back in. The app does not offer self serve
+// sign up, which is why there is no third "create account" affordance here.
+const APP_HREF = "https://app.harborlauncher.com";
+
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
 
@@ -37,6 +43,7 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
       </nav>
       <div class="nav-right">
         <a href={EARLY_ACCESS_HREF} class="btn btn-primary btn-sm">Get early access</a>
+        <a href={APP_HREF} class="btn btn-ghost btn-sm">Log in</a>
       </div>
     </div>
   </div>

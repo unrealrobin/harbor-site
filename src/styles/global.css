@@ -665,7 +665,16 @@ section[id] { scroll-margin-top: 80px; }
     border-bottom: 1px solid var(--harbor-line);
   }
   .nav-collapse .nav-link:last-child { border-bottom: none; }
-  .nav-collapse .nav-right { margin-top: 14px; }
+  /* Stack, don't share the row. .nav-right is a flex row on desktop, so once
+     it holds more than one button the width:100% below just splits the row
+     between them. In the dropdown each action should be its own full-width
+     target. */
+  .nav-collapse .nav-right {
+    margin-top: 14px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
   .nav-collapse .nav-right .btn { width: 100%; justify-content: center; }
   .hero-cta-row { width: 100%; }
 }
