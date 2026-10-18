@@ -712,6 +712,17 @@ const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
     min-width: 240px;
   }
 
+  /* "Own the moment" is ~10.6em wide and fits on one line only while the
+     13vh term caps the headline size, i.e. on viewports wider than ~1.44:1.
+     Narrower (iPad landscape, 5:4 monitors, tall windows) it wraps to three
+     lines, "of Play." reaches into the media column, and since the title
+     paints on top it would cover the video and block clicks on it. Drop the
+     interlock there; the frame sits below the headline instead. */
+  @media (min-width: 981px) and (max-aspect-ratio: 13 / 9) {
+    .hero-media {
+      margin-top: 0;
+    }
+  }
   @media (max-width: 980px) {
     /* Stacked layout can't honestly fit one viewport — release the lock. */
     .hero-xl {
