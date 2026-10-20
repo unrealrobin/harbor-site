@@ -2,6 +2,11 @@
   command = "npm run build"
   publish = "dist"
 
+# astro 7.4 requires Node >= 22.22.0. Pin the major the site is built and
+# verified on locally rather than trusting Netlify's default image.
+[build.environment]
+  NODE_VERSION = "24"
+
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"

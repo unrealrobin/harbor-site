@@ -33,8 +33,8 @@ The site **gates outreach** — every cold email links here. A broken build is a
 
 | Package | Pinned version | Role |
 |---|---|---|
-| `vitest` | `4.1.7` | Test runner + assertions |
-| `@vitest/coverage-v8` | `4.1.7` | V8 branch coverage |
+| `vitest` | `4.1.12` | Test runner + assertions |
+| `@vitest/coverage-v8` | `4.1.12` | V8 branch coverage |
 | `@testing-library/react` | `16.3.2` | Component tests (React islands now, configurator later) |
 | `@testing-library/jest-dom` | `6.9.1` | DOM matchers |
 | `@testing-library/user-event` | `14.6.1` | Realistic user interactions |

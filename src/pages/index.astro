@@ -4,6 +4,9 @@ import WhyHarbor from '../components/WhyHarbor.astro';
 import ValueProps from '../components/ValueProps.astro';
 import Frictionless from '../components/Frictionless.astro';
 
+// Hero explainer video (youtube.com/watch?v=6ioKU36dQYk).
+const HERO_VIDEO_ID = '6ioKU36dQYk';
+
 // Module names surface here so a first-time visitor sees the feature set
 // without leaving the homepage. Keep in sync with MODULES on /how-it-works.
 const MODULE_NAMES = ['Email Capture', 'Patch Notes', 'News', 'Dev Comments', 'Surveys', 'Analytics'];
@@ -70,23 +73,21 @@ const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
         </div>
       </div>
 
-      {/* Hero media. Interim still frame; swap the <img> for the short looping
-          clip (player opting in / answering a survey) once it's recorded. */}
+      {/* Hero media: the explainer video behind a click-to-play facade. The
+          poster is our own launcher capture, so nothing loads from YouTube
+          (no scripts, no cookies) until a visitor presses play. */}
       <div class="hero-media">
-        <button type="button" class="hero-media-frame" id="hero-zoom" aria-haspopup="dialog" aria-label="Enlarge screenshot: a white-label Harbor launcher for the game Die Robot showing news, dev comments, an email opt-in, and a Play button">
-          <img src="/demo-poster.webp" alt="A white-label Harbor launcher for the game Die Robot showing news, dev comments, an email opt-in, and a Play button" loading="eager" decoding="async" />
-          <span class="hero-zoom-hint" aria-hidden="true">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3M11 8v6M8 11h6" /></svg>
-            Enlarge
-          </span>
-        </button>
-        <p class="hero-media-cap">Your launcher, the moment players press play</p>
-        <dialog class="hero-lightbox" id="hero-lightbox" aria-label="Launcher screenshot, enlarged">
-          <img src="/demo-poster.webp" alt="A white-label Harbor launcher for the game Die Robot showing news, dev comments, an email opt-in, and a Play button" loading="lazy" decoding="async" />
-          <button type="button" class="hero-lightbox-close" id="hero-lightbox-close" aria-label="Close enlarged screenshot">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
-          </button>
-        </dialog>
+        <div class="hero-media-stage">
+          <div class="hero-media-frame" id="hero-video" data-video-id={HERO_VIDEO_ID}>
+            <button type="button" class="hero-video-play" id="hero-video-play" aria-label="Play video: Harbor explained">
+              <img src="/demo-poster.webp" alt="" width="1282" height="722" loading="eager" decoding="async" />
+              <span class="hero-play-glyph" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.52.85l10.4-6.5a1 1 0 0 0 0-1.7L9.52 4.65A1 1 0 0 0 8 5.5Z" /></svg>
+              </span>
+            </button>
+          </div>
+          <p class="hero-media-cap">Watch: Harbor explained</p>
+        </div>
       </div>
     </div>
   </section>
@@ -334,101 +335,82 @@ const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
     display: flex;
     flex-direction: column;
     min-height: 0;
-    /* Interlock: the launcher rises beside the short second headline line
+    padding-right: 4vw;
+    /* Interlock: the video rises beside the short second headline line
        ("of Play."), filling the top-right void instead of floating below. */
     margin-top: clamp(-150px, -13vh, -48px);
+    padding-bottom: clamp(24px, 3vw, 40px);
+  }
+  /* The stage is whatever space the locked-height hero leaves. A size
+     container lets the 16:9 frame fit whichever axis runs out first; a video
+     can't be cropped to fill like the old screenshot was, or YouTube's
+     controls would be clipped. The caption lives in the stage so it follows
+     the frame, and --cap-h reserves its height. */
+  .hero-media-stage {
+    --cap-h: 42px;
+    flex: 1;
+    min-height: 0;
+    container-type: size;
   }
   .hero-media-frame {
     position: relative;
-    display: block;
-    width: 110%;
-    max-width: none;
-    flex: 1;
-    min-height: 0;
-    padding: 0;
+    width: min(100cqw, (100cqh - var(--cap-h)) * 16 / 9);
+    aspect-ratio: 16 / 9;
     border: 1px solid var(--harbor-line-strong);
-    border-radius: var(--r-md) 0 0 var(--r-md);
+    border-radius: var(--r-md);
     overflow: hidden;
     background: var(--harbor-ink);
     box-shadow: -30px 40px 80px rgba(0, 0, 0, 0.5);
-    cursor: zoom-in;
   }
-  .hero-media-frame img {
+  .hero-media-frame :global(iframe),
+  .hero-video-play {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .hero-video-play {
+    display: block;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+  }
+  .hero-video-play img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: left top;
+    transition: filter var(--dur-base) var(--ease);
   }
-  .hero-media-frame:focus-visible {
+  .hero-video-play:hover img {
+    filter: brightness(0.82);
+  }
+  .hero-video-play:focus-visible {
     outline: 2px solid var(--teal);
-    outline-offset: 3px;
+    outline-offset: -4px;
   }
-  .hero-zoom-hint {
+  .hero-play-glyph {
     position: absolute;
-    right: 12px;
-    bottom: 12px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--font-mono);
-    font-size: 11.5px;
-    font-weight: 600;
-    color: var(--text);
-    background: rgba(10, 12, 16, 0.6);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    border: 1px solid var(--harbor-line);
-    border-radius: var(--r-sm);
-    padding: 5px 11px;
-    pointer-events: none;
-  }
-  .hero-lightbox {
-    max-width: min(1180px, 92vw);
-    padding: 0;
-    border: 1px solid var(--harbor-line-strong);
-    border-radius: var(--r-lg);
-    background: var(--harbor-ink);
-    overflow: hidden;
-  }
-  .hero-lightbox::backdrop {
-    background: rgba(10, 12, 16, 0.8);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-  }
-  /* Native <dialog> doesn't lock background scroll on its own. */
-  :global(body:has(.hero-lightbox[open])) {
-    overflow: hidden;
-  }
-  .hero-lightbox img {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: 88vh;
-    object-fit: contain;
-  }
-  .hero-lightbox-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 36px;
-    height: 36px;
+    top: 50%;
+    left: 50%;
+    width: 76px;
+    height: 76px;
     display: flex;
     align-items: center;
     justify-content: center;
+    /* Optical centring: a play triangle reads left-heavy at true centre. */
+    padding-left: 4px;
     border-radius: 50%;
-    border: 1px solid var(--harbor-line-strong);
-    background: rgba(10, 12, 16, 0.7);
-    color: var(--text);
-    cursor: pointer;
-    transition: border-color var(--dur-base) var(--ease);
+    color: var(--teal-contrast);
+    background: var(--teal);
+    box-shadow: 0 10px 34px rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -50%);
+    transition: transform var(--dur-base) var(--ease);
   }
-  .hero-lightbox-close:hover {
-    border-color: var(--teal-border);
-  }
-  .hero-lightbox-close:focus-visible {
-    outline: 2px solid var(--teal);
-    outline-offset: 2px;
+  .hero-video-play:hover .hero-play-glyph,
+  .hero-video-play:focus-visible .hero-play-glyph {
+    transform: translate(-50%, -50%) scale(1.08);
   }
   .hero-media-cap {
     flex: none;
@@ -438,7 +420,7 @@ const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
     text-transform: uppercase;
     text-align: left;
     color: var(--text3);
-    margin: 16px 0 clamp(24px, 3vw, 40px);
+    margin: 16px 0 0;
   }
   /* ----- What is Harbor: touchpoint rows + launcher wireframe flow ----- */
   .what {
@@ -730,6 +712,17 @@ const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
     min-width: 240px;
   }
 
+  /* "Own the moment" is ~10.6em wide and fits on one line only while the
+     13vh term caps the headline size, i.e. on viewports wider than ~1.44:1.
+     Narrower (iPad landscape, 5:4 monitors, tall windows) it wraps to three
+     lines, "of Play." reaches into the media column, and since the title
+     paints on top it would cover the video and block clicks on it. Drop the
+     interlock there; the frame sits below the headline instead. */
+  @media (min-width: 981px) and (max-aspect-ratio: 13 / 9) {
+    .hero-media {
+      margin-top: 0;
+    }
+  }
   @media (max-width: 980px) {
     /* Stacked layout can't honestly fit one viewport — release the lock. */
     .hero-xl {
@@ -774,23 +767,25 @@ const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
     .hero-media {
       margin-top: 0;
       padding: 8px 4vw 10px;
+      flex: none;
       /* TRIAL: Title -> Photo -> Body -> Form. The media is the second grid
          item in source order; this lifts it above the copy visually. See the
          focus-order caveat noted to Robin before this ships. */
       order: -1;
     }
+    /* Stacked, the hero height is unlocked, so the frame takes the full
+       column width and its height from the 16:9 ratio. */
+    .hero-media-stage {
+      flex: none;
+      container-type: normal;
+    }
     .hero-media-frame {
       width: 100%;
-      flex: none;
-      border-radius: var(--r-md);
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
     }
-    .hero-media-frame img {
-      /* Full launcher capture, uncropped: the whole image is the explainer.
-         Height comes from its own aspect ratio, so the fold budget is made up
-         in surrounding spacing rather than by cropping the product. */
-      height: auto;
-      object-fit: fill;
+    .hero-play-glyph {
+      width: 60px;
+      height: 60px;
     }
     .hero-media-cap {
       margin: 8px 0 4px;
@@ -861,17 +856,26 @@ const WHAT_BULLETS: { title: string; desc: string; modules?: string[] }[] = [
   // Directional scroll entrances — shared implementation in src/lib/reveal.ts.
   initReveal();
 
-  // Hero screenshot lightbox. Native <dialog> supplies Esc-to-close, focus
-  // trapping, and the backdrop; we only wire open, close, and backdrop clicks.
-  const zoomBtn = document.getElementById('hero-zoom');
-  const lightbox = document.getElementById('hero-lightbox') as HTMLDialogElement | null;
-  const closeBtn = document.getElementById('hero-lightbox-close');
-  if (zoomBtn && lightbox && typeof lightbox.showModal === 'function') {
-    zoomBtn.addEventListener('click', () => lightbox.showModal());
-    closeBtn?.addEventListener('click', () => lightbox.close());
-    lightbox.addEventListener('click', (event) => {
-      // Clicks on the backdrop register with the <dialog> itself as target.
-      if (event.target === lightbox) lightbox.close();
-    });
+  // Hero video facade. The privacy-enhanced (nocookie) player is only
+  // created on press, so visitors who never play it load nothing from YouTube.
+  const videoFrame = document.getElementById('hero-video');
+  const playBtn = document.getElementById('hero-video-play');
+  const videoId = videoFrame?.dataset.videoId;
+  if (videoFrame && playBtn && videoId) {
+    playBtn.addEventListener(
+      'click',
+      () => {
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0&playsinline=1`;
+        iframe.title = 'Harbor explained';
+        iframe.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+        playBtn.replaceWith(iframe);
+        iframe.focus();
+        window.posthog?.capture('hero_video_play');
+      },
+      { once: true },
+    );
   }
 </script>
